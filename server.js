@@ -23,7 +23,7 @@ app.use(cookie());
 
 app.use("/api/v1/auth", authRoute);
 app.get("/", (req, res) => {
-  res.send("i am sending your request");
+  res.send("i am sending your request ");
 });
 app.use(errorHandler);
 
