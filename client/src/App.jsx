@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 import React from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -8,6 +8,7 @@ import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import ProtectedRoute from "./Utils/ProtectedRoute";
 import Profile from "./Components/Profile";
+import Register from "./Components/Auth/Register";
 
 
 function App() {
@@ -19,8 +20,7 @@ function App() {
        
        <Routes>
         <Route path="/" element ={<Header/>}/>
-       <Route
-       
+       <Route 
               path="/login"
               element={
                 <ProtectedRoute
@@ -28,6 +28,17 @@ function App() {
                   redirect="/"
                 >
                   <Login/>
+               </ProtectedRoute>
+              }
+            />
+       <Route 
+              path="/register"
+              element={
+                <ProtectedRoute
+                  user={!isAuthenticated}
+                  redirect="/"
+                >
+                  <Register/>
                </ProtectedRoute>
               }
             />
@@ -61,30 +72,7 @@ function App() {
             />
        </Routes>
      </BrowserRouter>
-
-=======
-import React from 'react'
-import "./App.css"
-import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
-import Login from './Pages/Login'
-import Register from './Pages/Register'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-const App = () => {
-  return (
-   <>
-     <Router>
-
-    <Routes>
       
-   <Route path="/Login" element={<Login/>}/>
-   <Route path="/Register" element={<Register/>}/>
-
-    </Routes>
-    <ToastContainer  position="top-center"/>
-     </Router>
-   </>
->>>>>>> 276e5848f061ce8d93d3d4748eba3bbb79f23623
   )
 }
 

@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Login from "./Login";
+
+
 const Register = () => {
  
   const [email, setEmail] = useState("");
@@ -71,7 +73,7 @@ const Register = () => {
           >
             <p style={{ marginBottom: 0 }}>Already Registered?</p>
             <Link
-              to={"/Login"}
+              to={"/login"}
               style={{ textDecoration: "none", color: "#271776ca" }}
             >
               Login Now
