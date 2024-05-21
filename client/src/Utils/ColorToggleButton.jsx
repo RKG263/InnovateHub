@@ -10,8 +10,8 @@ export const ColorToggleButton = ({toggleColorMode , mode}) => {
     aria-label="Toggle color mode"
     sx={{
         position: 'fixed',
-        top: '8px',
-        right: '8px',
+        right: '2px',
+        bottom : '2px' ,
         color: 'text.primary', // Set the color of the icon
       }}
     >
