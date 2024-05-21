@@ -1,4 +1,10 @@
 import userModel from "../models/userModel.js";
+import { sendMail } from "../utils/sendVerificationMail.js";
+import crypto from 'crypto';
+
+const generateRandomToken = (length = 32) => {
+  return crypto.randomBytes(length).toString('hex');
+};
 // register controller
 export const registerController = async (req, res, next) => {
   try {
@@ -13,7 +19,10 @@ export const registerController = async (req, res, next) => {
       throw new Error("User already exists");
     }
 
-    const user = await userModel.create({ role, name, email, password });
+    const token = generateRandomToken(16); 
+    const user = await userModel.create({ role, name, email, password ,isVerifiedToken:token});
+   const mail= await sendMail(email,token)
+   console.log(mail);
 
     res.status(201).send({
       success: true,
@@ -37,14 +46,18 @@ export const loginController = async (req, res, next) => {
 
     const user = await userModel.findOne({ email });
     if (!user) {
-      throw new Error("invalid email password or role");
+      throw new Error("invalid email ");
     }
+    console.log(user.password)
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
-      throw new Error("invalid email password or role");
+      throw new Error("invalid  password ");
     }
     if (user.role != role) {
-      throw new Error("invalid email password or role");
+      throw new Error("invalid  role");
+    }
+    if(!user.isVerified){
+      throw new Error("user not verified")
     }
     const token = user.createJWT();
 
@@ -61,3 +74,26 @@ export const loginController = async (req, res, next) => {
     next(error);
   }
 };
+
+// verify email controller
+export const verifyEmailController=async(req,res,next)=>{
+  
+  try {
+    const reftoken=req.query.token;
+  const user=await userModel.findOne({isVerifiedToken:reftoken});
+
+  if(!user){
+    throw new Error("user not found");
+  }
+  user.isVerified=true;
+  user.isVerifiedToken=undefined;
+  user.save();
+  res.redirect('http://localhost:5173/')
+
+  return 
+    
+  } catch (error) {
+    console.log("error in user verification")
+    next(error)
+  }
+}
