@@ -4,15 +4,11 @@ import { AppBar, Toolbar, Typography, IconButton, Box, Button, Stack } from '@mu
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { ExitToApp } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
 import logo from  '../../assets/logo.png'
 import { logout } from '../../redux/actions/user';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-=======
-import logo from '../../assets/logo.png';
->>>>>>> 3f61a5d4205a0f7f75a480252e743d511d914171
 const Header = () => {
 
   const { isAuthenticated, user  } = useSelector(
