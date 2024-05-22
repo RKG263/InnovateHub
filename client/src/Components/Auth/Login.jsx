@@ -13,32 +13,8 @@ const Login = () => {
     const dispatch =  useDispatch() ;
 
   const handleLogin = async (event) => {
-
     event.preventDefault();
     dispatch(login(email, password , role));
-
-    // try {
-    //   const loginData = new FormData(event.currentTarget);
-
-    //   if (loginData.get('password') !== loginData.get('confirmPassword')) {
-    //     // toast("Password and Confirm Password should be same");
-    //     throw new Error("password not match");
-    //   }
-
-
-    //   const response = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}/api/v1/auth/login`, {
-
-    //     email: loginData.get('email'),
-    //     password: loginData.get('password'),
-    //     role: loginData.get('role'),
-
-    //   });
-    //   console.log(response);
-
-    // } catch (err) {
-    //   console.error(err);
-    // }
-        
 
   };
 
@@ -70,27 +46,12 @@ const Login = () => {
             name="confirmPassword"
             required
           />
-<<<<<<< HEAD
           <input
             type="text"
             placeholder="Role"
             name="role"
             onChange={e => setRole(e.target.value)}
           />
-=======
-           <div>
-            <select
-              name="role"
-              required
-
-            >
-              <option value="">Select Role</option>
-              <option value="Mentor">Mentor</option>
-              <option value="Investor">Investor</option>
-              <option value="Entreprenaur">Entreprenaur</option>
-            </select>
-          </div>
->>>>>>> ec3eaf697ca65d6cb675f4417f2e72fac9ca442a
           <div
             style={{
               gap: "10px",

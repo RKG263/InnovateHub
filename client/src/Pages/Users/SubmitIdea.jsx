@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container, TextField, Button, Typography, Box, Paper, Grid } from '@mui/material';
 import { CloudUpload as CloudUploadIcon } from '@mui/icons-material';
 
-const IdeaSubmissionForm = () => {
+const SubmitIdea = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,7 +21,6 @@ const IdeaSubmissionForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
     console.log(formData);
   };
 
@@ -40,6 +39,7 @@ const IdeaSubmissionForm = () => {
                 name="name"
                 label="Your Name"
                 variant="outlined"
+                
                 value={formData.name}
                 onChange={handleChange}
               />
@@ -119,4 +119,4 @@ const IdeaSubmissionForm = () => {
   );
 };
 
-export default IdeaSubmissionForm;
+export default SubmitIdea;
