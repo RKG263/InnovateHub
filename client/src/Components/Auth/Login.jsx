@@ -40,7 +40,7 @@ const Login = () => {
   return (
     <>
       <div className="container form-component login-form">
-        <h2>Sign In</h2>
+        <h1>Sign In</h1>
         <p>Please Login To Continue</p>
 
         <form onSubmit={handleLogin}>
@@ -62,12 +62,18 @@ const Login = () => {
             name="confirmPassword"
             required
           />
-          <input
-            type="text"
-            placeholder="Role"
-            name="role"
+           <div>
+            <select
+              name="role"
+              required
 
-          />
+            >
+              <option value="">Select Role</option>
+              <option value="Mentor">Mentor</option>
+              <option value="Investor">Investor</option>
+              <option value="Entreprenaur">Entreprenaur</option>
+            </select>
+          </div>
           <div
             style={{
               gap: "10px",
@@ -75,12 +81,12 @@ const Login = () => {
               flexDirection: "row",
             }}
           >
-            <p style={{ marginBottom: 0 }}>Not Registered?</p>
+           
             <Link
               to={"/Register"}
               style={{ textDecoration: "none", color: "#271776ca" }}
             >
-              Register Now
+             Not Registered? Register Now
             </Link>
           </div>
           <div style={{ justifyContent: "center", alignItems: "center" }}>
