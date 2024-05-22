@@ -9,6 +9,7 @@ import Register from "./Components/Auth/Register";
 import Home from "./Components/Home/Home";
 import NotFound from "./Shared/NotFound";
 import SpinningLoader from "./Shared/SpinningLoader";
+import EnterpreneurProfile from "./Pages/Users/Firm/EnterpreneurProfile";
 import './App.css'
 
 
