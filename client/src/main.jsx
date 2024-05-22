@@ -23,10 +23,10 @@ const Root = () => {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-        <div onContextMenu={(e) => e.preventDefault()}>         
+        {/* <div onContextMenu={(e) => e.preventDefault()}>          */}
         <ColorModeProvider>         
         <Root />
        </ColorModeProvider>
-        </div>
+        {/* </div> */}
   </React.StrictMode>
 );

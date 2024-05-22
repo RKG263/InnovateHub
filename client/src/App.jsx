@@ -1,14 +1,15 @@
 
-
 import React from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./Components/Header/Header";
 import Login from "./Components/Auth/Login";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import ProtectedRoute from "./Utils/ProtectedRoute";
 import Profile from "./Components/Profile";
 import Register from "./Components/Auth/Register";
+import Home from "./Components/Home/Home";
+import NotFound from "./Shared/NotFound";
+import SpinningLoader from "./Shared/SpinningLoader";
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
      <BrowserRouter>
        
        <Routes>
-        <Route path="/" element ={<Header/>}/>
+        <Route path="/" element ={<Home/>}/>
        <Route 
               path="/login"
               element={
@@ -70,6 +71,9 @@ function App() {
                </ProtectedRoute>
               }
             />
+             <Route path="/spinload" element={<SpinningLoader/>} />
+             <Route path="*" element={<NotFound/>} />
+
        </Routes>
      </BrowserRouter>
       
