@@ -7,63 +7,85 @@ import Login from "./Login";
 
 
 const Register = () => {
- 
-  const [email, setEmail] = useState("");
-  const [Name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [Role, setRole] = useState("");
-  
+
+
+
   const navigateTo = useNavigate();
 
-  const handleRegistration = async (e) => {
-  
- 
+
+  const handleRegistration = async (event) => {
+
+    event.preventDefault();
+
+    try {
+      const registerData = new FormData(event.currentTarget);
+
+
+      const response = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}/api/v1/auth/register`, {
+        name : registerData.get('name'),
+        email: registerData.get('email'),
+        password: registerData.get('password'),
+        role: registerData.get('role'),
+
+      });
+
+
+    } catch (err) {
+      console.error(err);
+    }
+
   };
+
+
 
   return (
     <>
       <div className="container form-component register-form">
         <h2>Sign Up</h2>
         <p>Please Sign Up To Continue</p>
-    
+
         <form onSubmit={handleRegistration}>
           <div>
-           <input
+            <input
               type="text"
               placeholder="Name"
-              value={Name}
-              onChange={(e) => setName(e.target.value)}
+              name="name"
+              required
             />
           </div>
           <div>
             <input
-              type="text"
+              type="email"
               placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />  
+              name="email"
+              required
+            />
 
           </div>
-       
-           
-           <div>
-            <select value={Role} onChange={(e) => setRole(e.target.value)}>
+
+
+          <div>
+            <select
+              name="role"
+              required
+
+            >
               <option value="">Select Role</option>
               <option value="Mentor">Mentor</option>
               <option value="Investor">Investor</option>
               <option value="Entreprenaur">Entreprenaur</option>
             </select>
-           </div>
-            <div>
+          </div>
+          <div>
 
-           <input
+            <input
               type="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              required
             />
-            
-            </div>
+
+          </div>
           <div
             style={{
               gap: "10px",
