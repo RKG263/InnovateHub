@@ -1,16 +1,11 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
-// import { toast } from "react-toastify";
-
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import Login from "./Login";
+import React, {  useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import React, {  useState } from "react";
 import { register } from "../../redux/actions/user";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { toast } from "react-toastify";
 
 const Register = () => {
 
@@ -19,14 +14,27 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const dispatch = useDispatch() ;
+  const {error , message} = useSelector((state) => state.user) ;
 
   const handleRegistration = async (event) => {
-
     event.preventDefault();
-    dispatch(register(role, name, email, password)) ;
-    
+    //  const myForm = new FormData();
+    //  myForm.append('name', name);
+    //  myForm.append('email', email);
+    //  myForm.append('password', password);
+    // myForm.append('file', image);
+     dispatch(register(name , email , password , role));
   };
-
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: 'clearError' });
+    }
+    if (message) {
+      toast.success(message);
+      dispatch({ type: 'clearMessage' });
+    }
+  }, [dispatch, error, message]);
 
 
   return (

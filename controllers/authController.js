@@ -5,7 +5,7 @@ import crypto from 'crypto';
 const generateRandomToken = (length = 32) => {
   return crypto.randomBytes(length).toString('hex');
 };
-// register controller
+// register controller   
 export const registerController = async (req, res, next) => {
   try {
     const { role, name, email, password } = req.body;
@@ -18,7 +18,7 @@ export const registerController = async (req, res, next) => {
     if (isUserExist) {
       throw new Error("User already exists");
     }
-
+     console.log(name ,email ) ;
     const token = generateRandomToken(16); 
     const user = await userModel.create({ role, name, email, password ,isVerifiedToken:token});
    const mail= await sendMail(email,token)

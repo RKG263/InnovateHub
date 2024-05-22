@@ -4,13 +4,22 @@ import { AppBar, Toolbar, Typography, IconButton, Box, Button, Stack } from '@mu
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { ExitToApp } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import logo from  '../../assets/logo.png'
+import { logout } from '../../redux/actions/user';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const Header = () => {
-  const [user, setUser] = useState(1);
 
-  const flip = () => {
-    setUser((prev) => !prev);
-  };
+  const { isAuthenticated, user  } = useSelector(
+    state => state.user
+  );
+  const dispatch = useDispatch() ;
+
+  const handleLogout = (event) =>{
+    event.preventDefault();
+    dispatch(logout()) ;
+  }
 
   return (
     <AppBar position="static">
@@ -65,7 +74,7 @@ const Header = () => {
               Contact Us
             </Button>
           </Link>
-          {user ? (
+          {isAuthenticated ? (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Link to="/profile">
                 <IconButton
@@ -77,7 +86,7 @@ const Header = () => {
                   <AccountCircle />
                 </IconButton>
               </Link>
-              <IconButton color="inherit" aria-label="logout" onClick={flip}>
+              <IconButton color="inherit" aria-label="logout" onClick={handleLogout}>
                 <ExitToApp />
               </IconButton>
             </Box>
@@ -90,7 +99,6 @@ const Header = () => {
                     backgroundColor: "#303f9f",
                   },
                 }}
-                onClick={flip}
               >
                 Log In
               </Button>

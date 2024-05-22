@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { Link, useNavigate, Navigate } from "react-router-dom";
 import Register from "./Register";
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
