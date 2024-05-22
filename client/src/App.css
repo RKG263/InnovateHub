@@ -1,12 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-*{
-  padding: 5px;
-}
+
 .container {
   width: 100%;
   max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
+  margin-top:10px  ;
+  margin: 50px 500px ;
+  padding: 40px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
@@ -46,6 +45,7 @@ button[type="submit"] {
   background-color: #0000ff; /* Theme color */
   color: #fff;
   border: none;
+  margin-top: 10px;
   border-radius: 4px;
   padding: 10px 20px;
   cursor: pointer;
