@@ -1,11 +1,25 @@
 import axios from "axios";
+<<<<<<< HEAD
 import React, {  useEffect, useState } from "react";
+=======
+
+// import { toast } from "react-toastify";
+
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import Login from "./Login";
+>>>>>>> 3f61a5d4205a0f7f75a480252e743d511d914171
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { register } from "../../redux/actions/user";
+<<<<<<< HEAD
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+=======
+import { useDispatch } from "react-redux";
+
+
+>>>>>>> 3f61a5d4205a0f7f75a480252e743d511d914171
 
 const Register = () => {
 
