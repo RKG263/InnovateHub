@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const PostSchema = mongoose.Schema({
+const PostSchema =new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -23,9 +23,14 @@ const PostSchema = mongoose.Schema({
         required: false   
     },
     createdDate: {
-        type: Date
+        type: Date,
+        default:Date.now()
+    },
+    like:{
+        type:Number,
+        default:0
     }
-});
+},{timestamps:true});
 
 
 export default mongoose.model('Post',PostSchema)
