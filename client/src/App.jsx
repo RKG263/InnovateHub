@@ -1,24 +1,85 @@
-import React from 'react'
-import "./App.css"
-import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
-import Login from './Pages/Login'
-import Register from './Pages/Register'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-const App = () => {
+
+import React from "react"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./Components/Auth/Login";
+import About from "./Pages/About";
+import Contact from "./Pages/Contact";
+import ProtectedRoute from "./Utils/ProtectedRoute";
+import Profile from "./Components/Profile";
+import Register from "./Components/Auth/Register";
+import Home from "./Components/Home/Home";
+import NotFound from "./Shared/NotFound";
+import SpinningLoader from "./Shared/SpinningLoader";
+
+
+
+function App() {
+  
+  const isAuthenticated = false;
   return (
-   <>
-     <Router>
+     
+     <BrowserRouter>
+       
+       <Routes>
+        <Route path="/" element ={<Home/>}/>
+       <Route 
+              path="/login"
+              element={
+                <ProtectedRoute
+                  user={!isAuthenticated}
+                  redirect="/"
+                >
+                  <Login/>
+               </ProtectedRoute>
+              }
+            />
+       <Route 
+              path="/register"
+              element={
+                <ProtectedRoute
+                  user={!isAuthenticated}
+                  redirect="/"
+                >
+                  <Register/>
+               </ProtectedRoute>
+              }
+            />
+          <Route
+              path="/about"
+              element={
+                <About/>
+              }
+            />
+             <Route
+              path="/contact"
+              element={
+                <ProtectedRoute
+                  user={isAuthenticated}
+                  redirect="/login"
+                >
+                  <Contact/>
+               </ProtectedRoute>
+              }
+            />
+             <Route
+              path="/profile"
+              element={
+                <ProtectedRoute
+                  user={isAuthenticated}
+                  redirect="/login"
+                >
+                  <Profile/>
+               </ProtectedRoute>
+              }
+            />
+           <Route path="/spinload" element={<SpinningLoader/>} />
+             <Route path="*" element={<NotFound/>} />
 
-    <Routes>
+
+
+       </Routes>
+     </BrowserRouter>
       
-   <Route path="/Login" element={<Login/>}/>
-   <Route path="/Register" element={<Register/>}/>
-
-    </Routes>
-    <ToastContainer  position="top-center"/>
-     </Router>
-   </>
   )
 }
 

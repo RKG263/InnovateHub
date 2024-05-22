@@ -1,44 +1,66 @@
 import axios from "axios";
-import React, {  useState } from "react";
-import { toast } from "react-toastify";
-
+import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import Register from "./Register";
 
 const Login = () => {
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [role, setRole] = useState("");
-  const handleLogin = async (e) => {
-   
-   
+
+
+  const handleLogin = async (event) => {
+
+    event.preventDefault();
+
+    try {
+      const loginData = new FormData(event.currentTarget);
+
+      if (loginData.get('password') !== loginData.get('confirmPassword')) {
+        // toast("Password and Confirm Password should be same");
+        throw new Error("password not match");
+      }
+
+
+      const response = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}/api/v1/auth/login`, {
+
+        email: loginData.get('email'),
+        password: loginData.get('password'),
+        role: loginData.get('role'),
+
+      });
+      console.log(response);
+
+    } catch (err) {
+      console.error(err);
+    }
+
   };
+
+
   return (
     <>
       <div className="container form-component login-form">
         <h2>Sign In</h2>
         <p>Please Login To Continue</p>
-    
+
         <form onSubmit={handleLogin}>
           <input
-            type="text"
+            type="email"
             placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            required
           />
           <input
             type="password"
             placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            required
           />
           <input
             type="password"
             placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            name="confirmPassword"
+            required
           />
       <select value={role} onChange={(e) => setRole(e.target.value)}>
               <option value="">Select Role</option>
