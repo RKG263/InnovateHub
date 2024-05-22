@@ -62,12 +62,18 @@ const Login = () => {
             name="confirmPassword"
             required
           />
-          <input
-            type="text"
-            placeholder="Role"
-            name="role"
+           <div>
+            <select
+              name="role"
+              required
 
-          />
+            >
+              <option value="">Select Role</option>
+              <option value="Mentor">Mentor</option>
+              <option value="Investor">Investor</option>
+              <option value="Entreprenaur">Entreprenaur</option>
+            </select>
+          </div>
           <div
             style={{
               gap: "10px",
