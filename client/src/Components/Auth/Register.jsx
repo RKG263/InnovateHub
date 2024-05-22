@@ -1,39 +1,23 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
-// import { toast } from "react-toastify";
-
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import Login from "./Login";
+import React, {  useState } from "react";
+import { register } from "../../redux/actions/user";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 const Register = () => {
 
-
-
-  const navigateTo = useNavigate();
-
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
+  const dispatch = useDispatch() ;
 
   const handleRegistration = async (event) => {
 
     event.preventDefault();
-
-    try {
-      const registerData = new FormData(event.currentTarget);
-
-
-      const response = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}/api/v1/auth/register`, {
-        name : registerData.get('name'),
-        email: registerData.get('email'),
-        password: registerData.get('password'),
-        role: registerData.get('role'),
-
-      });
-
-
-    } catch (err) {
-      console.error(err);
-    }
-
+    dispatch(register(role, name, email, password)) ;
+    
   };
 
 
@@ -51,6 +35,7 @@ const Register = () => {
               placeholder="Name"
               name="name"
               required
+              onChange={e => setName(e.target.value)}
             />
           </div>
           <div>
@@ -59,6 +44,7 @@ const Register = () => {
               placeholder="Email"
               name="email"
               required
+              onChange={e => setEmail(e.target.value)}
             />
 
           </div>
@@ -68,7 +54,7 @@ const Register = () => {
             <select
               name="role"
               required
-
+              onChange={e => setRole(e.target.value)}
             >
               <option value="">Select Role</option>
               <option value="Mentor">Mentor</option>
@@ -83,6 +69,7 @@ const Register = () => {
               placeholder="Password"
               name="password"
               required
+              onChange={e => setPassword(e.target.value)}
             />
 
           </div>

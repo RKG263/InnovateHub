@@ -3,12 +3,16 @@ import React from 'react';
 import { Container, Typography, Button, AppBar, Grid, Paper, Box } from '@mui/material';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import { useSelector } from 'react-redux';
+
+
 
 const Home = () => {
+      const {isAuthenticated} = useSelector((state) => state.user) ;
   return (
     <>
       <AppBar position="static" style={{ marginBottom: '32px' }}>
-        <Header />
+        <Header isAuthenticated = {isAuthenticated}/>
       </AppBar>
       <main>
         <div style={{ padding: '48px 0 32px' }}> 

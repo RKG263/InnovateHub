@@ -5,8 +5,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { ExitToApp } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
-  const [user, setUser] = useState(1);
+
+const Header = ({ isAuthenticated = false }) => {
 
   const flip = () => {
     setUser((prev) => !prev);
@@ -62,7 +62,7 @@ const Header = () => {
               Contact Us
             </Button>
           </Link>
-          {user ? (
+          {isAuthenticated  ? (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Link to="/profile">
                 <IconButton
