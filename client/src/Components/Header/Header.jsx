@@ -1,17 +1,10 @@
-import React, { useState } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
-  Box,
-  Button,
-  Stack,
-} from "@mui/material";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import { ExitToApp } from "@mui/icons-material";
-import { Link } from "react-router-dom";
-import logo from "../../assets/logo.png";
+
+import React, { useState } from 'react';
+import { AppBar, Toolbar, Typography, IconButton, Box, Button, Stack } from '@mui/material';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import { ExitToApp } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+
 const Header = () => {
   const [user, setUser] = useState(1);
 
@@ -73,7 +66,7 @@ const Header = () => {
             </Button>
           </Link>
           {user ? (
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Link to="/profile">
                 <IconButton
                   edge="end"
