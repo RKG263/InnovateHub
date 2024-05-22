@@ -16,7 +16,9 @@ function App() {
   const isAuthenticated = false;
   return (
     <BrowserRouter>
+    
       <Routes>
+      
         <Route path="/" element={<Home />} />
         <Route
           path="/login"
