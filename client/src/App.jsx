@@ -12,6 +12,7 @@ import NotFound from "./Shared/NotFound";
 import SpinningLoader from "./Shared/SpinningLoader";
 
 
+
 function App() {
   
   const isAuthenticated = false;
@@ -71,8 +72,10 @@ function App() {
                </ProtectedRoute>
               }
             />
-             <Route path="/spinload" element={<SpinningLoader/>} />
+           <Route path="/spinload" element={<SpinningLoader/>} />
              <Route path="*" element={<NotFound/>} />
+
+
 
        </Routes>
      </BrowserRouter>
