@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+
 // import { toast } from "react-toastify";
 
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import Footer from "../Footer/Footer";
 import React, {  useState } from "react";
 import { register } from "../../redux/actions/user";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+
 
 
 const Register = () => {

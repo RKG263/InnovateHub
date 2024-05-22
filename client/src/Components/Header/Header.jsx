@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Typography, IconButton, Box, Button, Stack } from '@mu
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { ExitToApp } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-
+import logo from '../../assets/logo.png';
 const Header = () => {
   const [user, setUser] = useState(1);
 
