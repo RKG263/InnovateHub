@@ -40,7 +40,7 @@ const Login = () => {
   return (
     <>
       <div className="container form-component login-form">
-        <h2>Sign In</h2>
+        <h1>Sign In</h1>
         <p>Please Login To Continue</p>
 
         <form onSubmit={handleLogin}>
@@ -75,12 +75,12 @@ const Login = () => {
               flexDirection: "row",
             }}
           >
-            <p style={{ marginBottom: 0 }}>Not Registered?</p>
+           
             <Link
               to={"/Register"}
               style={{ textDecoration: "none", color: "#271776ca" }}
             >
-              Register Now
+             Not Registered? Register Now
             </Link>
           </div>
           <div style={{ justifyContent: "center", alignItems: "center" }}>
