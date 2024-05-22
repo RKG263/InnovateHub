@@ -4,6 +4,8 @@ import React, { useContext, useState } from "react";
 
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Login from "./Login";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 
 const Register = () => {
@@ -40,6 +42,7 @@ const Register = () => {
 
   return (
     <>
+    <Header/>
       <div className="container form-component register-form">
         <h1>Sign Up</h1>
         <p>Please Sign Up To Continue</p>
@@ -106,6 +109,7 @@ const Register = () => {
           </div>
         </form>
       </div>
+      <Footer/>
     </>
   );
 };

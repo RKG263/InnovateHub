@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import Register from "./Register";
-
+import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 const Login = () => {
 
 
@@ -39,6 +40,7 @@ const Login = () => {
 
   return (
     <>
+     <Header/>
       <div className="container form-component login-form">
         <h1>Sign In</h1>
         <p>Please Login To Continue</p>
@@ -94,6 +96,7 @@ const Login = () => {
           </div>
         </form>
       </div>
+      <Footer/>
     </>
   );
 };
