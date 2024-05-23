@@ -4,7 +4,7 @@ export const userReducer = createReducer({}, (builder) => {
 
   builder
     .addCase('loginRequest', (state) => {
-        state.loading = true;
+           state.loading = true;
     })
     .addCase('loginSuccess', (state , action) => {
             state.loading = false;
@@ -28,7 +28,7 @@ export const userReducer = createReducer({}, (builder) => {
     })
     .addCase('registerSuccess',(state, action) => {
       state.loading = false;
-      state.isAuthenticated = true;
+      // state.isAuthenticated = true;
       state.user = action.payload.user;
       state.message = action.payload.message;
     })
@@ -52,6 +52,19 @@ export const userReducer = createReducer({}, (builder) => {
       state.isAuthenticated = true;
       state.error = action.payload;
     })
-
+    .addCase('loadUserRequest', (state ,action) => {
+      state.loading = true;
+    })
+    .addCase('loadUserSuccess' ,( state,action) => {
+      state.loading = false;
+      state.isAuthenticated = true;
+      state.user = action.payload;
+    })
+    .addCase('loadUserFail' , (state,action)=>{
+      state.loading = false;
+      state.isAuthenticated = false;
+      state.error = action.payload;
+    })
+   
 });
 

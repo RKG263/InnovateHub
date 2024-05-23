@@ -108,3 +108,19 @@ export const logoutController=async(req,res,next)=>{
     next(error);
   }
 }
+
+export const loadUser = async(req ,res , next) =>{
+
+  try{
+  const user =await userModel.findById(req.user._id);
+  console.log(req.user._id) ;
+  res.status(200).json({
+          success:true,
+          user,
+  })
+}
+  catch(error){
+         console.log(error) ;
+         next(error); 
+  }
+}

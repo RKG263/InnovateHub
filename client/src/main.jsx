@@ -18,7 +18,7 @@ const Root = () => {
     <ReduxProvider store = {store}>
       <ThemeProvider theme={theme}>
          <CssBaseline />
-        <App />
+         <App />
        </ThemeProvider>
     </ReduxProvider>
   );

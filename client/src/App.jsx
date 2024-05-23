@@ -13,6 +13,8 @@ import './App.css' ;
 import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from 'react-hot-toast';
 import SubmitIdea from "./Pages/Users/SubmitIdea";
+import { loadUser } from "./redux/actions/user";
+
 
 function App() {
   
@@ -31,7 +33,12 @@ function App() {
       toast.success(message);
       dispatch({ type: 'clearMessage' });
     }
-  }, [dispatch, error, message]);
+  }, [dispatch, error, message , loading ]);
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
+
 
   return (
      
