@@ -3,27 +3,37 @@ import "./enterpreneurProfile.css";
 
 const EnterpreneurProfile = () => {
   return (
-    <div className="profile">
-      <div className="picture">
-        <img
-          src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600"
-          alt=""
-        />
-        <div className="rating">STAR</div>
-      </div>
-      <div className="detail">
-        <div className="nameDetail">
-          <div className="name">LANA DEL RE</div>
-          <div className="user"> Entrepreneur</div>
+    <div className="body">
+      <div className="container">
+        {/* <!-- Profile Section --> */}
+        <div className="profile-section">
+          <div className="profile-content">
+            <img
+              src="https://images.pexels.com/photos/3781545/pexels-photo-3781545.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt=""
+              className="profile-img"
+            />
+            <h2 className="user-name">URFI JAVED</h2>
+
+            <p className="user-bio">
+              Innovating solutions to create a better tomorrow.
+              <br />
+              Contact - 9087890878
+            </p>
+            <div className="link">
+              <div className="link-info">Ideas Submitted</div>
+              <div className="link-info">Meeting Schedule</div>
+              <div className="link-info">Mentors</div>
+              <div className="link-info">Investors</div>
+              <div className="link-info">Chat</div>
+              <div className="link-info">Edit Profile</div>
+            </div>
+          </div>
         </div>
-        <div className="bio">
-          Please help. I am full of talents. But due to my familly background I
-          am unable to grow in my career.
-        </div>
-        <div className="moreDetail">
-          <button>Update profile</button>
-          <button>My Mentor</button>
-          <button>My investor</button>
+        {/* <!-- Post Section --> */}
+        <div className="post-section">
+          <h2>Posts</h2>
+          <p>This is where the user's posts will be displayed.</p>
         </div>
       </div>
     </div>
