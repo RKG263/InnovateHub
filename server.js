@@ -16,7 +16,11 @@ connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+  origin : true,
+  credentials : true,
+  methods : ["GET" , 'POST' , "PUT" , "DELETE"],       
+}));
 app.use(morgan("dev"));
 app.use(cookie());
 

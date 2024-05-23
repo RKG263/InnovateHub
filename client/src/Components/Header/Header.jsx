@@ -4,65 +4,77 @@ import { AppBar, Toolbar, Typography, IconButton, Box, Button, Stack } from '@mu
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { ExitToApp } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import logo from  '../../assets/logo.png'
+import { logout } from '../../redux/actions/user';
+import { useDispatch, useSelector } from 'react-redux';
 
 
-const Header = ({ isAuthenticated = false }) => {
+const Header = () => {
 
-  const flip = () => {
-    setUser((prev) => !prev);
-  };
+  const { isAuthenticated, user  } = useSelector(
+    state => state.user
+  );
+  const dispatch = useDispatch() ;
+
+  const handleLogout = (event) =>{
+    event.preventDefault();
+    dispatch(logout()) ;
+  }
 
   return (
     <AppBar position="static">
       <Toolbar>
-        <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}>
+          <img
+            src={logo}
+            alt="Logo"
+            style={{ width: "50px", marginRight: "10px" }}
+          />
+
           <Stack>
-            <Typography variant="h3">
-              Innovators Hub
-            </Typography>
-            <Typography variant="h7">
-              Empowering entrepreneurs to achieve their dreams.
+            <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+              InnovatorsHub
             </Typography>
           </Stack>
         </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Link to="/" style={{ textDecoration: 'none' }}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Link to="/" style={{ textDecoration: "none" }}>
             <Button
               sx={{
-                color: 'white',
-                '&:hover': {
-                  backgroundColor: '#303f9f',
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "#303f9f",
                 },
               }}
             >
               HOME
             </Button>
           </Link>
-          <Link to="/about" style={{ textDecoration: 'none' }}>
+          <Link to="/about" style={{ textDecoration: "none" }}>
             <Button
               sx={{
-                color: 'white',
-                '&:hover': {
-                  backgroundColor: '#303f9f',
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "#303f9f",
                 },
               }}
             >
               About Us
             </Button>
           </Link>
-          <Link to="/contact" style={{ textDecoration: 'none' }}>
+          <Link to="/contact" style={{ textDecoration: "none" }}>
             <Button
               sx={{
-                color: 'white',
-                '&:hover': {
-                  backgroundColor: '#303f9f',
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "#303f9f",
                 },
               }}
             >
               Contact Us
             </Button>
           </Link>
-          {isAuthenticated  ? (
+          {isAuthenticated ? (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Link to="/profile">
                 <IconButton
@@ -74,24 +86,19 @@ const Header = ({ isAuthenticated = false }) => {
                   <AccountCircle />
                 </IconButton>
               </Link>
-              <IconButton
-                color="inherit"
-                aria-label="logout"
-                onClick={flip}
-              >
+              <IconButton color="inherit" aria-label="logout" onClick={handleLogout}>
                 <ExitToApp />
               </IconButton>
             </Box>
           ) : (
-            <Link to="/login" style={{ textDecoration: 'none' }}>
+            <Link to="/login" style={{ textDecoration: "none" }}>
               <Button
                 sx={{
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: '#303f9f',
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#303f9f",
                   },
                 }}
-                onClick={flip}
               >
                 Log In
               </Button>
