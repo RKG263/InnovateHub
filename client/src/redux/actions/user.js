@@ -6,13 +6,9 @@ export const login = (email, password , role) => async dispatch => {
     dispatch({ type: 'loginRequest' });
 
     const { data } = await axios.post(
-      `${server}/login`,
+      `${import.meta.env.VITE_API_ENDPOINT}/api/v1/auth/login`,
       { email, password , role},
       {
-        headers: {
-          'Content-type': 'application/json',
-        },
-
         withCredentials: true,
       }
     );
@@ -22,15 +18,15 @@ export const login = (email, password , role) => async dispatch => {
     dispatch({ type: 'loginFail', payload: error.response.data.message });
   }
 };
+
+
+
 export const register = formdata => async dispatch => {
     try {
       dispatch({ type: 'registerRequest' });
   
-      const { data } = await axios.post(`${server}/register`, formdata, {
-        headers: {
-          'Content-type': 'multipart/form-data',
-        },
-  
+      const { data } = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}/api/v1/auth/register`, formdata, {
+    
         withCredentials: true,
       });
   
@@ -43,11 +39,11 @@ export const register = formdata => async dispatch => {
     try {
       dispatch({ type: 'logoutRequest' });
   
-      const { data } = await axios.get(`${server}/logout`, {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/api/v1/auth/logout`, {
             withCredentials: true,
       });
       dispatch({ type: 'logoutSuccess', payload: data.message });
     } catch (error) {
       dispatch({ type: 'logoutFail', payload: error.response.data.message });
     }
-  };  
+  };
