@@ -18,6 +18,8 @@ import AboutUs from "./Pages/About";
 import TermsAndConditions from "./Pages/TermsAndConditions";
 import ConnectToInnovators from "./Pages/ConnectToInnovators";
 import Explore from "./Pages/Explore";
+import AdminResources from "./Pages/AdminPages/AdminResources";
+import SuccessStoryPage from "./Pages/AdminPages/SuccessStories";
 
 
 
@@ -109,6 +111,8 @@ function App() {
              <Route path="/termsandconditions" element={<TermsAndConditions/>} />
              <Route path="/connecttoinnovators" element={<ConnectToInnovators/>} />
              <Route path="/explore" element={<Explore/>} />
+             <Route path="/adminresources" element={<AdminResources/>} />
+             <Route path="/successstorypage" element={<SuccessStoryPage/>} />
              <Route path="*" element={<NotFound/>} />
        </Routes>
        <Toaster />
