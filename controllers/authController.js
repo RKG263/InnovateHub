@@ -68,8 +68,8 @@ export const loginController = async (req, res, next) => {
     }).send({
       success: true,
       message: "login sucessfully",
-     token,
-     user,
+       token,
+       user,
     });
   } catch (error) {
     console.log("error in loginController");

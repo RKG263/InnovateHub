@@ -99,11 +99,11 @@ const Header = () => {
           ) : (
             <Link to="/login" style={{ textDecoration: "none" }}>
               <Button
-                sx={{
+                 sx={{
                   color: "white",
-                  textDecoration: "none",
+                  textDecoration: isActiveLink('/login') ? "underline" : "none", // Underline when active
                   "&:hover": {
-                    backgroundColor: "#303f9f",
+                    backgroundColor: isActiveLink('/login') ? "#303f9f" : "transparent", // Dark blue background when active
                   },
                 }}
               >

@@ -9,7 +9,7 @@ import Register from "./Components/Auth/Register";
 import Home from "./Components/Home/Home";
 import NotFound from "./Shared/NotFound";
 import SpinningLoader from "./Shared/SpinningLoader";
-import './App.css' ;
+// import './App.css' ;
 import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from 'react-hot-toast';
 import SubmitIdea from "./Pages/Users/SubmitIdea";
@@ -17,10 +17,12 @@ import { loadUser } from "./redux/actions/user";
 import AboutUs from "./Pages/About";
 import TermsAndConditions from "./Pages/TermsAndConditions";
 import ConnectToInnovators from "./Pages/ConnectToInnovators";
+import Explore from "./Pages/Explore";
+
 
 
 function App() {
-  
+ 
   const { isAuthenticated, user, message, error, loading } = useSelector(
     state => state.user
   );
@@ -106,6 +108,7 @@ function App() {
              <Route path="/about" element={<AboutUs/>} />
              <Route path="/termsandconditions" element={<TermsAndConditions/>} />
              <Route path="/connecttoinnovators" element={<ConnectToInnovators/>} />
+             <Route path="/explore" element={<Explore/>} />
              <Route path="*" element={<NotFound/>} />
        </Routes>
        <Toaster />
