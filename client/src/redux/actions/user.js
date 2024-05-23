@@ -55,12 +55,12 @@ export const register = (name , email , password , role)  => async dispatch => {
       dispatch({ type: 'loadUserRequest' });
   
       const { data } = await axios.get(
-        `${server}/auth/me`,
-  
+        `${server}/auth/me`, 
         {
           withCredentials: true,
         }
       );
+    if(data === undefined)  dispatch({ type: 'loadUserFail', payload: error.response.data.message });
       dispatch({ type: 'loadUserSuccess', payload: data.user });
     } catch (error) {
       dispatch({ type: 'loadUserFail', payload: error.response.data.message });

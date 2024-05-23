@@ -112,17 +112,23 @@ export const logoutController=async(req,res,next)=>{
 
 export const meController = async(req, res, next)=>{
 
-    try{
+    // try{
 
-      res.status(200).json({
-        userId : req.user
-      });
+    //   res.status(200).json({
+    //         userId : req.user
+    //   });
 
 
-    }catch(err)
-    {
-      console.error(err);
-      next(err);
-    }
+    // }catch(err)
+    // {
+    //   console.error(err);
+    //   next(err);
+    // }
+    const user =await userModel.findById(req.user._id);
+
+    res.status(200).json({
+            success:true,
+            user,
+    })
 
 }

@@ -35,9 +35,9 @@ function App() {
     }
   }, [dispatch, error, message , loading ]);
 
-  useEffect(() => {
-    dispatch(loadUser());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(loadUser());
+  // }, [dispatch]);
 
 
   return (
