@@ -3,14 +3,8 @@ const Schema = mongoose.Schema;
 
 
 const entrepreneurSchema = new Schema({
-    submittedIdea: {
-        type: String,
+   
 
-    },
-    post: {
-        type: String,
-
-    },
     chats: {
         type: String,
 
@@ -27,12 +21,12 @@ const entrepreneurSchema = new Schema({
         type: String,
 
     },
-    mentors: {
-        type: String,
+    mentorIds: {
+        type: [Schema.Types.ObjectId],
 
     },
-    investors: {
-        type: String,
+    investorIds: {
+        type: [Schema.Types.ObjectId],
 
     }
 
@@ -41,4 +35,4 @@ const entrepreneurSchema = new Schema({
 });
 
 
-export default mongoose.model("entrepreneur", entrepreneurSchema);
+export default mongoose.model("entrepreneurs", entrepreneurSchema);

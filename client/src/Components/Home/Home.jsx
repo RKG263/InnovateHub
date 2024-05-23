@@ -5,7 +5,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import { useSelector } from 'react-redux';
 
-
+ 
 
 const Home = () => {
       const {isAuthenticated} = useSelector((state) => state.user) ;

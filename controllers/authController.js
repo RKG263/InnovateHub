@@ -99,3 +99,12 @@ export const verifyEmailController=async(req,res,next)=>{
     next(error)
   }
 }
+
+// logout controller
+export const logoutController=async(req,res,next)=>{
+  try {
+    res.clearCookie("token",{sameSite:"none",secure:true}).status(200).send("User logged out successfully!")
+  } catch (error) {
+    next(error);
+  }
+}

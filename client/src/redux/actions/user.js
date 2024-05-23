@@ -49,4 +49,4 @@ export const register = (name , email , password , role)  => async dispatch => {
     } catch (error) {
       dispatch({ type: 'logoutFail', payload: error.response.data.message });
     }
-  };  
+  };
