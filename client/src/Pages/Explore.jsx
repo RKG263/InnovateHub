@@ -3,6 +3,7 @@ import { Container, Typography, Grid, Paper, Card, CardContent, CardMedia, Butto
 import { BusinessCenter, Event, LibraryBooks, Star, Person, AccountBalance } from '@mui/icons-material';
 import Header from '../Components/Header/Header';
 import Footer from '../Components/Footer/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const categories = [
   {
@@ -56,8 +57,16 @@ const entrepreneurs = [
 ];
 
 const Explore = () => {
+    
+    const navigate = useNavigate() ;
   const handleCategoryClick = (categoryId) => {
     console.log(`Category clicked: ${categoryId}`);
+    if(categoryId === 3 ){
+           navigate('/adminresources') ;
+    }
+    else if(categoryId === 4){
+       navigate('/successstorypage');
+    }
     // Implement navigation to category details page or relevant action here
   };
 
