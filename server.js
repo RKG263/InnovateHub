@@ -7,6 +7,7 @@ import cookie from "cookie-parser";
 import connectDB from "./config/db.js";
 import authRoute from "./routes/authRoute.js";
 import blogRoute from "./routes/blogRoute.js";
+import commentRoute from "./routes/commentRoute.js"
 import errorHandler from "./middleware/errorMiddleware.js";
 const app = express();
 
@@ -26,6 +27,7 @@ app.use(cookie());
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/blog", blogRoute);
+app.use("/api/v1/comment",commentRoute)
 app.get("/", (req, res) => {
   res.send("i am sending your request ");
 });
