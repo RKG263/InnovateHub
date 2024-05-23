@@ -18,7 +18,7 @@ const Register = () => {
 
   const handleRegistration = async (event) => {
     event.preventDefault();
-    //  const myForm = new FormData();
+    //  const myForm = new FormData(); 
     //  myForm.append('name', name);
     //  myForm.append('email', email);
     //  myForm.append('password', password);
