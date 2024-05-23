@@ -1,13 +1,13 @@
 import nodemailer from 'nodemailer'
-export const sendMail = async ( recipientEmail,verificationToken) => {
+export const sendMail = async (recipientEmail, verificationToken) => {
   try {
-    
+
 
     var transport = nodemailer.createTransport({
       host: process.env.MAIL_HOST,
       port: 2525,
       auth: {
-        user: process.env.MAIL_USER, 
+        user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASSWORD
       }
     });
@@ -27,7 +27,44 @@ export const sendMail = async ( recipientEmail,verificationToken) => {
 
     const info = await transport.sendMail(mailOptions);
     return info;
-  } catch (error) { 
+  } catch (error) {
     console.log('Error in nodemailer: ' + error);
   }
 };
+
+
+export const recieveMail = async ({ email, name, message }) => {
+
+  try {
+   
+    var transport = nodemailer.createTransport({
+      host: process.env.MAIL_HOST,
+      port: 2525,
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASSWORD
+      }
+    });
+
+
+    const mailOptions = {
+      from : email,
+      to: '1prashantkumar1@gmail.com',
+      subject: 'Contact Us',
+      html: `
+        <p>Hello, I am  ${name}</p>
+        <p>${message}</p>
+      `
+    };
+
+    const info = await transport.sendMail(mailOptions);
+    return info;
+
+
+  } catch (error) {
+    console.log('Error in nodemailer: ' + error);
+
+  }
+
+
+}
