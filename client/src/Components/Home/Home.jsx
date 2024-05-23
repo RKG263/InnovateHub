@@ -4,7 +4,7 @@ import { Container, Typography, Button, AppBar, Grid, Paper, Box } from '@mui/ma
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import { useSelector } from 'react-redux';
-
+import { Link } from 'react-router-dom';
  
 
 const Home = () => {
@@ -31,11 +31,15 @@ const Home = () => {
                       <Button variant="contained" color="primary">
                         Get Started
                       </Button>
+                    
                     </Grid>
                     <Grid item>
-                      <Button variant="outlined" color="primary">
+                     <Link to={'/connecttoinnovators'}>
+                    <Button variant="outlined" color="primary">
                         Connect to Innovators
                       </Button>
+                      </Link>
+                      
                     </Grid>
                   </Grid>
                 </div>

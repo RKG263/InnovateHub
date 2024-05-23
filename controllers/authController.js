@@ -67,7 +67,7 @@ export const loginController = async (req, res, next) => {
       expires:new Date(Date.now()+1*24*60*60)
     }).send({
       success: true,
-      messege: "login sucessfully",
+      message: "login sucessfully",
      token,
      user,
     });
@@ -103,8 +103,12 @@ export const verifyEmailController=async(req,res,next)=>{
 // logout controller
 export const logoutController=async(req,res,next)=>{
   try {
-    res.clearCookie("token",{sameSite:"none",secure:true}).status(200).send("User logged out successfully!")
+    res.clearCookie("token",{sameSite:"none",secure:true}).status(200).send({
+      success : true ,
+      message : "User logged out successfully!"
+    })
   } catch (error) {
+    console.log(error) ;
     next(error);
   }
 }

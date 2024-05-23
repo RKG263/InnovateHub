@@ -14,6 +14,9 @@ import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from 'react-hot-toast';
 import SubmitIdea from "./Pages/Users/SubmitIdea";
 import { loadUser } from "./redux/actions/user";
+import AboutUs from "./Pages/About";
+import TermsAndConditions from "./Pages/TermsAndConditions";
+import ConnectToInnovators from "./Pages/ConnectToInnovators";
 
 
 function App() {
@@ -35,9 +38,9 @@ function App() {
     }
   }, [dispatch, error, message , loading ]);
 
-  // useEffect(() => {
-  //   dispatch(loadUser());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
 
 
   return (
@@ -78,12 +81,13 @@ function App() {
              <Route
               path="/contact"
               element={
-                <ProtectedRoute
-                  user={isAuthenticated}
-                  redirect="/login"
-                >
-                  <Contact/>
-               </ProtectedRoute>
+              //   <ProtectedRoute
+              //     user={isAuthenticated}
+              //     redirect="/login"
+              //   >
+              //     <Contact/>
+              //  </ProtectedRoute>
+              <Contact/>
               }
             />
              <Route
@@ -99,6 +103,9 @@ function App() {
             />
 
              <Route path="/ideasubmit" element={<SubmitIdea/>} />
+             <Route path="/about" element={<AboutUs/>} />
+             <Route path="/termsandconditions" element={<TermsAndConditions/>} />
+             <Route path="/connecttoinnovators" element={<ConnectToInnovators/>} />
              <Route path="*" element={<NotFound/>} />
        </Routes>
        <Toaster />
