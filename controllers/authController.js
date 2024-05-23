@@ -21,8 +21,8 @@ export const registerController = async (req, res, next) => {
      console.log(name ,email ) ;
     const token = generateRandomToken(16); 
     const user = await userModel.create({ role, name, email, password ,isVerifiedToken:token});
-    const mail= await sendMail(email,token) ;
-     console.log(mail);
+   const mail= await sendMail(email,token);
+   console.log(mail);
 
     res.status(201).send({
       success: true,
@@ -40,7 +40,6 @@ export const registerController = async (req, res, next) => {
 export const loginController = async (req, res, next) => {
   try {
     const { email, password, role } = req.body;
-    console.log(req.body) ;
     if (!email || !password || !role) {
       throw new Error("all field required");
     }
@@ -52,6 +51,7 @@ export const loginController = async (req, res, next) => {
     }
     console.log(user.password)
     const isMatch = await user.comparePassword(password);
+
     if (!isMatch) {
       throw new Error("invalid  password ");
     }
@@ -109,18 +109,20 @@ export const logoutController=async(req,res,next)=>{
   }
 }
 
-export const loadUser = async(req ,res , next) =>{
 
-  try{
-  const user =await userModel.findById(req.user._id);
-  console.log(req.user._id) ;
-  res.status(200).json({
-          success:true,
-          user,
-  })
-}
-  catch(error){
-         console.log(error) ;
-         next(error); 
-  }
+export const meController = async(req, res, next)=>{
+
+    try{
+
+      res.status(200).json({
+        userId : req.user
+      });
+
+
+    }catch(err)
+    {
+      console.error(err);
+      next(err);
+    }
+
 }
