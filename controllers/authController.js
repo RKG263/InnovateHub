@@ -113,8 +113,9 @@ export const logoutController=async(req,res,next)=>{
 export const meController = async(req, res, next)=>{
 
     try{
-
+    
       res.status(200).json({
+        success:true,
         userId : req.user
       });
 

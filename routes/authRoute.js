@@ -13,6 +13,6 @@ router.get('/logout',isauth,logoutController)
 router.get('/testauth',isauth,(req,res)=>{
   res.send("hellp tos")
 });
-router.get('/me',isauth,  meController);``
+router.get('/me',isauth,  meController);
 
 export default router
