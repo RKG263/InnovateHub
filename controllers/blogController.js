@@ -1,27 +1,30 @@
-import jwt from 'jsonwebtoken';
-import userModel from '../models/userModel.js';
-import postModel from '../models/postModel.js';
+
+import postModel from "../models/postModel.js";
+
 export const createPostController = async (req, res, next) => {
   try {
-    const {title,description,categories} = req.body;
-    const { token } = req.cookies; 
-    const decode = jwt.verify(token, process.env.SECRET_CODE);
-    const user = await userModel.findById({_id:decode.userId});
-    
-    if(!title || !description){
-      throw new Error('all fields required')
+    const { title, description, username, userID } = req.body;
+    if (!title || !description || !username || !userID) {
+      throw new Error("All fields are required");
     }
 
-    const post =await postModel.create({title,description,categories,username:user.name});
+    const newPost = new postModel({
+      title,
+      description,
+      picture: req.body.picture || null,
+      username,
+      userID,
+      categories: req.body.categories || [],
+    });
 
+    const savedPost = await newPost.save();
 
-    res.status(200).send({
+    res.status(200).json({
       success: true,
-      message: "Post successfully",
-      post
+      message: "Post successfully created",
+      post: savedPost,
     });
   } catch (error) {
-    console.error(error); // Log the error for debugging
     next(error);
   }
 };
