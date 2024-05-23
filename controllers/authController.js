@@ -21,8 +21,8 @@ export const registerController = async (req, res, next) => {
      console.log(name ,email ) ;
     const token = generateRandomToken(16); 
     const user = await userModel.create({ role, name, email, password ,isVerifiedToken:token});
-   const mail= await sendMail(email,token)
-   console.log(mail);
+    const mail= await sendMail(email,token) ;
+     console.log(mail);
 
     res.status(201).send({
       success: true,
@@ -40,13 +40,15 @@ export const registerController = async (req, res, next) => {
 export const loginController = async (req, res, next) => {
   try {
     const { email, password, role } = req.body;
+    console.log(req.body) ;
     if (!email || !password || !role) {
       throw new Error("all field required");
     }
-
+  
     const user = await userModel.findOne({ email });
     if (!user) {
-      throw new Error("invalid email ");
+       console.log("Invalid Email Helllo ") ;
+      throw new Error("Invalid Email Helllo ");
     }
     console.log(user.password)
     const isMatch = await user.comparePassword(password);
@@ -66,8 +68,8 @@ export const loginController = async (req, res, next) => {
     }).send({
       success: true,
       messege: "login sucessfully",
-      token,
-      user,
+     token,
+     user,
     });
   } catch (error) {
     console.log("error in loginController");
