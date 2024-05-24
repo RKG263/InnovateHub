@@ -3,7 +3,7 @@ import "./Firm.css";
 
 const Firm = () => {
   return (
-    <div className="profile">
+    <div className="user-profile">
       <div className="profile-container">
         <div className="profile-header">
           <img

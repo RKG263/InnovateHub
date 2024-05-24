@@ -3,8 +3,8 @@ import "./enterpreneurProfile.css";
 
 const EnterpreneurProfile = () => {
   return (
-    <div className="body">
-      <div className="container">
+    <div className="user-dashboard">
+      <div className="user-container">
         {/* <!-- Profile Section --> */}
         <div className="profile-section">
           <div className="profile-content">
