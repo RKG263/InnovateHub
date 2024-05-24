@@ -109,7 +109,9 @@ function App() {
             <Route path="/adminresources" element={<AdminResources />} />
             <Route path="/successstorypage" element={<SuccessStoryPage />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="/userProfile" element={<MentorProfile />} />
+            <Route path="/userProfile" element={<EnterpreneurProfile />} />
+
+            <Route path="/user/profile" element={<Investor />} />
           </Routes>
           <Toaster />
         </>
