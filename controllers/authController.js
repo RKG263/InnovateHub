@@ -26,7 +26,7 @@ export const registerController = async (req, res, next) => {
 
     res.status(201).send({
       success: true,
-      message: "User created successfully",
+      message: "You are Registerd Successfully",
       user,
     });
   } catch (error) {
@@ -67,9 +67,9 @@ export const loginController = async (req, res, next) => {
       expires:new Date(Date.now()+1*24*60*60)
     }).send({
       success: true,
-      message: "login sucessfully",
-       token,
-       user,
+      message: `Welcome ${user.name}`,
+      token,
+      user,
     });
   } catch (error) {
     console.log("error in loginController");
@@ -105,7 +105,7 @@ export const logoutController=async(req,res,next)=>{
   try {
     res.clearCookie("token",{sameSite:"none",secure:true}).status(200).send({
       success : true ,
-      message : "User logged out successfully!"
+      message : "Logged out successfully!"
     })
   } catch (error) {
     console.log(error) ;

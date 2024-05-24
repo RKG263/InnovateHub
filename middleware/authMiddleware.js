@@ -8,8 +8,8 @@ export const isauth=async(req,res,next)=>{
 
    if(!token){
     return res.status(401).send({
-      success:false,
-      message:"unauthorized"
+       success:false,
+       message:"unauthorized"
     })
    }
    const decode=JWT.verify(token,process.env.SECRET_CODE);
