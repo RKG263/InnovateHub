@@ -10,12 +10,12 @@ export const userReducer = createReducer({}, (builder) => {
             state.loading = false;
             state.isAuthenticated = true; 
             state.user = action.payload.user;
-            state.message = action.payload.message;
+            state.message = `Welcome ${action.payload.user.name}`;
     })
     .addCase('loginFail', (state ,action) => {
             state.loading = false;
             state.isAuthenticated = false;
-            state.error = action.payload;
+            state.error = `Please Enter Correct Feild`;
     })
     .addCase('clearError' ,( state) => {
          state.error = null;
@@ -63,7 +63,7 @@ export const userReducer = createReducer({}, (builder) => {
     .addCase('loadUserFail' , (state,action)=>{
       state.loading = false;
       state.isAuthenticated = false;
-      state.error = action.payload;
+      // state.error = action.payload;
     })
    
 });

@@ -85,13 +85,13 @@ function App() {
              <Route
               path="/contact"
               element={
-              //   <ProtectedRoute
-              //     user={isAuthenticated}
-              //     redirect="/login"
-              //   >
-              //     <Contact/>
-              //  </ProtectedRoute>
-              <Contact/>
+                <ProtectedRoute
+                  user={isAuthenticated}
+                  redirect="/login"
+                  message= "Please Login First"
+                >
+                  <Contact/>
+               </ProtectedRoute>
               }
             />
              <Route
