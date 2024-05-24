@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from "react";
 import "./enterpreneurProfile.css";
 
@@ -22,41 +21,36 @@ const EnterpreneurProfile = () => {
               <br />
               Contact - 9087890878
             </p>
-            <div className="link"
-              onClick={handleClick}
-            >
-              <div className="link-info"
-                name="Post"
-              >Post</div>
-              <div className="link-info"
-                name="Idea"
-              >Ideas Submitted</div>
-              <div className="link-info"
-                name="Meeting"
-              >Meeting Schedule</div>
-              <div className="link-info"
-                name="Mentors"
-              >Mentors</div>
-              <div className="link-info"
-                name="Investors"
-              >Investors</div>
-              <div className="link-info"
-                name="Chat"
-              >Chat</div>
-              <div className="link-info"
-                name="EditProfile"
-              >Edit Profile</div>
+            <div className="link" onClick={handleClick}>
+              <div className="link-info" name="Post">
+                Post
+              </div>
+              <div className="link-info" name="Idea">
+                Ideas Submitted
+              </div>
+              <div className="link-info" name="Meeting">
+                Meeting Schedule
+              </div>
+              <div className="link-info" name="Mentors">
+                Mentors
+              </div>
+              <div className="link-info" name="Investors">
+                Investors
+              </div>
+              <div className="link-info" name="Chat">
+                Chat
+              </div>
+              <div className="link-info" name="EditProfile">
+                Edit Profile
+              </div>
             </div>
           </div>
         </div>
         {/* <!-- Post Section --> */}
-        <div className="post-section">
-          {genreateComponent()}
-        </div>
+        <div className="post-section">{genreateComponent()}</div>
       </div>
     </div>
   );
 };
 
 export default EnterpreneurProfile;
->>>>>>> 88c6bb3cf2ebeafac829d9a4fc75edbf252a9704
