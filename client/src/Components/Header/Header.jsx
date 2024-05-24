@@ -1,68 +1,86 @@
-
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Box, Button, Stack } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { ExitToApp } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import logo from  '../../assets/logo.png'
+import { logout } from '../../redux/actions/user';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Header = () => {
-  const [user, setUser] = useState(1);
+  const { isAuthenticated, user } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+  const location = useLocation();
 
-  const flip = () => {
-    setUser((prev) => !prev);
-  };
+  const handleLogout = (event) => {
+    event.preventDefault();
+    dispatch(logout());
+  }
+
+  const isActiveLink = (pathname) => {
+    return location.pathname === pathname;
+  }
 
   return (
     <AppBar position="static">
       <Toolbar>
-        <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}>
+
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <img
+              src={logo}
+           alt="Logo"
+            style={{ width: "50px", marginRight: "10px" }}
+              />
+</Link>
+
           <Stack>
-            <Typography variant="h3">
-              Innovators Hub
-            </Typography>
-            <Typography variant="h7">
-              Empowering entrepreneurs to achieve their dreams.
+            <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+              InnovatorsHub
             </Typography>
           </Stack>
         </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Link to="/" style={{ textDecoration: 'none' }}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Link to="/" style={{ textDecoration: "none" }}>
             <Button
               sx={{
-                color: 'white',
-                '&:hover': {
-                  backgroundColor: '#303f9f',
+                color: "white",
+                textDecoration: isActiveLink('/') ? "underline" : "none", // Underline when active
+                "&:hover": {
+                  backgroundColor: isActiveLink('/') ? "#303f9f" : "transparent", // Dark blue background when active
                 },
               }}
             >
               HOME
             </Button>
           </Link>
-          <Link to="/about" style={{ textDecoration: 'none' }}>
+          <Link to="/about" style={{ textDecoration: "none" }}>
             <Button
               sx={{
-                color: 'white',
-                '&:hover': {
-                  backgroundColor: '#303f9f',
+                color: "white",
+                textDecoration: isActiveLink('/about') ? "underline" : "none", // Underline when active
+                "&:hover": {
+                  backgroundColor: isActiveLink('/about') ? "#303f9f" : "transparent", // Dark blue background when active
                 },
               }}
             >
               About Us
             </Button>
           </Link>
-          <Link to="/contact" style={{ textDecoration: 'none' }}>
+          <Link to="/contact" style={{ textDecoration: "none" }}>
             <Button
               sx={{
-                color: 'white',
-                '&:hover': {
-                  backgroundColor: '#303f9f',
+                color: "white",
+                textDecoration: isActiveLink('/contact') ? "underline" : "none", // Underline when active
+                "&:hover": {
+                  backgroundColor: isActiveLink('/contact') ? "#303f9f" : "transparent", // Dark blue background when active
                 },
               }}
             >
               Contact Us
             </Button>
           </Link>
-          {user ? (
+          {isAuthenticated ? (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Link to="/profile">
                 <IconButton
@@ -74,24 +92,20 @@ const Header = () => {
                   <AccountCircle />
                 </IconButton>
               </Link>
-              <IconButton
-                color="inherit"
-                aria-label="logout"
-                onClick={flip}
-              >
+              <IconButton color="inherit" aria-label="logout" onClick={handleLogout}>
                 <ExitToApp />
               </IconButton>
             </Box>
           ) : (
-            <Link to="/login" style={{ textDecoration: 'none' }}>
+            <Link to="/login" style={{ textDecoration: "none" }}>
               <Button
-                sx={{
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: '#303f9f',
+                 sx={{
+                  color: "white",
+                  textDecoration: isActiveLink('/login') ? "underline" : "none", // Underline when active
+                  "&:hover": {
+                    backgroundColor: isActiveLink('/login') ? "#303f9f" : "transparent", // Dark blue background when active
                   },
                 }}
-                onClick={flip}
               >
                 Log In
               </Button>

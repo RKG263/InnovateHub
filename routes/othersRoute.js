@@ -1,0 +1,11 @@
+import express from 'express';
+import { isauth } from '../middleware/authMiddleware.js';
+import { contactUsController, meetingController } from '../controllers/otherController.js';
+
+
+const router=express.Router();
+
+router.post('/contact',isauth,  contactUsController);
+router.post('/meeting', isauth, meetingController);
+
+export default router;

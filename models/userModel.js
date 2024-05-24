@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import JWT from "jsonwebtoken";
 const userSchema = new mongoose.Schema(
   {
-    role: {
+    role: { 
       type: String,
       required: [true, "role is required"],
     },
