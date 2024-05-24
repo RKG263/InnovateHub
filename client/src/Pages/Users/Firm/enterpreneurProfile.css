@@ -9,16 +9,17 @@ img {
   padding: 0;
   box-sizing: border-box;
 }
-
-.body {
+ 
+/* .body {
   font-family: "Arial", sans-serif;
   background: #f0f2f5;
+  background: #000000;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
-}
+} */
 
 .container {
   display: flex;
@@ -31,7 +32,7 @@ img {
 }
 
 /* Profile Section */
-.profile-section {
+/* .profile-section {
   width: 25%;
   background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
   color: #ffffff;
@@ -40,7 +41,7 @@ img {
   align-items: center;
   padding-top: 20px;
   border-radius: 8px;
-}
+} */
 
 .profile-content {
   text-align: center;

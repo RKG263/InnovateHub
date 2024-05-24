@@ -10,11 +10,19 @@ export const contactUsController = async (req, res, next) => {
         const mail = await recieveMail(req.body);
         console.log(mail);
 
-        res.status(200).json({
+        // return res.status(200).cookie("token", token).send({
+        //     success: true,  
+        //     message: "login sucessfully",
+        //      token,
+        //      user,
+        //   });
+
+
+        res.status(200).cookie("contactus", "sssj@38494").json({
             success: true,
             message: "Mail sent successfully",
 
-        })
+        });
 
 
     } catch (err) {

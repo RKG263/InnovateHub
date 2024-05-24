@@ -63,10 +63,8 @@ export const loginController = async (req, res, next) => {
     }
     const token = user.createJWT();
 
-    return res.status(200).cookie("token", token, {
-      expires:new Date(Date.now()+1*24*60*60)
-    }).send({
-      success: true,
+    return res.status(200).cookie("token", token).send({
+      success: true,  
       message: "login sucessfully",
        token,
        user,
@@ -106,7 +104,7 @@ export const logoutController=async(req,res,next)=>{
     res.clearCookie("token",{sameSite:"none",secure:true}).status(200).send({
       success : true ,
       message : "User logged out successfully!"
-    })
+    });
   } catch (error) {
     console.log(error) ;
     next(error);

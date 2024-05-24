@@ -3,23 +3,31 @@ const Schema = mongoose.Schema;
 
 
 const ideaSchema = new Schema({
+    title: {
+        type: String,
+        required: true
+    },
     idea: {
         type: String,
 
     },
     entrepreneurId: {
         type: Schema.Types.ObjectId,
-        required : true
+        required: true
 
     },
-    investorId : {
-        type : Schema.Types.ObjectId,
-        required : true
+    investorId: {
+        type: Schema.Types.ObjectId,
+        required: true
+    },
+    status: {
+        type: Boolean,
+        default: false
     }
 
 
 
-}, {timestamps:true});
+}, { timestamps: true });
 
 
 export default mongoose.model("ideas", ideaSchema);

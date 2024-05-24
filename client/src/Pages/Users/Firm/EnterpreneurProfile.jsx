@@ -43,17 +43,19 @@ const EnterpreneurProfile = () => {
 
 
   return (
-    <div className="body">
+    
+      
       <div className="container">
         {/* <!-- Profile Section --> */}
 
         <div className="profile-section">
-          <div className="profile-content">
+          <div className="flex justify-center items-center flex-col text-center">
+            
             <img
               src="https://images.pexels.com/photos/3781545/pexels-photo-3781545.jpeg?auto=compress&cs=tinysrgb&w=600"
               alt=""
               className="profile-img"
-            />
+              />
             <h2 className="user-name">URFI JAVED</h2>
 
             <p className="user-bio">
@@ -61,6 +63,9 @@ const EnterpreneurProfile = () => {
               <br />
               Contact - 9087890878
             </p>
+              </div>
+          <div className="profile-content">
+
             <div className="link"
               onClick={handleClick}
             >
@@ -93,7 +98,7 @@ const EnterpreneurProfile = () => {
           {genreateComponent()}
         </div>
       </div>
-    </div>
+      
   );
 };
 

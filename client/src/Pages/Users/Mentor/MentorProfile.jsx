@@ -44,25 +44,32 @@ const MentorProfile = () => {
 
 
   return (
-    <div className="body">
 
-      <div className="container">
-        {/* <!-- Profile Section --> */}
+
+    <div className="container">
+
+      {/* <!-- Profile Section --> */}
+
+      
+
         <div className="profile-section">
 
-          <div className="profile-content">
-            <img
-              src="https://images.pexels.com/photos/3781545/pexels-photo-3781545.jpeg?auto=compress&cs=tinysrgb&w=600"
-              alt=""
-              className="profile-img"
-            />
-            <h2 className="user-name">URFI JAVED</h2>
+      <div className="flex justify-center items-center flex-col">
+        <img
+          src="https://images.pexels.com/photos/3781545/pexels-photo-3781545.jpeg?auto=compress&cs=tinysrgb&w=600"
+          alt=""
+          className="profile-img"
+        />
 
-            <p className="user-bio">
-              Innovating solutions to create a better tomorrow.
-              <br />
-              Contact - 9087890878
-            </p>
+        <h2 className="user-name">URFI JAVED</h2>
+
+        <p className="user-bio text-center">
+          Innovating solutions to create a better tomorrow.
+          <br />
+          Contact - 9087890878
+        </p>
+      </div>
+          <div className="profile-content">
             <div className="link"
               onClick={handleClick}
 
@@ -102,7 +109,7 @@ const MentorProfile = () => {
                 className="link-info"
                 name="Chat"
               >
-                Chat
+                Chat with AI
               </div>
               <div
                 className="link-info"
@@ -116,9 +123,10 @@ const MentorProfile = () => {
         {/* <!-- Post Section --> */}
         <div className="post-section">
           {genreateComponent()}
-        </div>
+        
       </div>
     </div>
+
   );
 };
 

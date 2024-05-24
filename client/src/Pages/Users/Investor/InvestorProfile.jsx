@@ -47,7 +47,7 @@ const InvestorProfile = () => {
 
 
   return (
-    <div className="body">
+    
       <div className="container">
         {/* <!-- Profile Section --> */}
         <div className="profile-section">
@@ -96,7 +96,7 @@ const InvestorProfile = () => {
         {genreateComponent()}
          </div>
       </div>
-    </div>
+    
   );
 };
 
