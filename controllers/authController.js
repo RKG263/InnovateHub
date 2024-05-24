@@ -18,7 +18,7 @@ export const registerController = async (req, res, next) => {
     if (isUserExist) {
       throw new Error("User already exists");
     }
-
+    
     const token = generateRandomToken(16); 
     const user = await userModel.create({ role, name, email, password ,isVerifiedToken:token});
    const mail= await sendMail(email,token)

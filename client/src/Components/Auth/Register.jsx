@@ -3,7 +3,6 @@ import React, { useContext, useState } from "react";
 // import { toast } from "react-toastify";
 
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import Login from "./Login";
 
 
 const Register = () => {
@@ -20,7 +19,6 @@ const Register = () => {
     try {
       const registerData = new FormData(event.currentTarget);
 
-
       const response = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}/api/v1/auth/register`, {
         name : registerData.get('name'),
         email: registerData.get('email'),
@@ -35,13 +33,11 @@ const Register = () => {
     }
 
   };
-
-
-
+  
   return (
     <>
       <div className="container form-component register-form">
-        <h2>Sign Up</h2>
+        <h1>Sign Up</h1>
         <p>Please Sign Up To Continue</p>
 
         <form onSubmit={handleRegistration}>
@@ -93,12 +89,12 @@ const Register = () => {
               flexDirection: "row",
             }}
           >
-            <p style={{ marginBottom: 0 }}>Already Registered?</p>
+            
             <Link
               to={"/login"}
               style={{ textDecoration: "none", color: "#271776ca" }}
             >
-              Login Now
+              Already Registered? Login Now
             </Link>
           </div>
           <div style={{ justifyContent: "center", alignItems: "center" }}>

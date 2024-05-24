@@ -1,0 +1,72 @@
+.profile {
+    display: flex;
+    padding: 100px;
+    background-color: aliceblue;
+    gap: 30px;
+  
+    .picture {
+      img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 8px solid white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+  
+      .rating {
+        padding: 0 auto;
+        background-color: white;
+        margin-top: 20px;
+        height: 35px;
+        border: 2px solid white;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        text-align: center;
+      }
+    }
+  
+    .detail {
+      display: flex;
+      flex-direction: column;
+      padding-left: 80px;
+  
+      .nameDetail {
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+  
+        .name {
+          font-size: 30px;
+          font-weight: 800;
+        }
+      }
+  
+      .bio {
+        margin-top: 20px;
+        padding: 10px;
+        font-size: 14px;
+        text-align: center;
+        border: 1px solid black;
+        background-color: lightgray;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+      }
+  
+      .moreDetail {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+  
+        button {
+          padding: 10px;
+          background-color: #4caf50;
+          color: white;
+          text-align: center;
+          font-size: 16px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
