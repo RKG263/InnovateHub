@@ -23,6 +23,9 @@ import SuccessStoryPage from "./Pages/AdminPages/SuccessStories";
 import EnterpreneurProfile from "./Pages/Users/Firm/EnterpreneurProfile";
 import InvestorProfile from "./Pages/Users/Investor/InvestorProfile";
 import MentorProfile from "./Pages/Users/Mentor/MentorProfile";
+import Firm from "./Pages/Profile/firm/Firm";
+import Investor from "./Pages/Profile/Investor/Investor";
+import Mentor from "./Pages/Profile/Mentor/Mentor";
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
