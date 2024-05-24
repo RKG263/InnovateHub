@@ -1,11 +1,12 @@
 import express from 'express';
 import { isauth } from '../middleware/authMiddleware.js';
-import { contactUsController, meetingController } from '../controllers/otherController.js';
+import { allUsersController, contactUsController, meetingController } from '../controllers/otherController.js';
 
 
 const router=express.Router();
 
 router.post('/contact',isauth,  contactUsController);
 router.post('/meeting', isauth, meetingController);
+router.get('/allUsers', isauth, allUsersController)
 
 export default router;
