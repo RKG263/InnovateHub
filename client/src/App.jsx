@@ -4,7 +4,7 @@ import Login from "./Components/Auth/Login";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import ProtectedRoute from "./Utils/ProtectedRoute";
-import Profile from "./Components/Profile";
+import Profile from "./Pages/Users/Profile";
 import Register from "./Components/Auth/Register";
 import Home from "./Components/Home/Home";
 import NotFound from "./Shared/NotFound";

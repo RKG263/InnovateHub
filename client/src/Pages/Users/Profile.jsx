@@ -1,8 +1,8 @@
 import React from 'react'
-import EnterpreneurProfile from '../Pages/Users/Firm/EnterpreneurProfile.jsx';
-import AdminProfile from '../Pages/AdminPages/AdminProfile.jsx';
-import MentorProfile from '../Pages/Users/Mentor/MentorProfile.jsx';
-import InvestorProfile from '../Pages/Users/Investor/InvestorProfile.jsx';
+import EnterpreneurProfile from './Firm/EnterpreneurProfile.jsx';
+import AdminProfile from '../AdminPages/AdminProfile.jsx';
+import MentorProfile from './Mentor/MentorProfile.jsx';
+import InvestorProfile from './Investor/InvestorProfile.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 
 

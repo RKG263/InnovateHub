@@ -4,6 +4,9 @@ const Schema = mongoose.Schema;
 
 const entrepreneurSchema = new Schema({
    
+    entrepreneurId : {
+        type: Schema.Types.ObjectId
+    },
 
     chats: {
         type: String,

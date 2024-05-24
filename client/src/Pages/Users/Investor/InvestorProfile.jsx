@@ -1,7 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import "./investorProfile.css";
+import Post from "../../../Components/Users/Post.jsx";
+import Chat from "../../../Components/Users/Chat.jsx";
+import EditProfile from "../../../Components/Users/EditProfile.jsx";
+import Meeting from "../../../Components/Users/Meeting.jsx";
+import Appointment from "../../../Components/Users/Investor/Appointment.jsx";
+import Idea from "../../../Components/Users/Investor/Idea.jsx";
+import Invested from "../../../Components/Users/Investor/Invested.jsx";
+
+
+
 
 const InvestorProfile = () => {
+
+  const [currentComponent, setCurrentComponent] = useState("Post");
+
+  const handleClick = (event) => {
+
+    setCurrentComponent(event.target.getAttribute('name'));
+
+  }
+
+  const genreateComponent = () => {
+    switch (currentComponent) {
+      case 'Post':
+        return <Post />
+      case 'Chat':
+        return <Chat />
+      case 'EditProfile':
+        return <EditProfile />
+      case 'Appointment':
+        return <Appointment />
+      case 'Idea':
+        ; return <Idea />
+      case 'Invested':
+        return <Invested />
+      case 'Meeting':
+        return <Meeting />
+      default:
+        return <Post />
+    }
+
+
+  }
+
+
+
   return (
     <div className="body">
       <div className="container">
@@ -20,21 +64,37 @@ const InvestorProfile = () => {
               <br />
               Contact - 9087890878
             </p>
-            <div className="link">
-              <div className="link-info">Requested Ideas</div>
-              <div className="link-info">Meeting Schedule</div>
-              <div className="link-info">Invested</div>
-              <div className="link-info">Appointment</div>
-              <div className="link-info">Chat</div>
-              <div className="link-info">Edit Profile</div>
+            <div className="link"
+               onClick={handleClick}
+            >
+               <div className="link-info"
+                name="Post"
+              >Post</div>
+              <div className="link-info"
+                name="Idea"
+              >Requested Ideas</div>
+              <div className="link-info"
+                name="Meeting"
+              >Meeting Schedule</div>
+              <div className="link-info"
+                name="Invested"
+              >Invested</div>
+              <div className="link-info"
+                name="Appointment"
+              >Appointment</div>
+              <div className="link-info"
+                name="Chat"
+              >Chat</div>
+              <div className="link-info"
+                name="EditProfile"
+              >Edit Profile</div>
             </div>
           </div>
         </div>
         {/* <!-- Post Section --> */}
         <div className="post-section">
-          <h2>Posts</h2>
-          <p>This is where the user's posts will be displayed.</p>
-        </div>
+        {genreateComponent()}
+         </div>
       </div>
     </div>
   );
