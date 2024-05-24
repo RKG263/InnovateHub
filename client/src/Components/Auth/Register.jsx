@@ -1,4 +1,7 @@
 
+<<<<<<< HEAD
+import { Link, Navigate, useNavigate } from "react-router-dom";
+=======
 import React, { useEffect, useState } from "react";
 import { Container, Typography, TextField, Button, MenuItem, Select, FormControl, InputLabel, Box, Link as MuiLink } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +10,7 @@ import { toast } from "react-toastify";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { register } from "../../redux/actions/user";
+>>>>>>> 88c6bb3cf2ebeafac829d9a4fc75edbf252a9704
 
 
 const Register = () => {
@@ -20,6 +24,27 @@ const Register = () => {
 
   const handleRegistration = async (event) => {
     event.preventDefault();
+<<<<<<< HEAD
+
+    try {
+      const registerData = new FormData(event.currentTarget);
+
+      const response = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}/api/v1/auth/register`, {
+        name : registerData.get('name'),
+        email: registerData.get('email'),
+        password: registerData.get('password'),
+        role: registerData.get('role'),
+
+      });
+
+
+    } catch (err) {
+      console.error(err);
+    }
+
+  };
+  
+=======
     dispatch(register(name, email, password, role));
     navigate('/login');
   };
@@ -35,6 +60,7 @@ const Register = () => {
     }
   }, [dispatch, error, message]);
 
+>>>>>>> 88c6bb3cf2ebeafac829d9a4fc75edbf252a9704
   return (
     <>
       <Header />

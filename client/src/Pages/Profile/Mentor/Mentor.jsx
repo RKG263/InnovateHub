@@ -3,7 +3,7 @@ import "./mentor.css";
 
 const Mentor = () => {
   return (
-    <div className="profile">
+    <div className="user-profile">
       <div className="profile-container">
         <div className="profile-header">
           <img
@@ -18,7 +18,7 @@ const Mentor = () => {
               className="profile-img"
             />
             <div className="user-info">
-              <h1 className="user-name">John Doe / Investor</h1>
+              <h1 className="user-name">John Doe / Mentor</h1>
               <p className="user-bio">
                 A motivated individual with in-depth knowledge of languages and
                 development tools, seeking a position in a growth-oriented

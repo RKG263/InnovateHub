@@ -1,47 +1,40 @@
 import React, { useState } from "react";
 import "./mentorProfile.css";
-import Post from "../../../Components/Users/Post.jsx"
-import Chat from "../../../Components/Users/Chat.jsx"
-import EditProfile from "../../../Components/Users/EditProfile.jsx"
-import Expertise from "../../../Components/Users/Mentor/Expertise.jsx"
-import Mentored from "../../../Components/Users/Mentor/Mentored.jsx"
-import Requested from "../../../Components/Users/Mentor/Requested.jsx"
-import Reviews from "../../../Components/Users/Mentor/Reviews.jsx"
-
-
+import Post from "../../../Components/Users/Post.jsx";
+import Chat from "../../../Components/Users/Chat.jsx";
+import EditProfile from "../../../Components/Users/EditProfile.jsx";
+import Expertise from "../../../Components/Users/Mentor/Expertise.jsx";
+import Mentored from "../../../Components/Users/Mentor/Mentored.jsx";
+import Requested from "../../../Components/Users/Mentor/Requested.jsx";
+import Reviews from "../../../Components/Users/Mentor/Reviews.jsx";
 
 const MentorProfile = () => {
   const [currentComponent, setCurrentComponent] = useState("Post");
 
   const handleClick = (event) => {
-
-    setCurrentComponent(event.target.getAttribute('name'));
-
-  }
+    setCurrentComponent(event.target.getAttribute("name"));
+  };
 
   const genreateComponent = () => {
     switch (currentComponent) {
-      case 'Post':
-        return <Post />
-      case 'Chat':
-        return <Chat />
-      case 'EditProfile':
-        return <EditProfile />
-      case 'Expertise':
-        return <Expertise />
-      case 'Mentored':
-        ; return <Mentored />
-      case 'Requested':
-        return <Requested />
-      case 'Reviews':
-        return <Reviews />
+      case "Post":
+        return <Post />;
+      case "Chat":
+        return <Chat />;
+      case "EditProfile":
+        return <EditProfile />;
+      case "Expertise":
+        return <Expertise />;
+      case "Mentored":
+        return <Mentored />;
+      case "Requested":
+        return <Requested />;
+      case "Reviews":
+        return <Reviews />;
       default:
-        return <Post />
+        return <Post />;
     }
-
-
-  }
-
+  };
 
   return (
 
@@ -81,28 +74,16 @@ const MentorProfile = () => {
                 Posts
               </div>
 
-              <div
-                className="link-info"
-                name="Expertise"
-              >
+              <div className="link-info" name="Expertise">
                 Expertise
               </div>
-              <div
-                className="link-info"
-                name="Reviews"
-              >
+              <div className="link-info" name="Reviews">
                 Reviews
               </div>
-              <div
-                className="link-info"
-                name="Mentored"
-              >
+              <div className="link-info" name="Mentored">
                 Mentored
               </div>
-              <div
-                className="link-info"
-                name="Requested"
-              >
+              <div className="link-info" name="Requested">
                 Requsted
               </div>
               <div
@@ -111,10 +92,7 @@ const MentorProfile = () => {
               >
                 Chat with AI
               </div>
-              <div
-                className="link-info"
-                name="EditProfile"
-              >
+              <div className="link-info" name="EditProfile">
                 Edit Profile
               </div>
             </div>

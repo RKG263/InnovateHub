@@ -1,47 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./enterpreneurProfile.css";
-import Post from "../../../Components/Users/Post.jsx";
-import Chat from "../../../Components/Users/Chat.jsx";
-import EditProfile from "../../../Components/Users/EditProfile.jsx";
-import Meeting from "../../../Components/Users/Meeting.jsx";
-import Idea from "../../../Components/Users/Enterpreneur/Idea.jsx";
-import Investors from "../../../Components/Users/Enterpreneur/Investors.jsx";
-import Mentors from "../../../Components/Users/Enterpreneur/Mentors.jsx";
-
 
 const EnterpreneurProfile = () => {
-  const [currentComponent, setCurrentComponent] = useState("Post");
-
-  const handleClick = (event) => {
-
-    setCurrentComponent(event.target.getAttribute('name'));
-
-  }
-
-  const genreateComponent = () => {
-    switch (currentComponent) {
-      case 'Post':
-        return <Post />
-      case 'Chat':
-        return <Chat />
-      case 'EditProfile':
-        return <EditProfile />
-      case 'Idea':
-        return <Idea />
-      case 'Investors':
-        return <Investors />
-      case 'Mentors':
-        return <Mentors />
-      case 'Meeting':
-        return <Meeting />
-      default:
-        return <Post />
-    }
-
-
-  }
-
-
   return (
     
       
@@ -94,9 +54,7 @@ const EnterpreneurProfile = () => {
           </div>
         </div>
         {/* <!-- Post Section --> */}
-        <div className="post-section">
-          {genreateComponent()}
-        </div>
+        <div className="post-section">{genreateComponent()}</div>
       </div>
       
   );
