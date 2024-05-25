@@ -8,7 +8,12 @@ body {
   font-family: 'Roboto', sans-serif;
  
 }
-
+body {
+  background: #dbecf8;
+  background-image: radial-gradient(#d9f1fc 5%, transparent 0);
+  background-size: 35px 35px;
+  
+}
 
 
 

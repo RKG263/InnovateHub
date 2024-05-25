@@ -10,7 +10,7 @@ import blogRoute from "./routes/blogRoute.js";
 import commentRoute from "./routes/commentRoute.js"
 import errorHandler from "./middleware/errorMiddleware.js";
 import othersRoute from "./routes/othersRoute.js"
-
+import cloudinary from 'cloudinary'
 const app = express();
 
 dotenv.config();
@@ -26,6 +26,11 @@ app.use(cors({
 }));
 app.use(morgan("dev"));
 app.use(cookie());
+cloudinary.v2.config({
+  cloud_name:process.env.CLOUDINARY_NAME,
+  api_key:process.env.CLOUDINARY_API_KEY,
+  api_secret:process.env.CLOUDINARY_SECRET
+})
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/blog", blogRoute);

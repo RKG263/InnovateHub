@@ -1,38 +1,48 @@
-import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, IconButton, Box, Button, Stack } from '@mui/material';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import { ExitToApp } from '@mui/icons-material';
-import { Link, useLocation } from 'react-router-dom';
-import logo from  '../../assets/logo.png'
-import { logout } from '../../redux/actions/user';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Box,
+  Button,
+  Stack,
+} from "@mui/material";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import { ExitToApp } from "@mui/icons-material";
+import { Link, useLocation } from "react-router-dom";
+import logo from "../../assets/logo.png";
+import { logout } from "../../redux/actions/user";
+import { useDispatch, useSelector } from "react-redux";
+import SearchBox from "../Blog/SearchBox";
+import MyBlogs from "../../Pages/Blogpage/MyBlogs";
 
 const Header = () => {
-  const { isAuthenticated, user } = useSelector(state => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const location = useLocation();
 
   const handleLogout = (event) => {
     event.preventDefault();
     dispatch(logout());
-  }
+  };
+  const path = useLocation().pathname;
 
   const isActiveLink = (pathname) => {
     return location.pathname === pathname;
-  }
+  };
 
   return (
     <AppBar position="static">
       <Toolbar>
         <Box sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}>
-
           <Link to="/" style={{ textDecoration: "none" }}>
             <img
               src={logo}
-           alt="Logo"
-            style={{ width: "50px", marginRight: "10px" }}
-              />
-</Link>
+              alt="Logo"
+              style={{ width: "50px", marginRight: "10px" }}
+            />
+          </Link>
 
           <Stack>
             <Typography variant="h4" sx={{ fontWeight: "bold" }}>
@@ -40,48 +50,41 @@ const Header = () => {
             </Typography>
           </Stack>
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <Button
-              sx={{
-                color: "white",
-                textDecoration: isActiveLink('/') ? "underline" : "none", // Underline when active
-                "&:hover": {
-                  backgroundColor: isActiveLink('/') ? "#303f9f" : "transparent", // Dark blue background when active
-                },
-              }}
-            >
-              HOME
-            </Button>
-          </Link>
-          <Link to="/about" style={{ textDecoration: "none" }}>
-            <Button
-              sx={{
-                color: "white",
-                textDecoration: isActiveLink('/about') ? "underline" : "none", // Underline when active
-                "&:hover": {
-                  backgroundColor: isActiveLink('/about') ? "#303f9f" : "transparent", // Dark blue background when active
-                },
-              }}
-            >
-              About Us
-            </Button>
-          </Link>
-          <Link to="/contact" style={{ textDecoration: "none" }}>
-            <Button
-              sx={{
-                color: "white",
-                textDecoration: isActiveLink('/contact') ? "underline" : "none", // Underline when active
-                "&:hover": {
-                  backgroundColor: isActiveLink('/contact') ? "#303f9f" : "transparent", // Dark blue background when active
-                },
-              }}
-            >
-              Contact Us
-            </Button>
-          </Link>
+
+        {path==='/posts' || path==='/my-posts'? <Box sx={{ display: "flex", alignItems: "center" }}>
+          
+          <SearchBox/>
+          
           {isAuthenticated ? (
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Link to="/create-post" style={{ textDecoration: "none" }}>
+              <Button
+                sx={{
+                  color: "white",
+                  textDecoration: "none",
+                  "&:hover": {
+                    backgroundColor: "#303f9f",
+                  },
+                }}
+              >
+                Post
+              </Button>
+            </Link>
+            <Link to="/my-posts" style={{ textDecoration: "none" }}>
+              <Button
+                sx={{
+                  color: "white",
+                  textDecoration: "none",
+                  "&:hover": {
+                    backgroundColor: "#303f9f",
+                  },
+                }}
+              >
+                myPosts
+              </Button>
+            </Link>
+            
+           
               <Link to="/profile">
                 <IconButton
                   edge="end"
@@ -92,7 +95,11 @@ const Header = () => {
                   <AccountCircle />
                 </IconButton>
               </Link>
-              <IconButton color="inherit" aria-label="logout" onClick={handleLogout}>
+              <IconButton
+                color="inherit"
+                aria-label="logout"
+                onClick={handleLogout}
+              >
                 <ExitToApp />
               </IconButton>
             </Box>
@@ -111,7 +118,90 @@ const Header = () => {
               </Button>
             </Link>
           )}
-        </Box>
+        </Box> : 
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Button
+              sx={{
+                color: "white",
+                textDecoration: isActiveLink("/") ? "underline" : "none", // Underline when active
+                "&:hover": {
+                  backgroundColor: isActiveLink("/")
+                    ? "#303f9f"
+                    : "transparent", // Dark blue background when active
+                },
+              }}
+            >
+              HOME
+            </Button>
+          </Link>
+          <Link to="/about" style={{ textDecoration: "none" }}>
+            <Button
+              sx={{
+                color: "white",
+                textDecoration: isActiveLink("/about") ? "underline" : "none", // Underline when active
+                "&:hover": {
+                  backgroundColor: isActiveLink("/about")
+                    ? "#303f9f"
+                    : "transparent", // Dark blue background when active
+                },
+              }}
+            >
+              About Us
+            </Button>
+          </Link>
+          <Link to="/contact" style={{ textDecoration: "none" }}>
+            <Button
+              sx={{
+                color: "white",
+                textDecoration: isActiveLink("/contact") ? "underline" : "none", // Underline when active
+                "&:hover": {
+                  backgroundColor: isActiveLink("/contact")
+                    ? "#303f9f"
+                    : "transparent", // Dark blue background when active
+                },
+              }}
+            >
+              Contact Us
+            </Button>
+          </Link>
+          {isAuthenticated ? (
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Link to="/profile">
+                <IconButton
+                  edge="end"
+                  color="inherit"
+                  aria-label="profile"
+                  size="large"
+                >
+                  <AccountCircle />
+                </IconButton>
+              </Link>
+              <IconButton
+                color="inherit"
+                aria-label="logout"
+                onClick={handleLogout}
+              >
+                <ExitToApp />
+              </IconButton>
+            </Box>
+          ) : (
+            <Link to="/login" style={{ textDecoration: "none" }}>
+              <Button
+                sx={{
+                  color: "white",
+                  textDecoration: "none",
+                  "&:hover": {
+                    backgroundColor: "#303f9f",
+                  },
+                }}
+              >
+                Log In
+              </Button>
+            </Link>
+          )}
+        </Box>}
+        
       </Toolbar>
     </AppBar>
   );
