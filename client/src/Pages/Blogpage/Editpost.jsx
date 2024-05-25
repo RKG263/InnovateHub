@@ -34,35 +34,35 @@ const EditPost = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-  
-  
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", desc);
     formData.append("username", user.name);
     formData.append("userID", user._id);
-    formData.append("categories", cats); 
-  
-    
+    formData.append("categories", cats);
+
     formData.append("file", file);
-   console.log(formData)
-  
+    console.log(formData);
+
     try {
-   
-      const res = await axios.put(URL + "/api/v1/blog/update/"+postId, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data", 
-         
-        },
-        withCredentials: true, 
-      });
+      const res = await axios.put(
+        URL + "/api/v1/blog/update/" + postId,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
       navigate("/posts");
       console.log(res.data);
     } catch (err) {
       console.log(err);
     }
   };
-  
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
@@ -83,12 +83,11 @@ const EditPost = () => {
     fetchPost();
   }, [postId]);
 
-  const deleteCategory=(i)=>{
-    let updatedCats=[...cats]
-    updatedCats.splice(i,1)
-    setCats(updatedCats)
- }
-  
+  const deleteCategory = (i) => {
+    let updatedCats = [...cats];
+    updatedCats.splice(i, 1);
+    setCats(updatedCats);
+  };
 
   const addCategory = () => {
     let updatedCats = [...cats];
@@ -107,15 +106,15 @@ const EditPost = () => {
             value={title}
             type="text"
             placeholder="Enter post title"
-            className="input-field"
+            className="mb-4 px-4 py-2 border border-gray-300 rounded-md shadow-sm w-60 bg-gray-100"
           />
-         
+
           <div className="flex flex-col">
             <div className="flex items-center space-x-4 md:space-x-8">
               <input
                 value={cat}
                 onChange={(e) => setCat(e.target.value)}
-                className="input-field"
+                className="mb-4 px-4 py-2 border border-gray-300 rounded-md shadow-sm w-60 bg-gray-100"
                 placeholder="Enter post category"
                 type="text"
               />
@@ -127,15 +126,14 @@ const EditPost = () => {
               </div>
             </div>
             <div className="flex px-4 mt-3">
-            {cats.map((c, i) => (
+              {cats.map((c, i) => (
                 <div
-                  
                   key={i}
                   className="category-tag mr-2 mb-2 flex items-center bg-blue-500 px-2 py-1 rounded-md"
                 >
                   <p className="mr-1 text-white">{c}</p>
                   <p
-                    onClick={()=> deleteCategory(i)}
+                    onClick={() => deleteCategory(i)}
                     className="delete-btn p-1 text-sm rounded-full bg-1976d2 text-white"
                   >
                     <ImCross />

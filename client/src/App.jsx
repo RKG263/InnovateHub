@@ -22,6 +22,7 @@ import MyBlogs from "./Pages/Blogpage/MyBlogs";
 import CreatePost from "./Pages/Blogpage/CreatePost";
 import PostDetails from "./Pages/Blogpage/PostDetail";
 import EditPost from "./Pages/Blogpage/Editpost";
+import ChatBot from "./Pages/ChatBot.js/ChatBot";
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -53,6 +54,7 @@ function App() {
         <>
           <Routes>
             <Route path="/" element={<Home />} />
+            
             <Route
               path="/login"
               element={
@@ -83,6 +85,7 @@ function App() {
               }
             />
             <Route path='/posts' element={<BlogHome/>}/>
+            <Route path='/ask' element={<ChatBot/>}/>
             <Route
               path="/profile"
               element={
