@@ -17,7 +17,11 @@ import { loadUser } from "./redux/actions/user";
 import AboutUs from "./Pages/About";
 import TermsAndConditions from "./Pages/TermsAndConditions";
 import ConnectToInnovators from "./Pages/ConnectToInnovators";
-
+import BlogHome from  './Pages/Blogpage/BlogHome'
+import MyBlogs from "./Pages/Blogpage/MyBlogs";
+import CreatePost from "./Pages/Blogpage/CreatePost";
+import PostDetails from "./Pages/Blogpage/PostDetail";
+import EditPost from "./Pages/Blogpage/Editpost";
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -78,6 +82,7 @@ function App() {
                 <Contact />
               }
             />
+            <Route path='/posts' element={<BlogHome/>}/>
             <Route
               path="/profile"
               element={
@@ -86,7 +91,32 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
+            <Route
+              path="/my-posts"
+              element={
+                <ProtectedRoute user={isAuthenticated} redirect="/login">
+                  <MyBlogs/>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/create-post"
+              element={
+                <ProtectedRoute user={isAuthenticated} redirect="/login">
+                 <CreatePost/>
+                </ProtectedRoute>
+              }
+            />
+             <Route
+              path="/post/edit/:id"
+              element={
+                <ProtectedRoute user={isAuthenticated} redirect="/login">
+                 <EditPost/>
+                </ProtectedRoute>
+              }
+            />
+            <Route path='/posts/post-detail/:id' element={<PostDetails/>}/>
+             <Route path='/posts' element={<BlogHome/>}/>
              <Route path="/ideasubmit" element={<SubmitIdea/>} />
              <Route path="/about" element={<AboutUs/>} />
              <Route path="/termsandconditions" element={<TermsAndConditions/>} />

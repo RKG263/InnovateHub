@@ -11,7 +11,7 @@ import commentRoute from "./routes/commentRoute.js"
 import errorHandler from "./middleware/errorMiddleware.js";
 import othersRoute from "./routes/othersRoute.js"
 import cloudinary from 'cloudinary'
-import othersRoute from "./routes/othersRoute.js";
+
 import entrepreneurRoute from "./routes/entrepreneurRoute.js";
 import mentorRoute from "./routes/mentorRoute.js";
 import investorRoute from "./routes/investorRoute.js";

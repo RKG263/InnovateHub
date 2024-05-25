@@ -54,6 +54,7 @@ const Header = () => {
         {path==='/posts' || path==='/my-posts'? <Box sx={{ display: "flex", alignItems: "center" }}>
           
           <SearchBox/>
+
           
           {isAuthenticated ? (
             <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -164,6 +165,23 @@ const Header = () => {
             >
               Contact Us
             </Button>
+            
+          </Link>
+          <Link to="/posts" style={{ textDecoration: "none" }}>
+            <Button
+              sx={{
+                color: "white",
+                textDecoration: isActiveLink("/contact") ? "underline" : "none", // Underline when active
+                "&:hover": {
+                  backgroundColor: isActiveLink("/contact")
+                    ? "#303f9f"
+                    : "transparent", // Dark blue background when active
+                },
+              }}
+            >
+              Posts
+            </Button>
+            
           </Link>
           {isAuthenticated ? (
             <Box sx={{ display: "flex", alignItems: "center" }}>
