@@ -18,7 +18,7 @@ export const registerController = async (req, res, next) => {
     if (isUserExist) {
       throw new Error("User already exists");
     }
-     console.log(name ,email ) ;
+    
     const token = generateRandomToken(16); 
     const user = await userModel.create({ role, name, email, password ,isVerifiedToken:token});
    const mail= await sendMail(email,token);
@@ -63,13 +63,11 @@ export const loginController = async (req, res, next) => {
     }
     const token = user.createJWT();
 
-    return res.status(200).cookie("token", token, {
-      expires:new Date(Date.now()+1*24*60*60)
-    }).send({
-      success: true,
-      message: `Welcome ${user.name}`,
-      token,
-      user,
+    return res.status(200).cookie("token", token).send({
+      success: true,  
+       message: "login sucessfully",
+       token,
+       user,
     });
   } catch (error) {
     console.log("error in loginController");
@@ -105,8 +103,8 @@ export const logoutController=async(req,res,next)=>{
   try {
     res.clearCookie("token",{sameSite:"none",secure:true}).status(200).send({
       success : true ,
-      message : "Logged out successfully!"
-    })
+      message : "User logged out successfully!"
+    });
   } catch (error) {
     console.log(error) ;
     next(error);

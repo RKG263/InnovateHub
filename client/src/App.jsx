@@ -20,9 +20,6 @@ import ConnectToInnovators from "./Pages/ConnectToInnovators";
 import Explore from "./Pages/Explore";
 import AdminResources from "./Pages/AdminPages/AdminResources";
 import SuccessStoryPage from "./Pages/AdminPages/SuccessStories";
-import EnterpreneurProfile from "./Pages/Users/Firm/EnterpreneurProfile";
-import InvestorProfile from "./Pages/Users/Investor/InvestorProfile";
-import MentorProfile from "./Pages/Users/Mentor/MentorProfile";
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -84,14 +81,13 @@ function App() {
               }
             />
             <Route
-              path="/profile"
+              path="/profile/:userId"
               element={
                 <ProtectedRoute user={isAuthenticated} redirect="/login">
                   <Profile />
                 </ProtectedRoute>
               }
             />
-
             <Route path="/ideasubmit" element={<SubmitIdea />} />
             <Route path="/about" element={<AboutUs />} />
             <Route
@@ -106,7 +102,6 @@ function App() {
             <Route path="/adminresources" element={<AdminResources />} />
             <Route path="/successstorypage" element={<SuccessStoryPage />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="/userProfile" element={<MentorProfile />} />
           </Routes>
           <Toaster />
         </>

@@ -1,4 +1,5 @@
 import meetingModel from "../models/meetingModel.js";
+import userModel from "../models/userModel.js";
 import { recieveMail } from "../utils/sendVerificationMail.js";
 
 
@@ -6,15 +7,17 @@ import { recieveMail } from "../utils/sendVerificationMail.js";
 export const contactUsController = async (req, res, next) => {
 
     try {
-        // console.log(req.body);
+    
         const mail = await recieveMail(req.body);
         console.log(mail);
 
-        res.status(200).json({
+      
+
+        res.status(200).cookie("contactus", "sssj@38494").json({
             success: true,
             message: "Mail sent successfully",
 
-        })
+        });
 
 
     } catch (err) {
@@ -54,4 +57,19 @@ export const meetingController = async (req, res, next) => {
         next(err);
     }
 
+}
+
+export const allUsersController = async(req, res, next)=>{
+    try{
+        const allUser = await userModel.find();
+        res.status(200).send({
+            success : true,
+            users : allUser
+        });
+
+    }catch(err)
+    {
+        console.error(err);
+        next(err);
+    }
 }

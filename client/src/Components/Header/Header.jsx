@@ -82,9 +82,9 @@ const Header = () => {
           </Link>
           {isAuthenticated ? (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Link to="/profile">
+              <Link to = {`/profile/${user._id}`}>
                 <IconButton
-                  edge="end"
+                  edge="end" 
                   color="inherit"
                   aria-label="profile"
                   size="large"
