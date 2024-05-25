@@ -11,6 +11,7 @@ export const userReducer = createReducer({}, (builder) => {
             state.isAuthenticated = true; 
             state.user = action.payload.user;
             state.message = action.payload.message;
+            console.log(state.user);
     })
     .addCase('loginFail', (state ,action) => {
             state.loading = false;

@@ -1,0 +1,107 @@
+/* Reset some default browser styles */
+.body,
+h1,
+h2,
+p,
+div,
+img {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* .body {
+  font-family: "Arial", sans-serif;
+  background: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+} */
+
+  .user-container {
+    display: flex;
+    width: 70%;
+    max-width: 1200px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+
+/* Profile Section */
+/* .profile-section {
+  width: 25%;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  border-radius: 8px;
+} */
+
+      .profile-content {
+        text-align: center;
+
+        .profile-img {
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+          border: 5px solid #ffffff;
+          object-fit: cover;
+          margin-bottom: 5px;
+        }
+
+        .user-name {
+          font-size: 20px;
+          font-weight: 600;
+          margin-bottom: 5px;
+        }
+
+        .user-bio {
+          font-size: 14px;
+          font-weight: 300;
+          margin-bottom: 20px;
+        }
+
+        .link {
+          display: flex;
+          flex-direction: column;
+          font-size: 18px;
+          font-weight: 500;
+
+          .link-info {
+            border-top: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.5s ease;
+          }
+
+          .link-info:hover {
+            background-color: #6934b9a9; /* Darker shade on hover */
+          }
+        }
+      }
+    }
+
+    .post-section {
+      width: 70%;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .post-section h2 {
+        font-size: 28px;
+        color: #333333;
+        margin-bottom: 20px;
+      }
+
+      .post-section p {
+        font-size: 18px;
+        color: #555555;
+      }
+    }

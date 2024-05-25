@@ -18,7 +18,7 @@ export const registerController = async (req, res, next) => {
     if (isUserExist) {
       throw new Error("User already exists");
     }
-     console.log(name ,email ) ;
+    
     const token = generateRandomToken(16); 
     const user = await userModel.create({ role, name, email, password ,isVerifiedToken:token});
    const mail= await sendMail(email,token);
@@ -68,8 +68,8 @@ export const loginController = async (req, res, next) => {
     }).send({
       success: true,
       message: "login sucessfully",
-     token,
-     user,
+       token,
+       user,
     });
   } catch (error) {
     console.log("error in loginController");
@@ -106,7 +106,7 @@ export const logoutController=async(req,res,next)=>{
     res.clearCookie("token",{sameSite:"none",secure:true}).status(200).send({
       success : true ,
       message : "User logged out successfully!"
-    })
+    });
   } catch (error) {
     console.log(error) ;
     next(error);

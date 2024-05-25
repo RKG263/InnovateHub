@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography, Grid, TextField, Button, Box } from '@mui/material';
 import Header from '../Components/Header/Header';
 import Footer from '../Components/Footer/Footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { contactUs } from '../redux/actions/other';
+import {  useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ContactUs = () => {
+    
+   const [name  , setName] = useState('');
+   const [email , setEmail] = useState('');
+   const [message  , setMessage] = useState('');
   const formStyle = {
     padding: '24px',
     border: '1px solid #ccc',
@@ -21,10 +29,29 @@ const ContactUs = () => {
     marginTop: '16px',
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Your form submission logic here
-  };
+  const {  message : mess, error, loading } = useSelector(
+    state => state.other
+  );
+  const dispatch  = useDispatch() ;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: 'clearError' });
+    }
+    if (mess) {
+      toast.success(mess);
+      dispatch({ type: 'clearMessage' });
+    }
+  }, [dispatch, error, mess , loading ]);
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  dispatch(contactUs(name ,email , message)) ;
+   navigate('/') ;
+};
+
 
   return (
     <>
@@ -36,22 +63,15 @@ const ContactUs = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
-              label="First Name"
+              label=" Name"
               variant="outlined"
               fullWidth
               required
               style={textFieldStyle}
+              onChange={e => setName(e.target.value)}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label="Last Name"
-              variant="outlined"
-              fullWidth
-              required
-              style={textFieldStyle}
-            />
-          </Grid>
+
           <Grid item xs={12}>
             <TextField
               label="Email"
@@ -60,6 +80,7 @@ const ContactUs = () => {
               required
               type="email"
               style={textFieldStyle}
+              onChange={e => setName(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -71,6 +92,7 @@ const ContactUs = () => {
               rows={4} // Decreased number of rows for a smaller height
               required
               style={textFieldStyle}
+              onChange={e => setMessage(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>

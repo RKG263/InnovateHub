@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 
 
 const mentorSchema = new Schema({
+    mentorId : {
+        type: Schema.Types.ObjectId
+    },
     experties: {
         type: String,
 
@@ -28,7 +31,7 @@ const mentorSchema = new Schema({
 
     },
     mentorshipGiven: {
-        type: String,
+        type: [ Schema.Types.ObjectId],
 
     }
 

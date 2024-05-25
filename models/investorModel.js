@@ -3,6 +3,11 @@ const Schema = mongoose.Schema;
 
 
 const investorSchema = new Schema({
+
+    investorId : {
+        type: Schema.Types.ObjectId
+    },
+
     abouyMe: {
         type: String,
 

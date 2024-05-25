@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Container, Typography, Button, AppBar, Grid, Paper, Box } from '@mui/material';
+import { Container, Typography, Button, AppBar, Grid, Paper, Box, Stack } from '@mui/material';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import { useSelector } from 'react-redux';
@@ -27,12 +27,15 @@ const Home = () => {
                 </Typography>
                 <div style={{ marginTop: '32px' }}>
                   <Grid container spacing={2} justifyContent="flex-start">
-                    <Grid item>
+                      <Grid item>
+                    <Link to={'/explore'}>                     
                       <Button variant="contained" color="primary">
-                        Get Started
-                      </Button>
+                        Explore
+                      </Button>            
                     
+                    </Link>
                     </Grid>
+            
                     <Grid item>
                      <Link to={'/connecttoinnovators'}>
                     <Button variant="outlined" color="primary">
