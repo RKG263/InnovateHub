@@ -99,6 +99,10 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 10px;
+  border-radius: 30px;
+  box-shadow: 2px 3px 4px black;
+  border : black 1px solid;
 }
 
 .post-section h2 {

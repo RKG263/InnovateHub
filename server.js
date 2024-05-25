@@ -9,7 +9,10 @@ import authRoute from "./routes/authRoute.js";
 import blogRoute from "./routes/blogRoute.js";
 import commentRoute from "./routes/commentRoute.js"
 import errorHandler from "./middleware/errorMiddleware.js";
-import othersRoute from "./routes/othersRoute.js"
+import othersRoute from "./routes/othersRoute.js";
+import entrepreneurRoute from "./routes/entrepreneurRoute.js";
+import mentorRoute from "./routes/mentorRoute.js";
+import investorRoute from "./routes/investorRoute.js";
 
 const app = express();
 
@@ -29,7 +32,10 @@ app.use(cookie());
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/blog", blogRoute);
-app.use("/api/v1/comment",commentRoute)
+app.use("/api/v1/comment",commentRoute);
+app.use("/api/v1/entrepreneur", entrepreneurRoute);
+app.use("/api/v1/mentor", mentorRoute);
+app.use("/api/v1/investor", investorRoute);
 app.use("/api/v1/other", othersRoute);
 app.get("/", (req, res) => {
   res.send("i am sending your request ");
