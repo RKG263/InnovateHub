@@ -9,7 +9,7 @@ import Register from "./Components/Auth/Register";
 import Home from "./Components/Home/Home";
 import NotFound from "./Shared/NotFound";
 import SpinningLoader from "./Shared/SpinningLoader";
-import './App.css' ;
+import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import SubmitIdea from "./Pages/Users/SubmitIdea";
@@ -17,12 +17,16 @@ import { loadUser } from "./redux/actions/user";
 import AboutUs from "./Pages/About";
 import TermsAndConditions from "./Pages/TermsAndConditions";
 import ConnectToInnovators from "./Pages/ConnectToInnovators";
-import BlogHome from  './Pages/Blogpage/BlogHome'
-import MyBlogs from "./Pages/Blogpage/MyBlogs";
-import CreatePost from "./Pages/Blogpage/CreatePost";
-import PostDetails from "./Pages/Blogpage/PostDetail";
-import EditPost from "./Pages/Blogpage/Editpost";
-import ChatBot from "./Pages/ChatBot.js/ChatBot";
+import Explore from "./Pages/Explore";
+import AdminResources from "./Pages/AdminPages/AdminResources";
+import SuccessStoryPage from "./Pages/AdminPages/SuccessStories";
+import EnterpreneurProfile from "./Pages/Users/Firm/EnterpreneurProfile";
+import InvestorProfile from "./Pages/Users/Investor/InvestorProfile";
+import MentorProfile from "./Pages/Users/Mentor/MentorProfile";
+import Firm from "./Pages/Profile/firm/Firm";
+import Investor from "./Pages/Profile/Investor/Investor";
+import Mentor from "./Pages/Profile/Mentor/Mentor";
+import Review from "./Pages/Review/Review";
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -54,7 +58,7 @@ function App() {
         <>
           <Routes>
             <Route path="/" element={<Home />} />
-            
+
             <Route
               path="/login"
               element={
@@ -84,8 +88,8 @@ function App() {
                 <Contact />
               }
             />
-            <Route path='/posts' element={<BlogHome/>}/>
-            <Route path='/ask' element={<ChatBot/>}/>
+            <Route path="/posts" element={<BlogHome />} />
+            <Route path="/ask" element={<ChatBot />} />
             <Route
               path="/profile"
               element={
@@ -98,7 +102,7 @@ function App() {
               path="/my-posts"
               element={
                 <ProtectedRoute user={isAuthenticated} redirect="/login">
-                  <MyBlogs/>
+                  <MyBlogs />
                 </ProtectedRoute>
               }
             />
@@ -106,31 +110,23 @@ function App() {
               path="/create-post"
               element={
                 <ProtectedRoute user={isAuthenticated} redirect="/login">
-                 <CreatePost/>
+                  <CreatePost />
                 </ProtectedRoute>
               }
             />
-             <Route
-              path="/post/edit/:id"
-              element={
-                <ProtectedRoute user={isAuthenticated} redirect="/login">
-                 <EditPost/>
-                </ProtectedRoute>
-              }
-            />
-            <Route path='/posts/post-detail/:id' element={<PostDetails/>}/>
-             <Route path='/posts' element={<BlogHome/>}/>
-             <Route path="/ideasubmit" element={<SubmitIdea/>} />
-             <Route path="/about" element={<AboutUs/>} />
-             <Route path="/termsandconditions" element={<TermsAndConditions/>} />
-             <Route path="/connecttoinnovators" element={<ConnectToInnovators/>} />
-             <Route path="*" element={<NotFound/>} />
-       </Routes>
-       <Toaster />
-       </>) }
-     </BrowserRouter>
-      
-  )
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/adminresources" element={<AdminResources />} />
+            <Route path="/successstorypage" element={<SuccessStoryPage />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/userProfile" element={<EnterpreneurProfile />} />
+            <Route path="/user/profile" element={<Investor />} />
+            <Route path="/mentor/review" element={<Review />} />
+          </Routes>
+          <Toaster />
+        </>
+      )}
+    </BrowserRouter>
+  );
 }
 
 export default App;
