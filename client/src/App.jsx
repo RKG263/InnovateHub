@@ -26,6 +26,7 @@ import MentorProfile from "./Pages/Users/Mentor/MentorProfile";
 import Firm from "./Pages/Profile/firm/Firm";
 import Investor from "./Pages/Profile/Investor/Investor";
 import Mentor from "./Pages/Profile/Mentor/Mentor";
+import Review from "./Pages/Review/Review";
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -110,8 +111,8 @@ function App() {
             <Route path="/successstorypage" element={<SuccessStoryPage />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/userProfile" element={<EnterpreneurProfile />} />
-
             <Route path="/user/profile" element={<Investor />} />
+            <Route path="/mentor/review" element={<Review />} />
           </Routes>
           <Toaster />
         </>
