@@ -15,6 +15,7 @@ import cloudinary from 'cloudinary'
 import entrepreneurRoute from "./routes/entrepreneurRoute.js";
 import mentorRoute from "./routes/mentorRoute.js";
 import investorRoute from "./routes/investorRoute.js";
+import aiChatRoute from "./routes/aiChatRoute.js";
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use("/api/v1/entrepreneur", entrepreneurRoute);
 app.use("/api/v1/mentor", mentorRoute);
 app.use("/api/v1/investor", investorRoute);
 app.use("/api/v1/other", othersRoute);
+app.use("/api/v1/ai/",aiChatRoute)
 app.get("/", (req, res) => {
   res.send("i am sending your request ");
 });

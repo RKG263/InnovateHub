@@ -1,21 +1,21 @@
-
 import React from 'react';
 import { Container, Typography, Button, AppBar, Grid, Paper, Box, Stack } from '@mui/material';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
- 
+import { Fab } from '@mui/material';
+import { HelpOutline } from '@mui/icons-material'; // Using HelpOutline icon for "?"
 
 const Home = () => {
-      const {isAuthenticated} = useSelector((state) => state.user) ;
+  const { isAuthenticated } = useSelector((state) => state.user);
   return (
     <>
       <AppBar position="static" style={{ marginBottom: '32px' }}>
-        <Header isAuthenticated = {isAuthenticated}/>
+        <Header isAuthenticated={isAuthenticated} />
       </AppBar>
       <main>
-        <div style={{ padding: '48px 0 32px' }}> 
+        <div style={{ padding: '48px 0 32px' }}>
           <Container maxWidth="lg">
             <Grid container spacing={4} alignItems="center">
               <Grid item xs={12} md={6}>
@@ -27,22 +27,19 @@ const Home = () => {
                 </Typography>
                 <div style={{ marginTop: '32px' }}>
                   <Grid container spacing={2} justifyContent="flex-start">
-                      <Grid item>
-                    <Link to={'/explore'}>                     
-                      <Button variant="contained" color="primary">
-                        Explore
-                      </Button>            
-                    
-                    </Link>
-                    </Grid>
-            
                     <Grid item>
-                     <Link to={'/connecttoinnovators'}>
-                    <Button variant="outlined" color="primary">
-                        Connect to Innovators
-                      </Button>
+                      <Link to={'/explore'}>
+                        <Button variant="contained" color="primary">
+                          Explore
+                        </Button>
                       </Link>
-                      
+                    </Grid>
+                    <Grid item>
+                      <Link to={'/connecttoinnovators'}>
+                        <Button variant="outlined" color="primary">
+                          Connect to Innovators
+                        </Button>
+                      </Link>
                     </Grid>
                   </Grid>
                 </div>
@@ -57,7 +54,7 @@ const Home = () => {
             </Grid>
           </Container>
         </div>
-        <Container style={{ paddingTop: '48px', paddingBottom: '48px' }} maxWidth="md"> {/* Adjusted padding for the container */}
+        <Container style={{ paddingTop: '48px', paddingBottom: '48px' }} maxWidth="md">
           <Grid container spacing={4}>
             <Grid item xs={12} sm={6} md={4}>
               <Paper style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '16px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}>
@@ -99,6 +96,31 @@ const Home = () => {
         </Container>
       </main>
       <Footer />
+      <Box
+        sx={{
+          position: 'fixed',
+          bottom: 60, // Adjusted position
+          right: 20,
+        }}
+      >
+        <Fab
+          component={Link}
+          to="/ask"
+          color="secondary"
+          aria-label="ask"
+          variant="extended"
+          sx={{
+            background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+            '&:hover': {
+              background: 'linear-gradient(45deg, #FF8E53 30%, #FE6B8B 90%)',
+            },
+            transform: 'rotate(0deg)', // No rotation
+          }}
+        >
+          <HelpOutline /> {/* Changed icon to "?" */}
+          Ask
+        </Fab>
+      </Box>
     </>
   );
 };

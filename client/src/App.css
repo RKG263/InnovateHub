@@ -19,7 +19,7 @@ body {
 
 
 
-.container {
+/* .container {
   width: 100%;
   max-width: 400px;
   margin-top: 10px;
@@ -29,7 +29,7 @@ body {
   border-radius: 8px;
   background-color: #ebf1f6d8;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-}
+} */
 
 h1 {
   margin-top: 0;
@@ -47,7 +47,7 @@ form {
   flex-direction: column;
 }
 
-input[type="text"],
+/* input[type="text"],
 input[type="email"],
 input[type="password"],
 select {
@@ -58,15 +58,15 @@ select {
   border-radius: 5px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fbfbfbf3;
-}
+} */
 
 select {
   width: 100%;
 }
-
+/*
 button[type="submit"] {
   background-color: #1976d2;
-  /* Theme color */
+ 
   color: #fff;
   border: none;
   margin-top: 10px;
@@ -77,11 +77,12 @@ button[type="submit"] {
   transition: background-color 0.3s ease;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
+*/
 
-button[type="submit"]:hover {
+/* button[type="submit"]:hover {
   background-color: #20204d;
-  /* Darker shade for hover */
-}
+  
+} */
 
 .link-container {
   display: flex;
