@@ -22,6 +22,10 @@ import MyBlogs from "./Pages/Blogpage/MyBlogs";
 import CreatePost from "./Pages/Blogpage/CreatePost";
 import PostDetails from "./Pages/Blogpage/PostDetail";
 import EditPost from "./Pages/Blogpage/Editpost";
+import Firm from "./Pages/Profile/firm/Firm";
+
+
+
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(

@@ -13,4 +13,4 @@ router.get('/posts',getAllPostController);
 router.get('/post/user/:userID',getUserPostController);
 
 
-export default router
+export default router   

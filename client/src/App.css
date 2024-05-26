@@ -95,7 +95,7 @@ button[type="submit"]:hover {
   margin-bottom: 0;
 }
 
-.link-container a {
+.link-container a { 
   color: #271776;
   text-decoration: none;
   transition: color 0.3s ease;
