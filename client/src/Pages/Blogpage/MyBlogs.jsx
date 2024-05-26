@@ -26,7 +26,7 @@ const MyBlogs = () => {
     setLoader(true)
     try{
       const res=await axios.get(URL+"/api/v1/blog/post/user/"+user._id)
-       console.log(res.data)
+      //  console.log(res.data)
       setPosts(res.data.posts)
       if(res.data.length===0){
         setNoResults(true)

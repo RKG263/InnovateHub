@@ -20,14 +20,10 @@ import ConnectToInnovators from "./Pages/ConnectToInnovators";
 import Explore from "./Pages/Explore";
 import AdminResources from "./Pages/AdminPages/AdminResources";
 import SuccessStoryPage from "./Pages/AdminPages/SuccessStories";
-import EnterpreneurProfile from "./Pages/Users/Firm/EnterpreneurProfile";
-import InvestorProfile from "./Pages/Users/Investor/InvestorProfile";
-import MentorProfile from "./Pages/Users/Mentor/MentorProfile";
-import Firm from "./Pages/Profile/firm/Firm";
-import Investor from "./Pages/Profile/Investor/Investor";
-import Mentor from "./Pages/Profile/Mentor/Mentor";
-import Review from "./Pages/Review/Review";
-
+import BlogHome from "./Pages/Blogpage/BlogHome";
+import ChatBot from "./Pages/ChatBot.js/ChatBot" ;
+import MyBlogs from "./Pages/Blogpage/MyBlogs";
+import CreatePost from "./Pages/Blogpage/CreatePost";
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -118,10 +114,8 @@ function App() {
             <Route path="/explore" element={<Explore />} />
             <Route path="/adminresources" element={<AdminResources />} />
             <Route path="/successstorypage" element={<SuccessStoryPage />} />
+            <Route path="/connecttoinnovators" element={<ConnectToInnovators />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="/userProfile" element={<EnterpreneurProfile />} />
-            <Route path="/user/profile" element={<Investor />} />
-            <Route path="/mentor/review" element={<Review />} />
           </Routes>
           <Toaster />
         </>
