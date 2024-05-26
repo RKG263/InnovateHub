@@ -10,6 +10,15 @@ body {
   font-family: 'Roboto', sans-serif;
 
 }
+body {
+  background: #dbecf8;
+  background-image: radial-gradient(#d9f1fc 5%, transparent 0);
+  background-size: 35px 35px;
+  
+}
+
+
+
 .container {
   width: 100%;
   max-width: 400px;
@@ -70,13 +79,8 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-<<<<<<< HEAD
-  
-  background-color: #20204d; /* Darker shade for hover */
-=======
   background-color: #20204d;
   /* Darker shade for hover */
->>>>>>> 88c6bb3cf2ebeafac829d9a4fc75edbf252a9704
 }
 
 .link-container {

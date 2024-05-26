@@ -11,8 +11,12 @@ const PostSchema = new mongoose.Schema({
         required: true
     },
     picture: {
-        type: String,
-        required: false
+        public_id:{
+            type:String
+          },
+          url:{
+            type:String
+          }
     },
     username: {
         type: String,

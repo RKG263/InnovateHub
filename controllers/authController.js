@@ -63,9 +63,11 @@ export const loginController = async (req, res, next) => {
     }
     const token = user.createJWT();
 
-    return res.status(200).cookie("token", token).send({
-      success: true,  
-       message: "login sucessfully",
+    return res.status(200).cookie("token", token, {
+      expires:new Date(Date.now()+1*24*60*60*1000)
+    }).send({
+      success: true,
+      message: "login sucessfully",
        token,
        user,
     });

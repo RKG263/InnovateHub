@@ -28,7 +28,7 @@ const Profile = () => {
 
         {
           user.role === 'Mentor' ? (
-            userId == user._id ?  <MentorDashboard /> : <MentorPrfile/>             
+            userId == user._id ?  <MentorDashboard /> : <MentorProfile/>             
           ) : user.role === 'Investor' ? (
             userId == user._id ?  <InvestorDashboard /> : <InvestorProfile/> 
           ) : (
