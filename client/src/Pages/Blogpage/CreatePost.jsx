@@ -6,7 +6,7 @@ import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import axios from "axios";
 import { URL } from "../../url";
-
+import {toast} from 'react-hot-toast'
 const CreatePost = () => {
   const { user } = useSelector((state) => state.user);
   const [title, setTitle] = useState("");
@@ -78,10 +78,12 @@ const CreatePost = () => {
         },
         withCredentials: true, 
       });
+      toast.success("posted successfully")
       navigate("/posts");
       console.log(res.data);
     } catch (err) {
       console.log(err);
+      toast.error("error in posting")
     }
   };
   
