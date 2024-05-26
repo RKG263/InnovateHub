@@ -19,7 +19,7 @@ body {
 
 
 
-.container {
+/* .container {
   width: 100%;
   max-width: 400px;
   margin-top: 10px;
@@ -29,7 +29,7 @@ body {
   border-radius: 8px;
   background-color: #ebf1f6d8;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-}
+} */
 
 h1 {
   margin-top: 0;
@@ -96,7 +96,7 @@ button[type="submit"] {
   margin-bottom: 0;
 }
 
-.link-container a {
+.link-container a { 
   color: #271776;
   text-decoration: none;
   transition: color 0.3s ease;

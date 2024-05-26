@@ -17,6 +17,15 @@ import { loadUser } from "./redux/actions/user";
 import AboutUs from "./Pages/About";
 import TermsAndConditions from "./Pages/TermsAndConditions";
 import ConnectToInnovators from "./Pages/ConnectToInnovators";
+import BlogHome from './Pages/Blogpage/BlogHome'
+import MyBlogs from "./Pages/Blogpage/MyBlogs";
+import CreatePost from "./Pages/Blogpage/CreatePost";
+import PostDetails from "./Pages/Blogpage/PostDetail";
+import EditPost from "./Pages/Blogpage/Editpost";
+
+
+
+
 import Explore from "./Pages/Explore";
 import AdminResources from "./Pages/AdminPages/AdminResources";
 import SuccessStoryPage from "./Pages/AdminPages/SuccessStories";
@@ -24,6 +33,9 @@ import BlogHome from "./Pages/Blogpage/BlogHome";
 import ChatBot from "./Pages/ChatBot.js/ChatBot" ;
 import MyBlogs from "./Pages/Blogpage/MyBlogs";
 import CreatePost from "./Pages/Blogpage/CreatePost";
+
+
+import ChatBot from "./Pages/ChatBot/ChatBot.jsx"
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -111,6 +123,29 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+
+            <Route
+              path="/post/edit/:id"
+              element={
+                <ProtectedRoute user={isAuthenticated} redirect="/login">
+                  <EditPost />
+                </ProtectedRoute>
+              }
+            />
+            <Route path='/posts/post-detail/:id' element={<PostDetails />} />
+            <Route path='/posts' element={<BlogHome />} />
+            <Route path="/ideasubmit" element={<SubmitIdea />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/termsandconditions" element={<TermsAndConditions />} />
+            <Route path="/connecttoinnovators" element={<ConnectToInnovators />} />
+
+
+
+
+
+
+
             <Route path="/explore" element={<Explore />} />
             <Route path="/adminresources" element={<AdminResources />} />
             <Route path="/successstorypage" element={<SuccessStoryPage />} />

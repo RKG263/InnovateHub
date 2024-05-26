@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import Header from "../../Components/Header/Header";
-import Footer from "../../Components/Footer/Footer"
+import Header from "../../Components/Header/Header.jsx";
+import Footer from "../../Components/Footer/Footer.jsx"
 import HomePosts from "../../Components/Blog/HomePost"
 import SpinningLoader from "../../Shared/SpinningLoader";
 

@@ -67,6 +67,7 @@ const EnterpreneurDashboard = () => {
                 Contact - 9087890878
               </p>
                 </div>
+                
             <div className="profile-content">
 
               <div className="link"
