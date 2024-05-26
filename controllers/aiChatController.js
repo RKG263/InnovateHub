@@ -1,4 +1,5 @@
-
+import dotenv from 'dotenv'
+dotenv.config()
 import { GoogleGenerativeAI } from "@google/generative-ai";
 // Initialize Gemini API with your API key
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
@@ -9,8 +10,8 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 export const aiChatController = async (req, res, next) => {
   const { prompt } = req.body;
   try {
-    // For text-only input, use the gemini-pro model
-    const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
+    
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     const result = await model.generateContent(prompt);
     const response =  result.response;
@@ -21,3 +22,4 @@ export const aiChatController = async (req, res, next) => {
     res.status(500).send("Failed to generate content");
   }
 };
+
