@@ -36,6 +36,7 @@ import Firm from "./Pages/Profile/firm/Firm";
 import Investor from "./Pages/Profile/Investor/Investor";
 import Mentor from "./Pages/Profile/Mentor/Mentor";
 import Review from "./Pages/Review/Review";
+import UserChat from './Pages/Chat/UserChat.jsx'
 
 
 import ChatBot from "./Pages/ChatBot/ChatBot.jsx"
@@ -143,7 +144,14 @@ function App() {
             <Route path="/termsandconditions" element={<TermsAndConditions />} />
             <Route path="/connecttoinnovators" element={<ConnectToInnovators />} />
 
-
+            {/* <Route
+              path="/chat/:id"
+              element={
+                <ProtectedRoute user={isAuthenticated} redirect="/login">
+                  <UserChat />
+                </ProtectedRoute>
+              }
+            /> */}
 
 
 
@@ -156,6 +164,7 @@ function App() {
             <Route path="/userProfile" element={<EnterpreneurProfile />} />
             <Route path="/user/profile" element={<Investor />} />
             <Route path="/mentor/review" element={<Review />} />
+            <Route path="/chat/:id" element={<UserChat/>} />
           </Routes>
           <Toaster />
         </>
