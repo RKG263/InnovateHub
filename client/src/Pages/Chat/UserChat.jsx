@@ -20,45 +20,45 @@ const Chat = () => {
   const sender = user?._id;
   const receiverId = useParams().id;
 
-  // Establishing a connection to the Socket.io server
+ 
   const socket = useRef(null);
 
   useEffect(() => {
-    // Creating a Socket.io client instance
+    
     socket.current = io("http://localhost:4000");
 
-    // Handling connection events
+  
     socket.current.on("connect", () => {
       console.log("Connected to Socket.io server");
     });
 
-    // Handling disconnection events
+   
     socket.current.on("disconnect", () => {
       console.log("Disconnected from Socket.io server");
     });
 
-    // Cleanup function to disconnect from the server when the component unmounts
+   
     return () => {
       socket.current.disconnect();
     };
   }, []);
 
-  // Joining the chat room upon component mount
+ 
   useEffect(() => {
     socket.current.emit("join", sender);
 
-    // Listening for private messages
+   
     socket.current.on("private_message", (msg) => {
       setReceivedMessages((prevMessages) => [...prevMessages, msg]);
     });
 
-    // Cleanup function to remove the listener when the component unmounts
+   
     return () => {
       socket.current.off("private_message");
     };
   }, [sender]);
 
-  // Function to fetch receiver data based on the receiver ID
+ 
   const receiverData = async () => {
     try {
       const response = await axios.get(
@@ -70,12 +70,12 @@ const Chat = () => {
     }
   };
 
-  // Fetching receiver data when the receiver ID changes
+  
   useEffect(() => {
     receiverData();
   }, [receiverId]);
 
-  // Function to get the chat ID between the sender and receiver
+ 
   const getChatId = async () => {
     try {
       const res = await axios.get(
@@ -87,12 +87,12 @@ const Chat = () => {
     }
   };
 
-  // Fetching the chat ID when the sender or receiver ID changes
+ 
   useEffect(() => {
     getChatId();
   }, [sender, receiverId]);
 
-  // Function to fetch the chat messages
+ 
   const getChats = async () => {
     try {
       const res = await axios.get(URL + "/api/v1/message/" + chatId);
@@ -103,15 +103,15 @@ const Chat = () => {
     }
   };
 
-  // Fetching chat messages when the chat ID changes
+ 
   useEffect(() => {
     getChats();
   }, [chatId]);
 
-  // Ref for scrolling to the bottom of the chat messages
+ 
   const chatMessagesRef = useRef(null);
 
-  // Scroll to the bottom of the chat messages when they update
+ 
   const scrollToBottom = () => {
     if (chatMessagesRef.current) {
       chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
@@ -122,7 +122,7 @@ const Chat = () => {
     scrollToBottom();
   }, [chat]);
 
-  // Function to handle sending a message
+ 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -130,18 +130,18 @@ const Chat = () => {
         text: message,
         senderId: sender,
       };
-      // Emitting a private message event to the server
+    
       socket.current.emit("private_message", { recipientId: receiverId, msg });
-      // Sending the message to the server API
+     
       const res = await axios.post(URL + "/api/v1/message", {
         text: message,
         senderId: sender,
         chatId,
       });
-      // Clearing the message input after sending
+      
       setMessage("");
       console.log(res);
-      // Adding the sent message to the list of received messages
+      
       setReceivedMessages((prevMessages) => [...prevMessages, msg]);
     } catch (error) {
       console.log("error in submit handler", error);
@@ -159,7 +159,7 @@ const Chat = () => {
         {/* Profile Box */}
         <div className="p-2 bg-gray-200 w-1/4 min-w-300px shadow-md z-10">
           {" "}
-          {/* Changed background to light gray */}
+         
           <div className="flex flex-col items-center justify-center text-center">
             <div style={{ position: "relative", width: 200, height: 200 }}>
               <img
@@ -179,9 +179,9 @@ const Chat = () => {
             </div>
             <h6 className="text-3xl font-bold">@{receiver?.name}</h6>
             <p className="text-lg text-gray-700">{receiver?.email}</p>{" "}
-            {/* Changed text color to dark gray */}
+           
             <p className="text-xs">Description</p>{" "}
-            {/* Fixed typo in "Description" */}
+           
           </div>
         </div>
         {/* Chat Box */}
