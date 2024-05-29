@@ -6,8 +6,9 @@ import { URL } from "../../url";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
-import { format } from "timeago.js";
+
 import EmojiPicker from "emoji-picker-react";
+import MapMessage from "../../Components/Chat/MapMessage";
 const Chat = () => {
   const { isAuthenticated, user, error, loading } = useSelector(
     (state) => state.user
@@ -19,6 +20,8 @@ const Chat = () => {
   const [receivedMessages, setReceivedMessages] = useState([]);
   const sender = user?._id;
   const receiverId = useParams().id;
+// drop down menu for edit and delete
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
  
   const socket = useRef(null);
@@ -121,7 +124,15 @@ const Chat = () => {
   useEffect(() => {
     scrollToBottom();
   }, [chat]);
-
+// handle on msg dlt
+const handleOnDelete=async(id)=>{
+  try {
+    const del=await axios.delete(URL+'/api/v1/message/delete/'+ id)
+    
+  } catch (error) {
+    console.log(error,"error on deltion")
+  }
+}
  
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -194,33 +205,7 @@ const Chat = () => {
             className="p-2 bg-gray-100 flex-1 w-full rounded-lg overflow-y-auto"
           >
             {/* Mapping through received messages */}
-            {receivedMessages.map((data, key) => (
-              <div key={key}>
-                {sender === data.senderId ? ( // Check if sender is the user
-                  <div className="flex justify-end mb-3 mr-10">
-                    <div className="max-w-xs px-4 py-2 bg-green-400 text-gray-100 rounded-lg shadow-md">
-                      <div>{data.text}</div>{" "}
-                    
-                      <span style={{ fontSize: "0.8rem" }}>
-                        {format(data.createdAt)}
-                      </span>{" "}
-                     
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex justify-start mb-3 ml-10">
-                    <div className="max-w-xs px-4 py-2 bg-blue-400 text-white rounded-lg shadow-md">
-                    <div>{data.text}</div>{" "}
-                    
-                      <span style={{ fontSize: "0.8rem" }}>
-                        {format(data.createdAt)}
-                      </span>{" "}
-                     
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
+            <MapMessage receivedMessages={receivedMessages} OnDelete={handleOnDelete} sender={sender} />
           </div>
           {/* Message Input Box */}
           <div className="flex items-center py-2 px-4 bg-gray-100 z-20">

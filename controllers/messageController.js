@@ -24,3 +24,19 @@ export const getMessages = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+// delete message
+
+export const deleteMessageController=async(req,res,next)=>{
+  const {id}=req.params;
+  try {
+    const msg=await MessageModel.findOneAndDelete();
+    res.status(200).send({
+      msg,
+      message:"message deleted successfully"
+    })
+    
+  } catch (error) {
+    next(error);
+  }
+}
