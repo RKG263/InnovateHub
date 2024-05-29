@@ -38,7 +38,7 @@ const EditProfile = () => {
     fullName: '',
     profilePic: '',
     email: '',
-    contact: '',
+    aboutMe: '',
     newPassword: '',
     confirmPassword: '',
   });
@@ -66,12 +66,14 @@ const EditProfile = () => {
 
     try {
 
-      const { file, contact, newPassword, confirmPassword } = e.currentTarget;
-      console.log(file.value, contact.value, newPassword.value, confirmPassword.value)
+      const {fullName, file, aboutMe, newPassword, confirmPassword } = e.currentTarget;
+      console.log(file.value, aboutMe.value, newPassword.value, confirmPassword.value)
 
       
       const data = new FormData(e.currentTarget);
+      data.delete("file");
       data.append("file", profileImage  );
+      
 
       const res = await axios.post(`${import.meta.env.VITE_URL}/api/v1/auth/editProfile`, 
       data,
@@ -160,10 +162,11 @@ const EditProfile = () => {
 
               <Grid item xs={12}>
                 <TextField
-                  id="contact"
-                  name="contact"
-                  label="Contact"
-                  // value={formData.contact}
+                  id="aboutMe"
+                  name="aboutMe"
+                  label="About Me"
+                  multiline
+                  // value={formData.aboutMe}
                   // onChange={handleChange}
                   fullWidth
                 />

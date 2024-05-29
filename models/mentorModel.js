@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const mentorSchema = new Schema({
-    mentorId : {
+    userId : {
         type: Schema.Types.ObjectId
     },
     experties: {

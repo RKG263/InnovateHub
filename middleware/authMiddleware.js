@@ -15,7 +15,7 @@ export const isauth=async(req,res,next)=>{
    const decode=JWT.verify(token,process.env.SECRET_CODE);
    
    req.user=await userModel.findById(decode.userId);
-   console.log(req.user);
+  //  console.log(req.user);
    next();
 
 }

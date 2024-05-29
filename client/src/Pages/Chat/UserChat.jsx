@@ -11,7 +11,7 @@ import EmojiPicker from "emoji-picker-react";
 import MapMessage from "../../Components/Chat/MapMessage";
 const Chat = () => {
   const { isAuthenticated, user, error, loading } = useSelector(
-    (state) => state.user
+    (state) => state.user 
   );
   const [receiver, setReceiver] = useState(null);
   const [chat, setChat] = useState([]);

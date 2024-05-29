@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const investorSchema = new Schema({
 
-    investorId : {
+    userId : {
         type: Schema.Types.ObjectId
     },
 
