@@ -17,14 +17,11 @@ import { loadUser } from "./redux/actions/user";
 import AboutUs from "./Pages/About";
 import TermsAndConditions from "./Pages/TermsAndConditions";
 import ConnectToInnovators from "./Pages/ConnectToInnovators";
-import BlogHome from './Pages/Blogpage/BlogHome'
+import BlogHome from "./Pages/Blogpage/BlogHome";
 import MyBlogs from "./Pages/Blogpage/MyBlogs";
 import CreatePost from "./Pages/Blogpage/CreatePost";
 import PostDetails from "./Pages/Blogpage/PostDetail";
 import EditPost from "./Pages/Blogpage/Editpost";
-
-
-
 
 import Explore from "./Pages/Explore";
 import AdminResources from "./Pages/AdminPages/AdminResources";
@@ -36,9 +33,10 @@ import Firm from "./Pages/Profile/firm/Firm";
 import Investor from "./Pages/Profile/Investor/Investor";
 import Mentor from "./Pages/Profile/Mentor/Mentor";
 import Review from "./Pages/Review/Review";
+import UserChat from "./Pages/Chat/UserChat.jsx";
 
-
-import ChatBot from "./Pages/ChatBot/ChatBot.jsx"
+import ChatBot from "./Pages/ChatBot/ChatBot.jsx";
+import Graph from "./Pages/graph/Graph.jsx";
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -127,7 +125,6 @@ function App() {
               }
             />
 
-
             <Route
               path="/post/edit/:id"
               element={
@@ -136,18 +133,27 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path='/posts/post-detail/:id' element={<PostDetails />} />
-            <Route path='/posts' element={<BlogHome />} />
+            <Route path="/posts/post-detail/:id" element={<PostDetails />} />
+            <Route path="/posts" element={<BlogHome />} />
             <Route path="/ideasubmit" element={<SubmitIdea />} />
             <Route path="/about" element={<AboutUs />} />
-            <Route path="/termsandconditions" element={<TermsAndConditions />} />
-            <Route path="/connecttoinnovators" element={<ConnectToInnovators />} />
+            <Route
+              path="/termsandconditions"
+              element={<TermsAndConditions />}
+            />
+            <Route
+              path="/connecttoinnovators"
+              element={<ConnectToInnovators />}
+            />
 
-
-
-
-
-
+            {/* <Route
+              path="/chat/:id"
+              element={
+                <ProtectedRoute user={isAuthenticated} redirect="/login">
+                  <UserChat />
+                </ProtectedRoute>
+              }
+            /> */}
 
             <Route path="/explore" element={<Explore />} />
             <Route path="/adminresources" element={<AdminResources />} />
@@ -156,6 +162,8 @@ function App() {
             <Route path="/userProfile" element={<EnterpreneurProfile />} />
             <Route path="/user/profile" element={<Investor />} />
             <Route path="/mentor/review" element={<Review />} />
+            <Route path="/chat/:id" element={<UserChat />} />
+            <Route path="/user/graph" element={<Graph />} />
           </Routes>
           <Toaster />
         </>

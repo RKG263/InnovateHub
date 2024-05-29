@@ -117,8 +117,8 @@ const Home = () => {
             transform: 'rotate(0deg)', // No rotation
           }}
         >
-          <HelpOutline /> {/* Changed icon to "?" */}
-          Ask
+          
+          Ask Ai
         </Fab>
       </Box>
     </>

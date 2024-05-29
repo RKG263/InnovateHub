@@ -10,7 +10,7 @@ import {  useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 
 import SpinningLoader from './../../Shared/SpinningLoader';
-
+import {toast} from 'react-hot-toast'
 
 const PostDetails = () => {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -50,11 +50,13 @@ const PostDetails = () => {
     try{
       const res=await axios.delete(URL+"/api/v1/blog/delete/"+postId,{withCredentials:true})
       console.log(res)
+      toast.success('post deleted successfully');
       navigate("/posts")
 
     }
     catch(err){
       console.log(err)
+      toast.error('error in deletion of post')
     }
 
   }
