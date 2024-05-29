@@ -151,8 +151,7 @@ const Chat = () => {
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-white text-black relative">
       {" "}
-      {/* Changed background to white */}
-      {/* Chat Navigation Bar */}
+     
       <ChatNavBar />
       {/* Side by Side Container */}
       <div className="flex justify-between h-full relative">
@@ -234,6 +233,7 @@ const Chat = () => {
             <button
               className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500 text-white hover:bg-blue-600"
               onClick={handleOnSubmit}
+              
             >
               <FaRegPaperPlane />
             </button>
