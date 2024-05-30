@@ -4,7 +4,6 @@ import Login from "./Components/Auth/Login";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import ProtectedRoute from "./Utils/ProtectedRoute";
-import Profile from "./Pages/Users/Profile";
 import Register from "./Components/Auth/Register";
 import Home from "./Components/Home/Home";
 import NotFound from "./Shared/NotFound";
@@ -17,26 +16,17 @@ import { loadUser } from "./redux/actions/user";
 import AboutUs from "./Pages/About";
 import TermsAndConditions from "./Pages/TermsAndConditions";
 import ConnectToInnovators from "./Pages/ConnectToInnovators";
-import BlogHome from './Pages/Blogpage/BlogHome'
-import MyBlogs from "./Pages/Blogpage/MyBlogs";
-import CreatePost from "./Pages/Blogpage/CreatePost";
-import PostDetails from "./Pages/Blogpage/PostDetail";
 import EditPost from "./Pages/Blogpage/Editpost";
-
-
-
-
 import Explore from "./Pages/Explore";
 import AdminResources from "./Pages/AdminPages/AdminResources";
 import SuccessStoryPage from "./Pages/AdminPages/SuccessStories";
 import BlogHome from "./Pages/Blogpage/BlogHome";
-import ChatBot from "./Pages/ChatBot.js/ChatBot" ;
 import MyBlogs from "./Pages/Blogpage/MyBlogs";
 import CreatePost from "./Pages/Blogpage/CreatePost";
-
-
 import ChatBot from "./Pages/ChatBot/ChatBot.jsx"
-
+import PostDetails from "./Pages/Blogpage/PostDetail.jsx"
+import NotificationPage from "./Components/Users/Notification.jsx";
+import ProfilePage from "./Pages/Users/Profile";
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
     (state) => state.user
@@ -103,7 +93,7 @@ function App() {
               path="/profile/:userId"
               element={
                 <ProtectedRoute user={isAuthenticated} redirect="/login">
-                  <Profile />
+                  <ProfilePage />
                 </ProtectedRoute>
               }
             />
@@ -139,6 +129,8 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/termsandconditions" element={<TermsAndConditions />} />
             <Route path="/connecttoinnovators" element={<ConnectToInnovators />} />
+            {/* <Route path="/profile" element={<ProfilePage  />} /> */}
+            <Route path="/notifications" element={<NotificationPage />} />
 
 
 

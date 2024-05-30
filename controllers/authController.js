@@ -1,6 +1,10 @@
 import userModel from "../models/userModel.js";
 import { sendMail } from "../utils/sendVerificationMail.js";
 import crypto from 'crypto';
+import entrepreneurModel from '../models/entrepreneurModel.js'; 
+import investorModel from '../models/investorModel.js'; 
+import mentorModel from '../models/mentorModel.js'; 
+
 
 const generateRandomToken = (length = 32) => {
   return crypto.randomBytes(length).toString('hex');
@@ -18,15 +22,27 @@ export const registerController = async (req, res, next) => {
     if (isUserExist) {
       throw new Error("User already exists");
     }
-    
-    const token = generateRandomToken(16); 
-    const user = await userModel.create({ role, name, email, password ,isVerifiedToken:token});
-   const mail= await sendMail(email,token);
-   console.log(mail);
+
+    const token = generateRandomToken(16);
+    const user = await userModel.create({ role, name, email, password, isVerifiedToken: token });
+
+    if (role == "Entrepreneur") {
+      const ruser = await entrepreneurModel.create({userId : user._id});
+    }
+    else if (role == "Mentor") {
+      const ruser = await mentorModel.create({userId : user._id});
+    }
+    else if (role == "Investor") {
+      const ruser = await investorModel.create({userId : user._id});
+    }
+
+
+    const mail = await sendMail(email, token);
+    console.log(mail);
 
     res.status(201).send({
       success: true,
-      message: "You are Registerd Successfully",
+      message: "User created successfully",
       user,
     });
   } catch (error) {
@@ -34,6 +50,7 @@ export const registerController = async (req, res, next) => {
     next(error);
   }
 };
+
 
 // login controller
 
@@ -136,4 +153,68 @@ export const meController = async(req, res, next)=>{
             user,
     })
 
+}
+
+// Define the GET route for /api/getMyProfile
+
+export const getMyProfile = async (req ,res ) =>{
+  
+  const userId = req.query.userId ;
+  const user = await userModel.findOne({ _id : userId });
+
+    if(user.role == 'Entrepreneur'){
+        const entrepreneur = await entrepreneurModel.findOne({ email: user.email });  
+        const connections = entrepreneur &&  await Promise.all(entrepreneur.MyConnections.map(async connectionId => {
+        const userData = await userModel.findById(connectionId);
+        return {
+          _id: userData._id,
+          name: userData.name,
+          role: userData.role,
+          image : userData.image ,
+        };
+      }));
+      res.send(200).json({
+          success : true ,
+          User : entrepreneur ,
+          Connections : connections
+      })
+      return ;
+    }
+    else if(user.role == 'Investor'){
+      const Investor = await investorModel.findOne({ email: user.email }); 
+      const connections = await Promise.all(Investor.MyConnections.map(async connectionId => {
+        const userData = await userModel.findById(connectionId);
+        return {
+          _id: userData._id,
+          name: userData.name,
+          role: userData.role,
+          image : userData.image ,
+        };
+      }));
+      res.send(200).json({
+          success : true ,
+          User : Investor ,
+          Connections : connections ,
+      })
+      return ;
+    }
+    else{
+      const Mentor = await mentorModel.findOne({ email: user.email });  
+      const connections = await Promise.all(Mentor.MyConnections.map(async connectionId => {
+        const userData = await userModel.findById(connectionId);
+        return {
+          _id: userData._id,
+          name: userData.name,
+          role: userData.role,
+          image : userData.image ,
+        };
+      }));
+      res.send(200).json({
+           success : true ,
+           User : Mentor ,
+           Connections : connections ,
+      })
+      return ;
+    }
+            
 }

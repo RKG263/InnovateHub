@@ -1,30 +1,51 @@
 import mongoose from 'mongoose';
+import validator from "validator";
 const Schema = mongoose.Schema;
 
 
 const mentorSchema = new Schema({
+
+    
     mentorId : {
         type: Schema.Types.ObjectId
     },
+    name: {
+        type: String,
+        required: true,
+    },
+    role: {
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: [true, "email is required"],
+        unique: true,
+        validate: validator.isEmail,
+      },
     experties: {
         type: String,
-
+        default : ''
     },
     post: {
         type: String,
-
+        default : ''
     },
     chats: {
         type: String,
-
+        default : ''
     },
     rating: {
         type: String,
-
+         default : ''
     },
     contact: {
         type: String,
-
+        default : ''
+    },
+    aboutMe: {
+        type: String,
+        default : ''
     },
     askForMentorship: {
         type: String,
@@ -33,8 +54,15 @@ const mentorSchema = new Schema({
     mentorshipGiven: {
         type: [ Schema.Types.ObjectId],
 
-    }
-
+    } ,
+    MyConnections: {
+        type: [Schema.Types.ObjectId] ,
+        default : [""] 
+    },
+    interests: {
+        type: [String],
+        default : [""] 
+    },
 
 
 });

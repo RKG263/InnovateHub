@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { server } from '../redux/store';
 import SpinningLoader from '../Shared/SpinningLoader';
+import { useSelector } from 'react-redux';
 
 const UserListPage = () => {
   const [roleFilter, setRoleFilter] = useState('');
@@ -14,6 +15,7 @@ const UserListPage = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { user: currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -21,11 +23,17 @@ const UserListPage = () => {
         const { data } = await axios.get(`${server}/other/allusers`, {
           withCredentials: true,
         });
-        const usersArray = Object.keys(data.users).map(key => ({
-          id: key, // Ensure you use a consistent key (id or key) for unique identification
-          ...data[key]
-        }));
-        setUsers(usersArray);
+       // console.log('Fetched Data:', data); // Debugging statement
+        if (data.users) {
+          const usersArray = Object.keys(data.users).map(key => ({
+            id: key,
+            ...data.users[key],
+          }));
+         // console.log('Users Array:', usersArray); // Debugging statement
+          setUsers(usersArray);
+        } else {
+          console.error('Invalid response structure:', data);
+        }
       } catch (error) {
         console.error('Error fetching users:', error);
       } finally {
@@ -34,7 +42,7 @@ const UserListPage = () => {
     };
 
     getUsers();
-  }, [searchQuery , roleFilter]);
+  }, []);
 
   const handleViewProfile = (userId) => {
     navigate(`/profile/${userId}`);
@@ -43,33 +51,27 @@ const UserListPage = () => {
   const handleFindMore = () => {
     setVisibleUsers((prevVisibleUsers) => prevVisibleUsers + 15);
   };
-  // console.log(users) ;
 
   const filteredUsers = users.filter(user => {
+    // if (user._id == currentUser._id) return false;
+
     const searchQueryLower = searchQuery.toLowerCase();
     const userNameLower = user.name ? user.name.toLowerCase() : '';
     const userRoleLower = user.role ? user.role.toLowerCase() : '';
-  
-    // console.log('Search Query:', searchQuery);
-    // console.log('User Name:', user.name);
-    // console.log('User Role:', user.role);
-  
-    // console.log('Search Query Lower:', searchQueryLower);
-    // console.log('User Name Lower:', userNameLower);
-    // console.log('User Role Lower:', userRoleLower);
-            console.log(user) ;
+
     if (!roleFilter && !searchQuery) return true;
     if (roleFilter && searchQuery) {
-      return userRoleLower == roleFilter.toLowerCase() && userNameLower.includes(searchQueryLower);
+      return userRoleLower === roleFilter.toLowerCase() && userNameLower.includes(searchQueryLower);
     }
-    if (roleFilter) return userRoleLower == roleFilter.toLowerCase();
+    if (roleFilter) return userRoleLower === roleFilter.toLowerCase();
     if (searchQuery) return userNameLower.includes(searchQueryLower);
-    return false; // Ensure this function always returns a boolean
+    return false;
   });
 
-  console.log(filteredUsers) ;
   const usersToDisplay = filteredUsers.slice(0, visibleUsers);
 
+  console.log('Users:', users); // Debugging statement
+  console.log('Filtered Users:', filteredUsers); // Debugging statement
 
   return (
     <>
@@ -108,9 +110,9 @@ const UserListPage = () => {
                 />
               </Paper>
             </Grid>
-            {filteredUsers.length == 0 ? (
+            {filteredUsers.length === 0 ? (
               <Typography
-                variant='h3'
+                variant="h3"
                 sx={{
                   color: 'red',
                   justifyContent: 'center',
@@ -128,13 +130,13 @@ const UserListPage = () => {
                 <Grid item key={user.id} xs={12} sm={6} md={4}>
                   <Paper elevation={3} sx={{ padding: '20px', textAlign: 'center' }}>
                     <Avatar sx={{ width: 100, height: 100, margin: '0 auto', marginBottom: '10px' }}>
-                       {/* {user.avatar}  */}
-                   </Avatar>
+                      {/* {user.avatar} */}
+                    </Avatar>
                     <Typography variant="h6" gutterBottom>
-                      {user.name}
+                      {user.name || 'No Name'} {/* Use a fallback value */}
                     </Typography>
                     <Typography variant="subtitle1" color="textSecondary" gutterBottom>
-                      {user.role}
+                      {user.role || 'No Role'} {/* Use a fallback value */}
                     </Typography>
                     <Typography variant="body2" gutterBottom>
                       {/* {user.bio} */}

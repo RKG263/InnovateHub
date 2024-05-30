@@ -26,3 +26,26 @@ export const contactUs = (name, email, message) => async dispatch => {
     });
   }
 };
+export const Approach = (userId, targetUserId ) => async dispatch  => {
+  try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+      },
+      withCredentials: true,
+    };
+
+    dispatch({ type: 'approachRequest' });
+    const {data} = await axios.post(`${server}/other/approach`, {
+      userId,
+      targetUserId ,
+    } , config);
+
+    dispatch({type : 'approachSuccess' , payload : data.message})
+  } catch (error) {
+    dispatch({
+      type: 'approachFail',
+      payload: error.response.data.message,
+    });
+  }
+};

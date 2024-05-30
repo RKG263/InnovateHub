@@ -11,8 +11,6 @@ export const contactUsController = async (req, res, next) => {
         const mail = await recieveMail(req.body);
         console.log(mail);
 
-      
-
         res.status(200).cookie("contactus", "sssj@38494").json({
             success: true,
             message: "Mail sent successfully",
@@ -73,3 +71,36 @@ export const allUsersController = async(req, res, next)=>{
         next(err);
     }
 }
+
+export const approachUser = async (req, res) => {
+    const { userId, targetUserId } = req.body;
+       console.log(userId , targetUserId) ;
+    try {
+      const user = await userModel.findById(userId);
+      const targetUser = await userModel.findById(targetUserId);
+  
+      if (!user || !targetUser) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+    //   let User , TargetUser ;
+
+    //   if(user.role  == 'EnterPreneur'){
+    //        const A = await entrepreneurModel.findOne({email : user.email}) ;
+    //   }
+
+      
+    //   if (user.myConnections.includes(targetUserId) || targetUser.myConnections.includes(userId)) {
+    //     return res.status(400).json({ message: 'Users are already connected' });
+    //   }
+  
+    //   user.myConnections.push(targetUserId);
+    //   targetUser.myConnections.push(userId);
+  
+    //   await user.save();
+    //   await targetUser.save();
+  
+      res.status(200).json({ message: 'Users connected successfully' });
+    } catch (error) {
+      next(error) ;
+    }
+  };
