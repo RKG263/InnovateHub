@@ -6,8 +6,8 @@ import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import axios from "axios";
 import { URL } from "../../url";
+import {toast} from 'react-hot-toast'
 import { server } from "../../redux/store";
-
 
 const CreatePost = () => {
   const { user } = useSelector((state) => state.user);
@@ -80,10 +80,12 @@ const CreatePost = () => {
         },
         withCredentials: true, 
       });
+      toast.success("posted successfully")
       navigate("/posts");
       console.log(res.data);
     } catch (err) {
       console.log(err);
+      toast.error("error in posting")
     }
   };
   

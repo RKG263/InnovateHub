@@ -1,14 +1,20 @@
-import React from 'react';
-import { Container, Typography, Button, AppBar, Grid, Paper, Box, Stack } from '@mui/material';
+
+import React, { useState } from 'react';
+import { Container, Typography, Button, AppBar, Grid, Paper, Box, Fab } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Fab } from '@mui/material';
-import { HelpOutline } from '@mui/icons-material'; // Using HelpOutline icon for "?"
+import NotificationDialog from '../Users/Notification';
+import { Notifications } from '@mui/icons-material'; 
 
 const Home = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
+  const [isNotificationOpen, setNotificationOpen] = useState(false);
+
+  const handleNotificationOpen = () => setNotificationOpen(true);
+  const handleNotificationClose = () => setNotificationOpen(false);
+
   return (
     <>
       <AppBar position="static" style={{ marginBottom: '32px' }}>
@@ -46,9 +52,9 @@ const Home = () => {
               </Grid>
               <Grid item xs={12} md={6}>
                 <img
-                  src="https://unchartedcreative.com/wp-content/uploads/2020/01/25.jpg" // Replace with an actual image URL
+                  src="https://unchartedcreative.com/wp-content/uploads/2020/01/25.jpg"
                   alt="Entrepreneurship Growth"
-                  style={{ width: '100%', height: 'auto', maxHeight: '400px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }} // Adjusted maxHeight to decrease image height
+                  style={{ width: '100%', height: 'auto', maxHeight: '400px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}
                 />
               </Grid>
             </Grid>
@@ -96,31 +102,38 @@ const Home = () => {
         </Container>
       </main>
       <Footer />
-      <Box
-        sx={{
-          position: 'fixed',
-          bottom: 60, // Adjusted position
-          right: 20,
-        }}
-      >
-        <Fab
-          component={Link}
-          to="/ask"
-          color="secondary"
-          aria-label="ask"
-          variant="extended"
-          sx={{
-            background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-            '&:hover': {
-              background: 'linear-gradient(45deg, #FF8E53 30%, #FE6B8B 90%)',
-            },
-            transform: 'rotate(0deg)', // No rotation
-          }}
-        >
-          <HelpOutline /> {/* Changed icon to "?" */}
-          Ask
-        </Fab>
-      </Box>
+      <Box sx={{ position: 'fixed', bottom: 60, right: 20 }}>
+  <Fab
+    component={Link}
+    to="/ask"
+    color="secondary"
+    aria-label="ask"
+    variant="extended"
+    sx={{
+      background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+      '&:hover': {
+        background: 'linear-gradient(45deg, #FF8E53 30%, #FE6B8B 90%)',
+      },
+      mr: 2, // Margin right to separate the buttons
+    }}
+  >
+    Ask Ai
+  </Fab>
+  <Fab
+    color="primary"
+    aria-label="notifications"
+    onClick={handleNotificationOpen}
+    sx={{
+      background: 'linear-gradient(45deg, #6a1b9a 30%, #ab47bc 90%)',
+      '&:hover': {
+        background: 'linear-gradient(45deg, #ab47bc 30%, #6a1b9a 90%)',
+      },
+    }}
+  >
+    <Notifications /> 
+  </Fab>
+</Box>
+      <NotificationDialog open={isNotificationOpen} onClose={handleNotificationClose} />
     </>
   );
 };

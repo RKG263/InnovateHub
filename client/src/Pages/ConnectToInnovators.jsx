@@ -139,7 +139,7 @@ const UserListPage = () => {
                       {user.role || 'No Role'} {/* Use a fallback value */}
                     </Typography>
                     <Typography variant="body2" gutterBottom>
-                      {/* {user.bio} */}
+                      {user.aboutUs || "Growing"}
                     </Typography>
                     <Button
                       variant="contained"

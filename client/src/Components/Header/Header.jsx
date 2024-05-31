@@ -185,7 +185,7 @@ const Header = () => {
           </Link>
           {isAuthenticated ? (
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Link to={`/profile/${user._id}`}>
+              <Link to={`/dashboard`}>
                 <IconButton
                   edge="end"
                   color="inherit"

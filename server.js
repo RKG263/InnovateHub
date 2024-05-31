@@ -16,6 +16,8 @@ import entrepreneurRoute from "./routes/entrepreneurRoute.js";
 import mentorRoute from "./routes/mentorRoute.js";
 import investorRoute from "./routes/investorRoute.js";
 import aiChatRoute from "./routes/aiChatRoute.js";
+import chatRoute from "./routes/chatRoute.js"
+import messageRoute from "./routes/messageRoute.js"
 
 const app = express();
 
@@ -46,6 +48,8 @@ app.use("/api/v1/mentor", mentorRoute);
 app.use("/api/v1/investor", investorRoute);
 app.use("/api/v1/other", othersRoute);
 app.use("/api/v1/ai/",aiChatRoute)
+app.use('/api/v1/chat', chatRoute)
+app.use('/api/v1/message', messageRoute)
 app.get("/", (req, res) => {
   res.send("i am sending your request ");
 });

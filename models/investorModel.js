@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const investorSchema = new Schema({
 
-    investorId : {
+    userId : {
         type: Schema.Types.ObjectId
     },
     name: {
@@ -24,7 +24,7 @@ const investorSchema = new Schema({
       },
     aboutMe: {
         type: String,
-        default : ''
+        default : 'Hi I want to invest in fast growing bussinesses'
 
     },
     post: {
@@ -62,13 +62,13 @@ const investorSchema = new Schema({
         default : ''
     },
     MyConnections: {
-        type: [String] ,
-        default : [""] 
+        type: [Schema.Types.ObjectId] ,
+        default : [] 
     },
 
     interests: {
         type: [String],
-        default : [""],
+        default : [],
     }
 
 

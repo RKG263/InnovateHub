@@ -28,6 +28,14 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
+    profile_pic: {
+      public_id:{
+          type:String
+        },
+        url:{
+          type:String
+        }
+  },
     updatedAt: {
       type: Date,
       default: Date.now(),

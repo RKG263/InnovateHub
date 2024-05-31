@@ -6,7 +6,7 @@ import { otherReducer } from './reducers/OtherReducer/otherReducer';
 const store = configureStore({
   reducer: {
     user:   userReducer,
-    other : otherReducer,
+    other : otherReducer
   },
 });
 export default store;

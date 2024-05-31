@@ -1,7 +1,8 @@
 import express from 'express'
-import { getMyProfile, logoutController, meController, registerController, verifyEmailController } from '../controllers/authController.js';
+import { editProfileController, getMyProfile, logoutController, meController, registerController, verifyEmailController } from '../controllers/authController.js';
 import { loginController } from '../controllers/authController.js';
 import { isauth } from '../middleware/authMiddleware.js';
+import { singleUpload } from '../middleware/multer.js';
 
 
 const router=express.Router();
@@ -11,10 +12,11 @@ router.post('/login',loginController)
 router.get('/verify',verifyEmailController);
 router.get('/logout',logoutController) ;
 router.get('/me',isauth,  meController);
-router.get('/getmyprofile',isauth,  getMyProfile);
+router.get('/getmyprofile',  getMyProfile);
+router.post('/editProfile', isauth, singleUpload,  editProfileController);
 router.get('/testauth',isauth,(req,res)=>{
   res.send("hellp tos")
 });
 
 
-export default router
+export default router;

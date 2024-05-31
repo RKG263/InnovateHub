@@ -29,6 +29,18 @@ export const otherReducer = createReducer(
       .addCase('clearError', state => {
         state.error = null;
       })
+      .addCase('fetchNotificationRequest', state => {
+        state.loading = true;
+      })
+      .addCase('fetchNotificationSuccess', (state, action) => {
+        state.loading = false;
+        state.message = action.payload.message;
+        state.notifications = action.payload.notifications;
+      })
+      .addCase('fetchNotificationFail', (state, action) => {
+        state.loading = false;
+        // state.error = action.payload;
+      })
       .addCase('clearMessage', state => {
         state.message = null;
       });

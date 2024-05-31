@@ -3,11 +3,7 @@ import validator from "validator";
 const Schema = mongoose.Schema;
 
 const entrepreneurSchema = new Schema({
-    entrepreneurId: {
-        type: Schema.Types.ObjectId,
-        required: true,
-        unique: true,
-    },
+
     name: {
         type: String,
         required: true,
@@ -15,6 +11,9 @@ const entrepreneurSchema = new Schema({
     role: {
         type: String,
         required: true,
+    },
+    userId : {
+        type: Schema.Types.ObjectId
     },
     email: {
         type: String,
@@ -37,19 +36,19 @@ const entrepreneurSchema = new Schema({
     },
     aboutMe: {
         type: String,
-        default : ''
+        default : 'Help Me grow Fast'
     },
     contact: {
         type: String,
         default : ''
     },
     MyConnections: {
-        type: [String],
-        default: [""],
+        type: [Schema.Types.ObjectId],
+        default: [],
     },
     interests: {
         type: [String],
-        default : "" ,
+        default : [] ,
     }
 });
 

@@ -8,7 +8,7 @@ import Register from "./Components/Auth/Register";
 import Home from "./Components/Home/Home";
 import NotFound from "./Shared/NotFound";
 import SpinningLoader from "./Shared/SpinningLoader";
-import "./App.css";
+// import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import SubmitIdea from "./Pages/Users/SubmitIdea";
@@ -16,17 +16,21 @@ import { loadUser } from "./redux/actions/user";
 import AboutUs from "./Pages/About";
 import TermsAndConditions from "./Pages/TermsAndConditions";
 import ConnectToInnovators from "./Pages/ConnectToInnovators";
+import BlogHome from "./Pages/Blogpage/BlogHome";
+import MyBlogs from "./Pages/Blogpage/MyBlogs";
+import CreatePost from "./Pages/Blogpage/CreatePost";
+import PostDetails from "./Pages/Blogpage/PostDetail";
 import EditPost from "./Pages/Blogpage/Editpost";
 import Explore from "./Pages/Explore";
 import AdminResources from "./Pages/AdminPages/AdminResources";
 import SuccessStoryPage from "./Pages/AdminPages/SuccessStories";
-import BlogHome from "./Pages/Blogpage/BlogHome";
-import MyBlogs from "./Pages/Blogpage/MyBlogs";
-import CreatePost from "./Pages/Blogpage/CreatePost";
-import ChatBot from "./Pages/ChatBot/ChatBot.jsx"
-import PostDetails from "./Pages/Blogpage/PostDetail.jsx"
+import Review from "./Pages/Review/Review";
+import UserChat from "./Pages/Chat/UserChat.jsx";
+import ChatBot from "./Pages/ChatBot/ChatBot.jsx";
+import Graph from "./Pages/graph/Graph.jsx";
+import ProfilePage from "./Pages/Users/Profile.jsx";
+import Dashboard from "./Pages/Users/Dashboard.jsx";
 import NotificationPage from "./Components/Users/Notification.jsx";
-import ProfilePage from "./Pages/Users/Profile";
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
     (state) => state.user
@@ -78,13 +82,13 @@ function App() {
             <Route
               path="/contact"
               element={
-                <ProtectedRoute
-                  user={isAuthenticated}
-                  redirect="/login"
-                  message= "Please Login First"
-                >
-                  <Contact/>
-               </ProtectedRoute>
+                //   <ProtectedRoute
+                //     user={isAuthenticated}
+                //     redirect="/login"
+                //   >
+                //     <Contact/>
+                //  </ProtectedRoute>
+                <Contact />
               }
             />
             <Route path="/posts" element={<BlogHome />} />
@@ -97,6 +101,22 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute user={isAuthenticated} redirect="/login">
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            {/* <Route
+              path="/notifications"
+              element={
+                // <ProtectedRoute user={isAuthenticated} redirect="/login">
+                  <NotificationPage userId = {user?._id} />
+                //  </ProtectedRoute>
+              }
+            /> */}
             <Route
               path="/my-posts"
               element={
@@ -114,7 +134,6 @@ function App() {
               }
             />
 
-
             <Route
               path="/post/edit/:id"
               element={
@@ -123,25 +142,34 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path='/posts/post-detail/:id' element={<PostDetails />} />
-            <Route path='/posts' element={<BlogHome />} />
+            <Route path="/posts/post-detail/:id" element={<PostDetails />} />
+            <Route path="/posts" element={<BlogHome />} />
             <Route path="/ideasubmit" element={<SubmitIdea />} />
             <Route path="/about" element={<AboutUs />} />
-            <Route path="/termsandconditions" element={<TermsAndConditions />} />
-            <Route path="/connecttoinnovators" element={<ConnectToInnovators />} />
-            {/* <Route path="/profile" element={<ProfilePage  />} /> */}
-            <Route path="/notifications" element={<NotificationPage />} />
+            <Route
+              path="/termsandconditions"
+              element={<TermsAndConditions />}
+            />
+            <Route
+              path="/connecttoinnovators"
+              element={<ConnectToInnovators />}
+            />
 
-
-
-
-
-
+            {/* <Route
+              path="/chat/:id"
+              element={
+                <ProtectedRoute user={isAuthenticated} redirect="/login">
+                  <UserChat />
+                </ProtectedRoute>
+              }
+            /> */}
 
             <Route path="/explore" element={<Explore />} />
             <Route path="/adminresources" element={<AdminResources />} />
             <Route path="/successstorypage" element={<SuccessStoryPage />} />
-            <Route path="/connecttoinnovators" element={<ConnectToInnovators />} />
+            <Route path="/mentor/review" element={<Review />} />
+            <Route path="/chat/:id" element={<UserChat />} />
+            <Route path="/user/graph" element={<Graph />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Toaster />

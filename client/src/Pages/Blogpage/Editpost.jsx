@@ -7,7 +7,8 @@ import { URL } from "../../url";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-
+import { toast } from 'react-hot-toast';
+ 
 const EditPost = () => {
   const postId = useParams().id;
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -56,10 +57,12 @@ const EditPost = () => {
           withCredentials: true,
         }
       );
+       toast.success("post updated successfully");
       navigate("/posts");
       console.log(res.data);
     } catch (err) {
       console.log(err);
+      toast.error("error in updating post")
     }
   };
 
@@ -177,6 +180,7 @@ const EditPost = () => {
         </form>
       </div>
       <Footer />
+     
     </div>
   );
 };

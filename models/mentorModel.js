@@ -6,9 +6,6 @@ const Schema = mongoose.Schema;
 const mentorSchema = new Schema({
 
     
-    mentorId : {
-        type: Schema.Types.ObjectId
-    },
     name: {
         type: String,
         required: true,
@@ -17,12 +14,16 @@ const mentorSchema = new Schema({
         type: String,
         required: true,
     },
+    userId : {
+        type: Schema.Types.ObjectId
+    },
     email: {
         type: String,
         required: [true, "email is required"],
         unique: true,
         validate: validator.isEmail,
       },
+    
     experties: {
         type: String,
         default : ''
@@ -45,7 +46,7 @@ const mentorSchema = new Schema({
     },
     aboutMe: {
         type: String,
-        default : ''
+        default : "Hi I am an excellent Mentor"
     },
     askForMentorship: {
         type: String,
@@ -55,13 +56,14 @@ const mentorSchema = new Schema({
         type: [ Schema.Types.ObjectId],
 
     } ,
-    MyConnections: {
-        type: [Schema.Types.ObjectId] ,
-        default : [""] 
+   MyConnections: {
+        type: [Schema.Types.ObjectId],
+        default: [] ,
     },
+
     interests: {
         type: [String],
-        default : [""] 
+        default : [] 
     },
 
 
