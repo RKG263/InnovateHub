@@ -34,11 +34,9 @@ const PostSchema = new mongoose.Schema({
         type: Date,
         default: Date.now 
     },
-    like: {
-        type: Number,
-        default: 0,
-        min: 0 
-    }
+    
+        
+    
 }, { timestamps: true });
 
 export default mongoose.model('Post', PostSchema);

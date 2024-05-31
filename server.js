@@ -50,6 +50,7 @@ app.use("/api/v1/other", othersRoute);
 app.use("/api/v1/ai/",aiChatRoute)
 app.use('/api/v1/chat', chatRoute)
 app.use('/api/v1/message', messageRoute)
+
 app.get("/", (req, res) => {
   res.send("i am sending your request ");
 });
