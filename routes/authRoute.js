@@ -1,5 +1,5 @@
 import express from 'express'
-import { editProfileController, editProfilePicController, getMyProfile, logoutController, meController, registerController, verifyEmailController } from '../controllers/authController.js';
+import { editProfileController,editProfilePicController, getMyProfile, logoutController, meController, registerController, verifyEmailController } from '../controllers/authController.js';
 import { loginController } from '../controllers/authController.js';
 import { isauth } from '../middleware/authMiddleware.js';
 import { singleUpload } from '../middleware/multer.js';
