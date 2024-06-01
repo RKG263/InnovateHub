@@ -116,6 +116,9 @@ const ProfilePage = () => {
 
 
   console.log(User, "sssssssssss")
+  const handleChatClick = () => {
+    navigate(`/chat/${userId}`);
+  };
 
   return (
     <>
@@ -145,9 +148,9 @@ const ProfilePage = () => {
             <Section>
               <Typography variant="h6" gutterBottom>Approach</Typography>
               {chatEnabled ? (
-                <Button variant="contained" color="secondary" startIcon={<ChatIcon />}>
-                  Chat
-                </Button>
+                <Button onClick={handleChatClick} variant="contained" color="secondary" startIcon={<ChatIcon />}>
+      Chat
+    </Button>
               ) : approachedMessage === 'Approach' ? (
                 <Button variant="contained" color="primary" onClick={handleOpen} startIcon={<PersonAddIcon />}>
                   Approach
