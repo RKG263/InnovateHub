@@ -8,6 +8,7 @@ import Idea from "../../../Components/Users/Enterpreneur/Idea.jsx";
 import Investors from "../../../Components/Users/Enterpreneur/Investors.jsx";
 import Mentors from "../../../Components/Users/Enterpreneur/Mentors.jsx";
 import { useSelector } from "react-redux";
+import EditProfilePic from "../../../Components/Users/EditProfilePic.jsx";
 
 
 const EnterpreneurProfile = () => {
@@ -60,15 +61,16 @@ const EnterpreneurProfile = () => {
         <div className="flex justify-center items-center flex-col text-center ">
 
           <img
-            src={user.profile_pic.url}
+            src={user?.profile_pic?.url}
             alt=""
             className="profile-img"
           />
+          <EditProfilePic/>
           <h2 className="font-extrabold text-2xl mb-2">{user?.name}</h2>
           <h3 className="font-semibold text-md mb-4">{user?.role}</h3>
 
-          <p className="user-bio">
-            Innovating solutions to create a better tomorrow.
+          <p className="user-bio text-[rgb(209,207,207)]">
+           {user.aboutMe}
             <br />
             Contact - {user?.contact}
           </p>
@@ -110,7 +112,10 @@ const EnterpreneurProfile = () => {
 
 
       {/* <!-- Post Section --> */}
-      <div className="post-sections  p-2  min-w-[45%] overflow-auto max-h-[100vh]">{genreateComponent()}</div>
+      <div className="flex  border border-black p-2  min-w-[45%] overflow-auto max-h-[100vh]">
+        
+        {genreateComponent()}
+      </div>
     </div>
 
   );

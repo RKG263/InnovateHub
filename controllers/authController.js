@@ -27,8 +27,11 @@ export const registerController = async (req, res, next) => {
     const token = generateRandomToken(16);
     const user = await userModel.create({ role, name, email, password, isVerifiedToken: token });
 
+    console.log(user, "hi user");
+
     if (role == "Entrepreneur") {
       const ruser = await entrepreneurModel.create({userId : user._id});
+      console.log("sdjjdjfsjfdjfgsdfjfgdfjfsdfj");
     }
     else if (role == "Mentor") {
       const ruser = await mentorModel.create({userId : user._id});
@@ -159,30 +162,70 @@ export const editProfileController = async (req, res, next) => {
 
   try {
 
+  
+    
+
+    
+    const { fullName, aboutMe, newPassword, contact } = req.body;
     console.log(req.body);
-    console.log(req.file);
-    console.log(req.user);
-
-
-
-    const { fullName, aboutMe, newPassword } = req.body;
-
+    
     if (!newPassword) {
       throw new Error("All fields are required");
     }
 
-
-    // upload in cloudinary
-
-    const file = getDataUri(req.file);
-    const cloudinaryResult = await cloudinary.v2.uploader.upload(file.content);
+  
 
     req.user.name = fullName;
-    req.user.profile_pic.url = cloudinaryResult.secure_url;
-    req.user.profile_pic.public_id = cloudinaryResult.public_id;
     req.user.password = newPassword;
+    req.user.aboutMe = aboutMe;
+    req.user.contact = contact;
 
-    console.log(cloudinaryResult);
+
+    const result = await userModel.updateOne({ _id: req.user._id }, req.user);
+
+    console.log(result);
+
+    res.status(200).json({
+      success: true,
+      message: 'Edited successfully',
+      userId: req.user
+    });
+
+
+  } catch (err) {
+
+    console.error(err);
+    next(err);
+  }
+
+
+
+
+}
+
+
+export const editProfilePicController = async (req, res, next) => {
+
+  try {
+
+  
+    
+
+
+
+    // upload in cloudinary
+    if(req.file)
+      {
+        const file = getDataUri(req.file);
+        const cloudinaryResult = await cloudinary.v2.uploader.upload(file.content);
+        req.user.profile_pic.url = cloudinaryResult.secure_url;
+        req.user.profile_pic.public_id = cloudinaryResult.public_id;
+
+        console.log(cloudinaryResult);
+      }
+      else throw new Error("File must be image");
+
+  
 
     const result = await userModel.updateOne({ _id: req.user._id }, req.user);
 
