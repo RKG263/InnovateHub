@@ -7,6 +7,8 @@ import Footer from "../../Components/Footer/Footer";
 import axios from "axios";
 import { URL } from "../../url";
 import {toast} from 'react-hot-toast'
+import { server } from "../../redux/store";
+
 const CreatePost = () => {
   const { user } = useSelector((state) => state.user);
   const [title, setTitle] = useState("");
@@ -71,7 +73,7 @@ const CreatePost = () => {
   
     try {
    
-      const res = await axios.post(URL + "/api/v1/blog/post", formData, {
+      const res = await axios.post(`${server}/blog/post`, formData, {
         headers: {
           "Content-Type": "multipart/form-data", 
          

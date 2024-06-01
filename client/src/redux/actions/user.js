@@ -66,3 +66,5 @@ export const register = (name , email , password , role)  => async dispatch => {
       dispatch({ type: 'loadUserFail', payload: error.response.data.message });
     }
   };
+
+  

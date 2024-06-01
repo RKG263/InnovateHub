@@ -34,7 +34,8 @@ export const createPostController = async (req, res, next) => {
       picture: {
         url: cloudinaryResult.secure_url,
         public_id: cloudinaryResult.public_id,
-      },
+      }
+     
     });
 
     const savedPost = await newPost.save();
@@ -181,3 +182,7 @@ export const getUserPostController = async (req, res, next) => {
     res.status(500).json(err);
   }
 };
+
+
+
+

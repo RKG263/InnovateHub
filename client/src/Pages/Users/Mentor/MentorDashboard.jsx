@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./mentorProfile.css";
+import "./mentorDashboard.css";
 import Post from "../../../Components/Users/Post.jsx";
 import Chat from "../../../Components/Users/Chat.jsx";
 import EditProfile from "../../../Components/Users/EditProfile.jsx";
@@ -8,7 +8,7 @@ import Mentored from "../../../Components/Users/Mentor/Mentored.jsx";
 import Requested from "../../../Components/Users/Mentor/Requested.jsx";
 import Reviews from "../../../Components/Users/Mentor/Reviews.jsx";
 
-const MentorProfile = () => {
+const MentorDashboard = () => {
   const [currentComponent, setCurrentComponent] = useState("Post");
 
   const handleClick = (event) => {
@@ -108,4 +108,4 @@ const MentorProfile = () => {
   );
 };
 
-export default MentorProfile;
+export default MentorDashboard;

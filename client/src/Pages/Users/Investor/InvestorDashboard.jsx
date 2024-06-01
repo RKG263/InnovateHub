@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./investorProfile.css";
+import "./investorDashboard.css";
 import Post from "../../../Components/Users/Post.jsx";
 import Chat from "../../../Components/Users/Chat.jsx";
 import EditProfile from "../../../Components/Users/EditProfile.jsx";
@@ -11,7 +11,7 @@ import Invested from "../../../Components/Users/Investor/Invested.jsx";
 
 
 
-const InvestorProfile = () => {
+const InvestorDashboard = () => {
 
   const [currentComponent, setCurrentComponent] = useState("Post");
 
@@ -100,4 +100,4 @@ const InvestorProfile = () => {
   );
 };
 
-export default InvestorProfile;
+export default InvestorDashboard;

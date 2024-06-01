@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./enterpreneurProfile.css";
+import "./enterpreneurDashboard.css";
 import Post from "../../../Components/Users/Post.jsx";
 import Chat from "../../../Components/Users/Chat.jsx";
 import EditProfile from "../../../Components/Users/EditProfile.jsx";
@@ -10,8 +10,7 @@ import Mentors from "../../../Components/Users/Enterpreneur/Mentors.jsx";
 import { useSelector } from "react-redux";
 import EditProfilePic from "../../../Components/Users/EditProfilePic.jsx";
 
-
-const EnterpreneurProfile = () => {
+const EnterpreneurDashboard = () => {
 
   const { user } = useSelector(
     (state) => state.user
@@ -121,4 +120,4 @@ const EnterpreneurProfile = () => {
   );
 };
 
-export default EnterpreneurProfile;
+export default EnterpreneurDashboard;

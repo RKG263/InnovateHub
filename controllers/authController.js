@@ -30,14 +30,13 @@ export const registerController = async (req, res, next) => {
     console.log(user, "hi user");
 
     if (role == "Entrepreneur") {
-      const ruser = await entrepreneurModel.create({userId : user._id});
-      console.log("sdjjdjfsjfdjfgsdfjfgdfjfsdfj");
+      const ruser = await entrepreneurModel.create({userId : user._id , name , role , email});
     }
     else if (role == "Mentor") {
-      const ruser = await mentorModel.create({userId : user._id});
+      const ruser = await mentorModel.create({userId : user._id , name , role , email});
     }
     else if (role == "Investor") {
-      const ruser = await investorModel.create({userId : user._id});
+      const ruser = await investorModel.create({userId : user._id , name , role , email});
     }
 
 
@@ -54,6 +53,7 @@ export const registerController = async (req, res, next) => {
     next(error);
   }
 };
+
 
 // login controller
 
@@ -243,9 +243,63 @@ export const editProfilePicController = async (req, res, next) => {
     console.error(err);
     next(err);
   }
-
-
-
-
 }
 
+
+// Define the GET route for /api/getMyProfile
+
+export const getMyProfile = async (req, res, next) => {
+  try {
+    const userId = req.query.userId;
+    const Id = req.query.Id ;
+    console.log(userId);
+    const user = await userModel.findById({ _id: userId });
+    console.log(user);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    let roleModel;
+    if (user.role == 'Entrepreneur') {
+      roleModel = entrepreneurModel;
+    } else if (user.role == 'Investor') {
+      roleModel = investorModel;
+    } else {
+      roleModel = mentorModel;
+    }
+
+    const roleUser = await roleModel.findOne({ email: user.email });
+
+    if (!roleUser) {
+      return res.status(404).json({
+        success: false,
+        message: `${user.role} profile not found`,
+      });
+    }
+
+    const connections = await Promise.all(
+      roleUser.MyConnections.map(async connectionId => {
+        const userData = await userModel.findById(connectionId);
+        return {
+          _id: userData._id,
+          name: userData.name,
+          role: userData.role,
+          image: userData.profile_pic?.url,
+          bio : userData.aboutMe ,
+        };
+      })
+    );
+
+    return res.status(200).json({
+      success: true,
+      User: roleUser,
+      Connections: connections,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
