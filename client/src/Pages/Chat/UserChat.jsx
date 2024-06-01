@@ -151,7 +151,7 @@ const handleOnDelete=async(id)=>{
       });
       
       setMessage("");
-      console.log(res);
+      // console.log(res);
       
       setReceivedMessages((prevMessages) => [...prevMessages, msg]);
     } catch (error) {

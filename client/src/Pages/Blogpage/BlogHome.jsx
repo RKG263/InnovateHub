@@ -27,7 +27,7 @@ const Home = () => {
     setLoader(true);
     try {
       const res = await axios.get(URL + "/api/v1/blog/posts/" + search);
-      console.log(res)
+      // console.log(res)
       setPosts(res.data.posts);
       if (res.data.length === 0) {
         setNoResults(true);
@@ -35,7 +35,7 @@ const Home = () => {
         setNoResults(false);
       }
       setLoader(false);
-      console.log(res.data) ;
+      // console.log(res.data) ;
     } catch (err) {
       console.log(err);
       setLoader(true);

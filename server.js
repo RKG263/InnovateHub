@@ -9,7 +9,7 @@ import authRoute from "./routes/authRoute.js";
 import blogRoute from "./routes/blogRoute.js";
 import commentRoute from "./routes/commentRoute.js"
 import errorHandler from "./middleware/errorMiddleware.js";
-import othersRoute from "./routes/othersRoute.js"
+import othersRoute from "./routes/othersRoute.js";
 import cloudinary from 'cloudinary'
 
 import entrepreneurRoute from "./routes/entrepreneurRoute.js";

@@ -60,7 +60,7 @@ const Explore = () => {
     
     const navigate = useNavigate() ;
   const handleCategoryClick = (categoryId) => {
-    console.log(`Category clicked: ${categoryId}`);
+    // console.log(`Category clicked: ${categoryId}`);
     if(categoryId === 3 ){
            navigate('/adminresources') ;
     }
@@ -71,7 +71,7 @@ const Explore = () => {
   };
 
   const handleConnectClick = (type, id) => {
-    console.log(`Connect clicked: ${type} ID ${id}`);
+    // console.log(`Connect clicked: ${type} ID ${id}`);
     // Implement connect logic here
   };
 

@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  api:
+    build: .
+    container_name: api_c
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - ./.env
+  socket:
+    build: ./socket
+    container_name: socket_c
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./socket:/app
+      - /app/node_modules
+  client:
+    build: ./client
+    container_name: client_c
+    ports:
+      - "5173:5173" 
+    stdin_open: true
+    tty: true
+    depends_on:
+      - api
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    env_file:
+      - ./client/.env
+

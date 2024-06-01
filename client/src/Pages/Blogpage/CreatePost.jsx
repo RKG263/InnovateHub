@@ -82,7 +82,7 @@ const CreatePost = () => {
       });
       toast.success("posted successfully")
       navigate("/posts");
-      console.log(res.data);
+      // console.log(res.data);
     } catch (err) {
       console.log(err);
       toast.error("error in posting")

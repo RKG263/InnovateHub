@@ -13,7 +13,7 @@ import { recieveMail } from "../utils/sendVerificationMail.js";
 export const contactUsController = async (req, res, next) => {
   try {
     const mail = await recieveMail(req.body);
-    console.log(mail);
+    // console.log(mail);
 
     res.status(200).cookie("contactus", "sssj@38494").json({
       success: true,
@@ -54,7 +54,7 @@ export const approachUser = async (req, res , next) => {
   try {
     const { senderId, receiverId, description , name , email} = req.body;
     // const file = req.file; // Assuming file upload middleware is used 
-    console.log(senderId, receiverId , description, name , email);
+    // console.log(senderId, receiverId , description, name , email);
       
     const user = await userModel.findById({_id : senderId}) ;
     if(name != user.name || email != user.email){
@@ -173,7 +173,7 @@ export const CheckChatStatus = async (req, res, next) => {
 export const handleNotification = async (req, res, next) => {
   try {
     const { notificationId, action, senderId, receiverId } = req.body;
-    console.log(notificationId, action, senderId, receiverId);
+    // console.log(notificationId, action, senderId, receiverId);
     const notification = await notificationModel.findById({ _id: notificationId });
     if (action == 'accepted') {
       notification.status = "accepted";

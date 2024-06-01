@@ -36,7 +36,7 @@ const PostDetails = () => {
 
       setPost(res.data.post);
      
-      console.log(res.data.post);
+      // console.log(res.data.post);
     } catch (err) {
       console.log("Error fetching post details:");
       console.error(err);
@@ -55,7 +55,7 @@ const PostDetails = () => {
       const res = await axios.delete(URL + "/api/v1/blog/delete/" + postId, {
         withCredentials: true,
       });
-      console.log(res);
+      // console.log(res);
       toast.success("post deleted successfully");
       navigate("/posts");
     } catch (err) {

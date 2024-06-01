@@ -70,8 +70,8 @@ const UserListPage = () => {
 
   const usersToDisplay = filteredUsers.slice(0, visibleUsers);
 
-  console.log('Users:', users); // Debugging statement
-  console.log('Filtered Users:', filteredUsers); // Debugging statement
+  // console.log('Users:', users); // Debugging statement
+  // console.log('Filtered Users:', filteredUsers); // Debugging statement
 
   return (
     <>

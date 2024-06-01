@@ -9,9 +9,9 @@ import mentorModel from "../models/mentorModel.js";
 export const entrepreneurIdeaController = async (req, res, next) => {
 
     try {
-        const { idea, entrepreneurId, investorId } = req.body;
+        const { title, idea, entrepreneurId, investorId } = req.body;
 
-        const ideaRes = await ideaModel.create({ idea, entrepreneurId, investorId });
+        const ideaRes = await ideaModel.create({title,  idea, entrepreneurId, investorId });
 
         res.status(200).send({
             success: true,
@@ -105,3 +105,28 @@ export const myInvestorController = async(req , res , next)=>{
 
 }
 
+
+
+export const ideaController = async(req , res, next)=>{
+
+
+    try{
+
+
+        const idea  = await ideaModel.find({entrepreneurId : req.user._id});
+
+        res.status(200).send({
+            success : true,
+            idea
+        });
+
+
+
+    }catch(err)
+    {
+        console.error(err);
+        next(err);
+    }
+
+
+}

@@ -15,7 +15,7 @@ const Post = () => {
 
     axios.get(`${import.meta.env.VITE_URL}/api/v1/blog/post/user/${user._id}`, { withCredentials: true }).then(res => {
 
-      console.log(res.data)
+      // console.log(res.data)
       setMyPosts(res.data.posts);
     });
 

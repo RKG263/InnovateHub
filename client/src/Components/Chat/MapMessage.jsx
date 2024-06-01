@@ -6,7 +6,7 @@ const MapMessage = ({ sender, receivedMessages ,OnDelete }) => {
   const [openedMenuIndex, setOpenedMenuIndex] = useState(null);
 
  
-  console.log(receivedMessages[0]?._id)
+  // console.log(receivedMessages[0]?._id)
 
   return (
     <>

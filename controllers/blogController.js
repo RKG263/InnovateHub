@@ -76,7 +76,7 @@ export const updatePostController = async (req, res, next) => {
     }
 
     const post1 = req.body;
-    console.log(post1);
+    // console.log(post1);
 
     const updatedPost = await postModel.findByIdAndUpdate(post._id, {
       title: post1.title,

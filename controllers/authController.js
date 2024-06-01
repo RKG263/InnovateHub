@@ -6,6 +6,7 @@ import { getDataUri } from "../utils/features.js";
 import entrepreneurModel from "../models/entrepreneurModel.js";
 import mentorModel from "../models/mentorModel.js";
 import investorModel from "../models/investorModel.js";
+import bcrypt from "bcryptjs";
 
 const generateRandomToken = (length = 32) => {
   return crypto.randomBytes(length).toString('hex');
@@ -14,7 +15,7 @@ const generateRandomToken = (length = 32) => {
 export const registerController = async (req, res, next) => {
   try {
     const { role, name, email, password } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     if (!role || !name || !email || !password) {
       throw new Error("All fields are required");
     }
@@ -27,7 +28,7 @@ export const registerController = async (req, res, next) => {
     const token = generateRandomToken(16);
     const user = await userModel.create({ role, name, email, password, isVerifiedToken: token });
 
-    console.log(user, "hi user");
+   
 
     if (role == "Entrepreneur") {
       const ruser = await entrepreneurModel.create({userId : user._id , name , role , email});
@@ -41,7 +42,7 @@ export const registerController = async (req, res, next) => {
 
 
     const mail = await sendMail(email, token);
-    console.log(mail);
+    // console.log(mail);
 
     res.status(201).send({
       success: true,
@@ -66,10 +67,10 @@ export const loginController = async (req, res, next) => {
 
     const user = await userModel.findOne({ email });
     if (!user) {
-      console.log("Invalid Email Helllo ");
-      throw new Error("Invalid Email Helllo ");
+      // console.log("Invalid Email  ");
+      throw new Error("Invalid Email  ");
     }
-    console.log(user.password)
+    // console.log(user.password)
     const isMatch = await user.comparePassword(password);
 
     if (!isMatch) {
@@ -167,23 +168,26 @@ export const editProfileController = async (req, res, next) => {
 
     
     const { fullName, aboutMe, newPassword, contact } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     
-    if (!newPassword) {
-      throw new Error("All fields are required");
+    if (newPassword) {
+      
+      req.user.password = newPassword;
+      const salt = await bcrypt.genSalt(10);
+      req.user.password = await bcrypt.hash(newPassword, salt);
+
     }
 
   
 
     req.user.name = fullName;
-    req.user.password = newPassword;
     req.user.aboutMe = aboutMe;
     req.user.contact = contact;
 
 
     const result = await userModel.updateOne({ _id: req.user._id }, req.user);
 
-    console.log(result);
+    // console.log(result);
 
     res.status(200).json({
       success: true,
@@ -221,7 +225,7 @@ export const editProfilePicController = async (req, res, next) => {
         req.user.profile_pic.url = cloudinaryResult.secure_url;
         req.user.profile_pic.public_id = cloudinaryResult.public_id;
 
-        console.log(cloudinaryResult);
+        // console.log(cloudinaryResult);
       }
       else throw new Error("File must be image");
 
@@ -229,7 +233,7 @@ export const editProfilePicController = async (req, res, next) => {
 
     const result = await userModel.updateOne({ _id: req.user._id }, req.user);
 
-    console.log(result);
+    // console.log(result);
 
     res.status(200).json({
       success: true,
@@ -252,10 +256,10 @@ export const getMyProfile = async (req, res, next) => {
   try {
     const userId = req.query.userId;
     const Id = req.query.Id ;
-    console.log(userId);
+    // console.log(userId);
     const user = await userModel.findById({ _id: userId });
-    console.log(user);
 
+    
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -268,20 +272,23 @@ export const getMyProfile = async (req, res, next) => {
       roleModel = entrepreneurModel;
     } else if (user.role == 'Investor') {
       roleModel = investorModel;
-    } else {
+    } else { 
       roleModel = mentorModel;
     }
 
-    const roleUser = await roleModel.findOne({ email: user.email });
+    let roleUser = await roleModel.findOne({ email: user.email });
+    // const userProfile = await userModel.findOne({_id : roleUser.userId});
 
+    // console.log(roleUser);
+    
     if (!roleUser) {
       return res.status(404).json({
         success: false,
         message: `${user.role} profile not found`,
       });
     }
-
-    const connections = await Promise.all(
+    
+    let connections = await Promise.all(
       roleUser.MyConnections.map(async connectionId => {
         const userData = await userModel.findById(connectionId);
         return {
@@ -293,7 +300,10 @@ export const getMyProfile = async (req, res, next) => {
         };
       })
     );
+    
+    roleUser._doc.profile_pic = user?.profile_pic;
 
+    // console.log(roleUser);
     return res.status(200).json({
       success: true,
       User: roleUser,

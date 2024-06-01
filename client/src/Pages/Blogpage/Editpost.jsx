@@ -44,7 +44,7 @@ const EditPost = () => {
     formData.append("categories", cats);
 
     formData.append("file", file);
-    console.log(formData);
+    // console.log(formData);
 
     try {
       const res = await axios.put(
@@ -59,7 +59,7 @@ const EditPost = () => {
       );
        toast.success("post updated successfully");
       navigate("/posts");
-      console.log(res.data);
+      // console.log(res.data);
     } catch (err) {
       console.log(err);
       toast.error("error in updating post")
