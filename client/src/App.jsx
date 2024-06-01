@@ -4,12 +4,11 @@ import Login from "./Components/Auth/Login";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import ProtectedRoute from "./Utils/ProtectedRoute";
-import Profile from "./Pages/Users/Profile";
 import Register from "./Components/Auth/Register";
 import Home from "./Components/Home/Home";
 import NotFound from "./Shared/NotFound";
 import SpinningLoader from "./Shared/SpinningLoader";
-import "./App.css";
+// import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
 import SubmitIdea from "./Pages/Users/SubmitIdea";
@@ -22,22 +21,16 @@ import MyBlogs from "./Pages/Blogpage/MyBlogs";
 import CreatePost from "./Pages/Blogpage/CreatePost";
 import PostDetails from "./Pages/Blogpage/PostDetail";
 import EditPost from "./Pages/Blogpage/Editpost";
-
 import Explore from "./Pages/Explore";
 import AdminResources from "./Pages/AdminPages/AdminResources";
 import SuccessStoryPage from "./Pages/AdminPages/SuccessStories";
-import EnterpreneurProfile from "./Pages/Users/Firm/EnterpreneurProfile";
-import InvestorProfile from "./Pages/Users/Investor/InvestorProfile";
-import MentorProfile from "./Pages/Users/Mentor/MentorProfile";
-import Firm from "./Pages/Profile/firm/Firm";
-import Investor from "./Pages/Profile/Investor/Investor";
-import Mentor from "./Pages/Profile/Mentor/Mentor";
 import Review from "./Pages/Review/Review";
 import UserChat from "./Pages/Chat/UserChat.jsx";
-
 import ChatBot from "./Pages/ChatBot/ChatBot.jsx";
 import Graph from "./Pages/graph/Graph.jsx";
-
+import ProfilePage from "./Pages/Users/Profile.jsx";
+import Dashboard from "./Pages/Users/Dashboard.jsx";
+import NotificationPage from "./Components/Users/Notification.jsx";
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
     (state) => state.user
@@ -101,13 +94,29 @@ function App() {
             <Route path="/posts" element={<BlogHome />} />
             <Route path="/ask" element={<ChatBot />} />
             <Route
-              path="/profile"
+              path="/profile/:userId"
               element={
                 <ProtectedRoute user={isAuthenticated} redirect="/login">
-                  <Profile />
+                  <ProfilePage />
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute user={isAuthenticated} redirect="/login">
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            {/* <Route
+              path="/notifications"
+              element={
+                // <ProtectedRoute user={isAuthenticated} redirect="/login">
+                  <NotificationPage userId = {user?._id} />
+                //  </ProtectedRoute>
+              }
+            /> */}
             <Route
               path="/my-posts"
               element={
@@ -158,12 +167,10 @@ function App() {
             <Route path="/explore" element={<Explore />} />
             <Route path="/adminresources" element={<AdminResources />} />
             <Route path="/successstorypage" element={<SuccessStoryPage />} />
-            <Route path="*" element={<NotFound />} />
-            <Route path="/userProfile" element={<EnterpreneurProfile />} />
-            <Route path="/user/profile" element={<Investor />} />
             <Route path="/mentor/review" element={<Review />} />
             <Route path="/chat/:id" element={<UserChat />} />
             <Route path="/user/graph" element={<Graph />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Toaster />
         </>

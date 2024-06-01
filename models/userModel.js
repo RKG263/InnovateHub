@@ -2,9 +2,10 @@ import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import JWT from "jsonwebtoken";
+
 const userSchema = new mongoose.Schema(
   {
-    role: { 
+    role: {
       type: String,
       required: [true, "role is required"],
     },
@@ -28,23 +29,29 @@ const userSchema = new mongoose.Schema(
       default: Date.now(),
     },
     profile_pic: {
-      public_id:{
-          type:String
-        },
-        url:{
-          type:String
-        }
-  },
+      public_id: {
+        type: String
+      },
+      url: {
+        type: String
+      }
+    },
+    aboutMe: {
+      type: String,
+    },
+    contact : {
+      type : Number,
+    },
     updatedAt: {
       type: Date,
       default: Date.now(),
     },
-    isVerified:{
-      type:Boolean,
-      default:false
+    isVerified: {
+      type: Boolean,
+      default: false
     },
-    isVerifiedToken:{
-      type:String,
+    isVerifiedToken: {
+      type: String,
     }
   },
   { timestamps: true }
@@ -52,7 +59,7 @@ const userSchema = new mongoose.Schema(
 
 userSchema.pre("save", async function () {
   if (!this.isModified('password')) {
-    return  
+    return
   }
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);

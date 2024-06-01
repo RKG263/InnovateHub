@@ -1,4 +1,5 @@
 import { Avatar } from '@mui/material';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 const Idea = () => {
@@ -9,7 +10,11 @@ const Idea = () => {
     useEffect(()=>{
 
         // ideas fatched from backend
+        axios.get(`${import.meta.env.VITE_URL}/api/v1/entrepreneur/idea`, { withCredentials: true })
+        .then(res => {
 
+          console.log(res.data)
+          setIdeas(res.data.posts);});
 
     },[]);
 
