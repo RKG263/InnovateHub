@@ -23,13 +23,13 @@ const UserListPage = () => {
         const { data } = await axios.get(`${server}/other/allusers`, {
           withCredentials: true,
         });
-       // console.log('Fetched Data:', data); // Debugging statement
+        // console.log('Fetched Data:', data); // Debugging statement
         if (data.users) {
           const usersArray = Object.keys(data.users).map(key => ({
             id: key,
             ...data.users[key],
           }));
-         // console.log('Users Array:', usersArray); // Debugging statement
+          // console.log('Users Array:', usersArray); // Debugging statement
           setUsers(usersArray);
         } else {
           console.error('Invalid response structure:', data);
@@ -129,9 +129,12 @@ const UserListPage = () => {
               usersToDisplay.map((user) => (
                 <Grid item key={user.id} xs={12} sm={6} md={4}>
                   <Paper elevation={3} sx={{ padding: '20px', textAlign: 'center' }}>
-                    <Avatar sx={{ width: 100, height: 100, margin: '0 auto', marginBottom: '10px' }}>
-                      {/* {user.avatar} */}
-                    </Avatar>
+                    <Avatar
+                      src = {user?.profile_pic?.url}
+                      sx={{ width: 100, height: 100, margin: '0 auto', marginBottom: '10px' }}
+                    />
+              
+           
                     <Typography variant="h6" gutterBottom>
                       {user.name || 'No Name'} {/* Use a fallback value */}
                     </Typography>
@@ -139,7 +142,7 @@ const UserListPage = () => {
                       {user.role || 'No Role'} {/* Use a fallback value */}
                     </Typography>
                     <Typography variant="body2" gutterBottom>
-                      {user.aboutUs || "Growing"}
+                      {user.aboutMe || "Growing"}
                     </Typography>
                     <Button
                       variant="contained"

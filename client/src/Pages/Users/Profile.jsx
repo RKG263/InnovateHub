@@ -111,7 +111,11 @@ const ProfilePage = () => {
     formDataToSend.append('description', formData.description);
     dispatch(Approach(user._id, userId, user.name, user.email, formData.description));
     setApproachedMessage('Request Pending'); // Set approached message to pending after form submission
+    setOpen(false);
   };
+
+
+  console.log(User, "sssssssssss")
 
   return (
     <>
@@ -120,7 +124,13 @@ const ProfilePage = () => {
         <Container maxWidth="md">
           <Root elevation={3}>
             <Grid container direction="column" alignItems="center">
-              <StyledAvatar alt="Profile Picture" src={User?.image?.url || "/path/to/image.jpg"} />
+
+
+
+              <StyledAvatar alt="Profile Picture" src={User?.profile_pic?.url || "/path/to/image.jpg"} />
+
+
+
               <Typography variant="h5" gutterBottom>{User?.name || 'John Doe'}</Typography>
               <Typography variant="subtitle1" color="textSecondary">{User?.role || 'Investor / Mentor / Entrepreneur'}</Typography>
             </Grid>

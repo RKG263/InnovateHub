@@ -111,7 +111,7 @@ const EnterpreneurDashboard = () => {
 
 
       {/* <!-- Post Section --> */}
-      <div className="flex  border border-black p-2  min-w-[45%] overflow-auto max-h-[100vh]">
+      <div className="flex  p-2  min-w-[45%] overflow-auto max-h-[100vh]">
         
         {genreateComponent()}
       </div>
