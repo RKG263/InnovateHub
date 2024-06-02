@@ -60,9 +60,11 @@ export default function PrimarySearchAppBar() {
               style={{ width: "50px", marginRight: "10px" }}
             />
           </Link>
-
-          <Stack>
-            <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+ 
+          <Stack className='max-ssm:hidden'>
+            <Typography variant="h4" sx={{ fontWeight: "bold" }}
+              className='max-sm:text-2xl'
+            >
               InnovatorsSpace
             </Typography>
           </Stack>

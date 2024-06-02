@@ -8,6 +8,8 @@ export default {
   theme: {
     extend: {
       screens :{
+
+        'max-ssm': {'max': '450px'}, // Target screens smaller than 450px
         'max-sm': {'max': '639px'}, // Target screens smaller than 640px
         'max-md': {'max': '767px'}, // Target screens smaller than 768px
         'max-lg': {'max': '1023px'}, // Target screens smaller than 1024px
