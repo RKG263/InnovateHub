@@ -67,7 +67,6 @@ const Chat = () => {
       const response = await axios.get(
         URL + "/api/v1/other/user/" + receiverId
       );
-     
       setReceiver(response.data.newUser);
     } catch (error) {
       console.log(error, "error on fetching detail using user id in chat");
@@ -85,18 +84,7 @@ const Chat = () => {
       const res = await axios.get(
         URL + "/api/v1/chat/find/" + sender + "/" + receiverId
       );
-      if(res?.data==null){
-        const resp=await axios.post(URL+"/api/v1/chat",{
-          senderId:sender,
-          receiverId
-        })
-        setChat(resp?.data?._id)
-      }else{
-        console.log(res)
       setChatId(res?.data?._id);
-
-      }
-      
     } catch (error) {
       console.log(error, "error in finding chat id");
     }
