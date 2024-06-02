@@ -52,7 +52,7 @@ const Chat = () => {
           senderId:sender,
           receiverId
         })
-        console.log(rsp)
+        // console.log(rsp)
       }
    
     } catch (error) {
@@ -185,7 +185,7 @@ const handleOnDelete=async(id)=>{
       {/* Side by Side Container */}
       <div className="flex justify-between h-full relative">
         {/* Profile Box */}
-        <div className="p-2 bg-gray-200 w-1/4 min-w-300px shadow-md z-10">
+        <div className="p-2 bg-gray-200 w-1/4 min-w-300px shadow-md z-10 max-sm:hidden  ">
           {" "}
          
           <div className="flex flex-col items-center justify-center text-center">

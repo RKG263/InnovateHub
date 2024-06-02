@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   Stack,
+  Avatar,
 } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { ExitToApp } from "@mui/icons-material";
@@ -33,7 +34,11 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static">
+    <div className="mb-[4.3rem]">
+
+    <AppBar position="fixed"
+      className=""
+    >
       <Toolbar>
         <Box sx={{ flexGrow: 1, display: "flex", alignItems: "center" }}>
           <Link to="/" style={{ textDecoration: "none" }}>
@@ -44,14 +49,17 @@ const Header = () => {
             />
           </Link>
 
-          <Stack>
-            <Typography variant="h4" sx={{ fontWeight: "bold" }}>
-              InnovatorsHub
-            </Typography>
-          </Stack>
+            <Stack className="max-md:hidden">
+              <Typography variant="h4" sx={{ fontWeight: "bold" }}
+                  className=" max-lg:text-[30px]"
+              >
+                InnovatorsHub
+              </Typography>
+            </Stack>
         </Box>
 
-        {path==='/posts' || path==='/my-posts'? <Box sx={{ display: "flex", alignItems: "center" }}>
+        {path==='/posts' || path==='/my-posts'? 
+        <Box sx={{ display: "flex", alignItems: "center" }}>
           
           <SearchBox/>
 
@@ -86,14 +94,17 @@ const Header = () => {
             </Link>
             
            
-              <Link to={`/profile/${user._id}`}>
+              {/* <Link to={`/profile/${user._id}`}> */}
+              <Link to={`/dashboard`}>
                 <IconButton
                   edge="end" 
                   color="inherit"
                   aria-label="profile"
                   size="large"
                 >
-                  <AccountCircle />
+                  <Avatar 
+                    src={user?.profile_pic?.url}
+                  />
                 </IconButton>
               </Link>
               <IconButton
@@ -120,8 +131,10 @@ const Header = () => {
             </Link>
           )}
         </Box> : 
+        <>
+        
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          {/* <Link to="/" style={{ textDecoration: "none" }}>
             <Button
               sx={{
                 color: "white",
@@ -135,8 +148,14 @@ const Header = () => {
             >
               HOME
             </Button>
-          </Link>
-          <Link to="/about" style={{ textDecoration: "none" }}>
+          </Link> */}
+
+
+
+
+          <Link to="/about" style={{ textDecoration: "none" }}
+            className="max-sm:hidden"
+          >
             <Button
               sx={{
                 color: "white",
@@ -151,7 +170,9 @@ const Header = () => {
               About Us
             </Button>
           </Link>
-          <Link to="/contact" style={{ textDecoration: "none" }}>
+          <Link to="/contact" style={{ textDecoration: "none" }}
+            className="max-sm:hidden"
+          >
             <Button
               sx={{
                 color: "white",
@@ -192,7 +213,9 @@ const Header = () => {
                   aria-label="profile"
                   size="large"
                 >
-                  <AccountCircle />
+                  <Avatar 
+                    src={user?.profile_pic?.url}
+                  />
                 </IconButton>
               </Link>
               <IconButton
@@ -218,10 +241,15 @@ const Header = () => {
               </Button>
             </Link>
           )}
-        </Box>}
+        </Box>
+        </>
+        
+        
+        }
         
       </Toolbar>
     </AppBar>
+    </div>
   );
 };
 

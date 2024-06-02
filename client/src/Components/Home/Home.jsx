@@ -20,7 +20,7 @@ const Home = () => {
       <AppBar position="static" style={{ marginBottom: '32px' }}>
         <Header isAuthenticated={isAuthenticated} />
       </AppBar>
-      <main>
+      <main> 
         <div style={{ padding: '48px 0 32px' }}>
           <Container maxWidth="lg">
             <Grid container spacing={4} alignItems="center">

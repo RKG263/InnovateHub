@@ -48,15 +48,21 @@ const Home = () => {
   
    
   return (
-    <> <div className="bg-slate-200">
+    <> 
       <Header/>
+
+    <div className="bg-slate-200 ">
+      
       <div className="flex justify-center items-center h-40" >
       <div className="text-center">
-        <h1 className="text-7xl font-bold mb-4">Immerse Yourself in</h1>
+        <h1 className="text-7xl font-bold mb-4 max-md:text-4xl">Immerse Yourself in</h1>
         <h3 className="text-xl text-gray-700">Inspiring Narratives, Emerging Trends, and Lucrative Opportunities.</h3>
       </div>
     </div>
-      <div className="px-8 md:px-[200px] min-h-[80vh] mb-2">
+
+
+
+      <div className="px-8 md:px-[200px] min-h-[80vh] mb-2 relative top-14">
         {loader ? (
           <div className="h-[40vh] flex justify-center items-center">
            <SpinningLoader/>
@@ -78,7 +84,10 @@ const Home = () => {
           <h3 className="text-center font-bold mt-16">No posts available</h3>
         )}
       </div>
+      <div className="relative top-16">
+
       <Footer/>
+      </div>
       </div>
     </>
   );

@@ -115,7 +115,7 @@ const ProfilePage = () => {
   };
 
 
-  console.log(User, "sssssssssss")
+  
   const handleChatClick = () => {
     navigate(`/chat/${userId}`);
   };

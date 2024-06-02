@@ -11,7 +11,7 @@ const SearchBox = ({ onSearch }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex justify-center items-center space-x-2 relative w-80 h-10 bg-white rounded-full shadow-md mr-8">
+    <div className="flex justify-center items-center space-x-2 relative w-80 h-10 bg-white rounded-full shadow-md mr-8 max-lg:w-[10.5rem]">
       <input
         onChange={(e) => setPrompt(e.target.value)}
         className="outline-none px-4 py-2 w-full rounded-full bg-transparent focus:outline-none text-zinc-900"

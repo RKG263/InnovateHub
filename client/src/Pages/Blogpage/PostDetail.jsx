@@ -115,11 +115,11 @@ const PostDetails = () => {
     <div>
       <Header />
       {loader ? (
-        <div className="h-[80vh] flex justify-center items-center w-full">
+        <div className="h-[80vh] flex justify-center items-center w-full relative top-14 ">
           <SpinningLoader />
         </div>
       ) : (
-        <div className="px-8 md:px-[200px] mt-8">
+        <div className="px-8 md:px-[200px] mt-20 ">
           <div className="bg-blue-100 rounded-lg shadow-lg px-6 py-4 mb-8">
             {" "}
             {/* Changed color to light bluish */}
@@ -239,7 +239,10 @@ const PostDetails = () => {
           </div>
         </div>
       )}
+      <div className="relative top-16">
+
       <Footer />
+      </div>
     </div>
   );
 };

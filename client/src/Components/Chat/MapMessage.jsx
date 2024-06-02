@@ -14,11 +14,13 @@ const MapMessage = ({ sender, receivedMessages ,OnDelete }) => {
        
         <div key={key}>
           {sender === data.senderId ? (
-            <div className="flex justify-end mb-3 mr-10 relative">
+            <div className="flex justify-end mb-3 mr-10 relative ">
               {" "}
               {/* Added relative positioning */}
               <div className="max-w-xs px-4 py-2 bg-green-400 text-gray-100 rounded-lg shadow-md relative">
-                <div>{data.text}</div>
+                <div className=" text-wrap ">
+                  {data.text}
+                  </div>
                 <span style={{ fontSize: "0.8rem" }}>
                   {format(data.createdAt)}
                 </span>
