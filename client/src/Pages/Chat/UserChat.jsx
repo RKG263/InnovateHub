@@ -27,8 +27,9 @@ const Chat = () => {
   const socket = useRef(null); 
 
   useEffect(() => {
-    
-    socket.current = io(`${import.meta.env.SOCKET_URL}/websocket`);
+    socket.current=io('http://localhost:4000')
+    //socket.current = io(`${import.meta.env.SOCKET_URL}/websocket`);
+
 
   
     socket.current.on("connect", () => {
@@ -46,6 +47,24 @@ const Chat = () => {
     };
   }, []);
 
+  const chatCreate=async()=>{
+    try {
+      if(receiverId!=null &&  sender!=null){
+        const rsp=await axios.post(URL+'/api/v1/chat',{
+          senderId:sender,
+          receiverId
+        })
+        console.log(rsp)
+      }
+   
+    } catch (error) {
+     console.log(error)
+    }
+}
+  useEffect(()=>{
+      
+      chatCreate()
+  },[sender,receiverId])
  
   useEffect(() => {
     socket.current.emit("join", sender);
@@ -93,7 +112,7 @@ const Chat = () => {
  
   useEffect(() => {
     getChatId();
-  }, [sender, receiverId]);
+  }, [sender, receiverId,chatCreate]);
 
  
   const getChats = async () => {
