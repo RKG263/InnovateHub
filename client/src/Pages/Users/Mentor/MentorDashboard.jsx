@@ -68,6 +68,8 @@ const MentorDashboard = () => {
             {user.aboutMe}
             <br />
             Contact - {user?.contact}
+            <br/><br/>
+            Email - {user?.email}
           </p>
         </div>
 
