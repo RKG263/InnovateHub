@@ -24,11 +24,11 @@ const Chat = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
  
-  const socket = useRef(null);
+  const socket = useRef(null); 
 
   useEffect(() => {
     
-    socket.current = io("http://localhost:4000");
+    socket.current = io(`${import.meta.env.SOCKET_URL}/websocket`);
 
   
     socket.current.on("connect", () => {
@@ -173,7 +173,7 @@ const handleOnDelete=async(id)=>{
           <div className="flex flex-col items-center justify-center text-center">
             <div style={{ position: "relative", width: 200, height: 200 }}>
               <img
-                src={"https://picsum.photos/200/300"}
+                src={receiver?.profile_pic?.url || "https://picsum.photos/200/300"}
                 alt="User Avatar"
                 style={{
                   position: "absolute",
