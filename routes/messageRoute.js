@@ -9,4 +9,4 @@ router.get('/:chatId', getMessages);
 
 router.delete('/delete/:id',deleteMessageController)
 
-export default router
+export default router;

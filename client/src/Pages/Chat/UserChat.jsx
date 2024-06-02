@@ -28,8 +28,7 @@ const Chat = () => {
 
   useEffect(() => {
     
-    socket.current = io(`${import.meta.env.SOCKET_URL}/websocket`);
-
+    socket.current = io(`${import.meta.env.VITE_SOCKET_URL}`);
   
     socket.current.on("connect", () => {
       console.log("Connected to Socket.io server");
@@ -84,6 +83,7 @@ const Chat = () => {
       const res = await axios.get(
         URL + "/api/v1/chat/find/" + sender + "/" + receiverId
       );
+      
       setChatId(res?.data?._id);
     } catch (error) {
       console.log(error, "error in finding chat id");
