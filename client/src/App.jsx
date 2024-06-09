@@ -31,6 +31,13 @@ import Graph from "./Pages/graph/Graph.jsx";
 import ProfilePage from "./Pages/Users/Profile.jsx";
 import Dashboard from "./Pages/Users/Dashboard.jsx";
 import NotificationPage from "./Components/Users/Notification.jsx";
+import Plan from "./Pages/mentor-plan/Plan.jsx";
+import Createplan from "./Pages/mentor-plan/Createplan.jsx";
+
+
+
+// importing mentor plan
+
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
     (state) => state.user
@@ -61,7 +68,6 @@ function App() {
         <>
           <Routes>
             <Route path="/" element={<Home />} />
-
             <Route
               path="/login"
               element={
@@ -133,7 +139,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
             <Route
               path="/post/edit/:id"
               element={
@@ -154,7 +159,6 @@ function App() {
               path="/connecttoinnovators"
               element={<ConnectToInnovators />}
             />
-
             {/* <Route
               path="/chat/:id"
               element={
@@ -163,13 +167,15 @@ function App() {
                 </ProtectedRoute>
               }
             /> */}
-
             <Route path="/explore" element={<Explore />} />
             <Route path="/adminresources" element={<AdminResources />} />
             <Route path="/successstorypage" element={<SuccessStoryPage />} />
             <Route path="/mentor/review" element={<Review />} />
             <Route path="/chat/:id" element={<UserChat />} />
             <Route path="/user/graph" element={<Graph />} />
+            <Route path="/mentor/:id" element={<Plan/>} />
+            <Route path="/mentor/create-plan" element={<Createplan/>}/>
+            // mentor plan Routes
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Toaster />
