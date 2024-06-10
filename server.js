@@ -19,6 +19,7 @@ import aiChatRoute from "./routes/aiChatRoute.js";
 import chatRoute from "./routes/chatRoute.js"
 import messageRoute from "./routes/messageRoute.js"
 import mentorPlanRoute from './routes/mentorPlanRoute.js'
+import paymentRoute from './routes/paymentRoute.js'
 
 const app = express();
 
@@ -51,7 +52,8 @@ app.use("/api/v1/other", othersRoute);
 app.use("/api/v1/ai/",aiChatRoute)
 app.use('/api/v1/chat', chatRoute)
 app.use('/api/v1/message', messageRoute)
-app.use('/api/v1/mentorPlan',mentorPlanRoute)
+app.use('/api/v1/mentorPlan',mentorPlanRoute);
+app.use('/api/v1/payment' , paymentRoute);
 
 app.get("/", (req, res) => {
   res.send("i am sending your request ");

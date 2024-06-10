@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Typography, Grid, Paper, Card, CardContent, CardMedia, Button, Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 import { BusinessCenter, Event, LibraryBooks, Star, Person, AccountBalance } from '@mui/icons-material';
 import Header from '../Components/Header/Header';
 import Footer from '../Components/Footer/Footer';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const categories = [
   {
@@ -41,10 +43,10 @@ const ongoingEvents = [
   { id: 2, name: 'Investor Meetup', date: '2023-07-10', location: 'New York' },
 ];
 
-const mentors = [
-  { id: 1, name: 'John Doe', role: 'Tech Mentor', avatar: <Person /> },
-  { id: 2, name: 'Jane Smith', role: 'Business Mentor', avatar: <Person /> },
-];
+// const mentors = [
+//   { id: 1, name: 'John Doe', role: 'Tech Mentor', avatar: <Person /> },
+//   { id: 2, name: 'Jane Smith', role: 'Business Mentor', avatar: <Person /> },
+// ];
 
 const investors = [
   { id: 1, name: 'Robert Johnson', role: 'Venture Capitalist', avatar: <AccountBalance /> },
@@ -57,15 +59,19 @@ const entrepreneurs = [
 ];
 
 const Explore = () => {
-    
-    const navigate = useNavigate() ;
+
+  const navigate = useNavigate();
+
+
+
+
   const handleCategoryClick = (categoryId) => {
     // console.log(`Category clicked: ${categoryId}`);
-    if(categoryId === 3 ){
-           navigate('/adminresources') ;
+    if (categoryId === 3) {
+      navigate('/adminresources');
     }
-    else if(categoryId === 4){
-       navigate('/successstorypage');
+    else if (categoryId === 4) {
+      navigate('/successstorypage');
     }
     // Implement navigation to category details page or relevant action here
   };
@@ -73,6 +79,7 @@ const Explore = () => {
   const handleConnectClick = (type, id) => {
     // console.log(`Connect clicked: ${type} ID ${id}`);
     // Implement connect logic here
+    navigate(`/mentor/${id}`)
   };
 
   return (
@@ -145,23 +152,7 @@ const Explore = () => {
           Connect with Mentors
         </Typography>
         <List>
-          {mentors.map((mentor) => (
-            <ListItem key={mentor.id}>
-              <ListItemAvatar>
-                <Avatar>
-                  {mentor.avatar}
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={mentor.name} secondary={mentor.role} />
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handleConnectClick('mentor', mentor.id)}
-              >
-                Connect
-              </Button>
-            </ListItem>
-          ))}
+          {generateMentor()}
         </List>
 
         <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: '40px' }}>
@@ -216,3 +207,58 @@ const Explore = () => {
 };
 
 export default Explore;
+
+
+const generateMentor = () => {
+  const [mentors, setMentors] = useState([]);
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+
+    axios.get(`${import.meta.env.VITE_API_ENDPOINT}/api/v1/mentor`,{withCredentials : true})
+    .then(data=>{
+      setMentors(data.data);
+    })
+
+  }, []);
+
+  console.log(mentors);
+
+  const handleConnectClick = async(userId)=>{
+
+    try{
+      navigate(`/mentor/${userId}`)
+
+
+    }catch(err)
+    {
+      toast.error("Something wrong");
+      console.error();
+    }
+  }
+
+  return (
+    <>
+
+
+      {mentors.map((mentor) => (
+        <ListItem key={mentor.userId}>
+          <ListItemAvatar>
+            <Avatar>
+              {mentor.avatar}
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={mentor.name} secondary={mentor.role} />
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => handleConnectClick( mentor.userId)}
+          >
+            Ask  for Mentorship
+          </Button>
+        </ListItem>
+      ))}
+    </>
+  )
+}

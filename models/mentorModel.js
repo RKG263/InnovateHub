@@ -56,7 +56,7 @@ const mentorSchema = new Schema({
         type: [ Schema.Types.ObjectId],
 
     } ,
-   MyConnections: {
+   myConnections: {
         type: [Schema.Types.ObjectId],
         default: [] ,
     },

@@ -7,7 +7,7 @@ import mentorPlanModel from "../models/mentorPlanModel.js";
 export const createPlanController=async(req,res,next)=>{
   try {
 
-    const {title,description,duration,mentorId,price}=req.body;
+    const {title,description,duration,mentorId,price,planID,paymentURL}=req.body;
 
     if(!title || !description || !duration ||!mentorId ||!price){
       throw new Error("all fied required");
@@ -15,9 +15,11 @@ export const createPlanController=async(req,res,next)=>{
     const result=await mentorPlanModel.create({
       title,
       description,
-      duration,
+      duration, 
       mentorId,
-      price
+      price,
+      planID,
+      paymentURL
     })
     res.status(200).send({
       success:true,

@@ -25,7 +25,14 @@ const mentorPlanSchema = new mongoose.Schema(
     },
     subscriber:[]
     ,
-
+    paymentURL:{
+      type : String,
+      default : "#",
+    },
+    planID : {
+      type : String,
+      required : true
+    },
     createdDate: {
       type: Date,
       default: Date.now,

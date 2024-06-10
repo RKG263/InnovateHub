@@ -56,7 +56,7 @@ const Plan = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </> 
   );
 };
 

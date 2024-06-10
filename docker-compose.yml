@@ -17,6 +17,8 @@ services:
     restart: on-failure
     ports:
       - "4000:4000"
+    depends_on:
+      - api
     volumes:
       - ./socket:/app
       - /app/node_modules
@@ -29,7 +31,7 @@ services:
     stdin_open: true
     tty: true
     depends_on:
-      - api
+      - socket
     volumes:
       - ./client:/app
       - /app/node_modules

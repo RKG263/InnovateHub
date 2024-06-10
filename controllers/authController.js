@@ -150,7 +150,7 @@ export const meController = async (req, res, next) => {
   //   console.error(err);
   //   next(err);
   // }
-  const user = await userModel.findById(req.user._id);
+  const user = await userModel.findById(req.user?._id);
 
   res.status(200).json({
     success: true,
