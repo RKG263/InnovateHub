@@ -1,0 +1,119 @@
+.success-post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  .success-post-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 700px;
+    width: 100%;
+    margin: 50px;
+    padding: 20px;
+    overflow: hidden;
+
+    .success-post-user-info {
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+
+      .success-post-profile-pic {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid white;
+        margin-right: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .success-post-user-details {
+        flex-grow: 1;
+
+        .success-post-user-name {
+          margin: 0;
+          font-size: 30px;
+          font-weight: 600;
+          color: #333;
+        }
+
+        .success-post-user-designation {
+          font-size: 20px;
+          color: #777;
+        }
+      }
+
+      .success-post-connect-btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        font-size: 18px;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .success-post-connect-btn:hover {
+        background-color: #0056b3;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    /* Post Content Section */
+    .success-post-content {
+      .success-post-image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .success-post-details {
+        .success-post-tag a {
+          color: blue;
+          opacity: 0.7;
+          font-size: 20px;
+        }
+
+        .success-post-tag {
+          margin-bottom: 15px;
+          display: flex;
+          align-items: center;
+          font-size: 20px;
+        }
+
+        .success-post-icon {
+          margin-right: 15px;
+          font-size: 25px;
+        }
+        h3 {
+          font-weight: 600;
+          font-size: 30px;
+        }
+
+        p {
+          color: #777;
+          margin: 15px 0;
+          font-size: 18px;
+          line-height: 1.5;
+        }
+        .success-post-date {
+          display: flex;
+          align-items: center;
+          font-size: 18px;
+        }
+        .success-post-date label {
+          display: block;
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}
