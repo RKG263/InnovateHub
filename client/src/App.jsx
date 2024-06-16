@@ -33,6 +33,7 @@ import Dashboard from "./Pages/Users/Dashboard.jsx";
 import NotificationPage from "./Components/Users/Notification.jsx";
 import Plan from "./Pages/mentor-plan/Plan.jsx";
 import Createplan from "./Pages/mentor-plan/Createplan.jsx";
+import EventPage from "./Pages/Event/EventPage.jsx";
 // importing mentor plan
 
 function App() {
@@ -172,6 +173,7 @@ function App() {
             <Route path="/user/graph" element={<Graph />} />
             <Route path="/mentor/:id" element={<Plan />} />
             <Route path="/mentor/create-plan" element={<Createplan />} />
+            <Route path="/events" element={<EventPage />} />
             // mentor plan Routes
             <Route path="*" element={<NotFound />} />
           </Routes>
