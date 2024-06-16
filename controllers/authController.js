@@ -26,7 +26,7 @@ export const registerController = async (req, res, next) => {
     }
 
     const token = generateRandomToken(16);
-    const user = await userModel.create({ role, name, email, password, isVerifiedToken: token });
+    const user = await userModel.create({ role, name, email, password, isVerifiedToken: token,isAdmin:false });
 
    
 

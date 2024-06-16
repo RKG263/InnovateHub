@@ -20,8 +20,12 @@ import chatRoute from "./routes/chatRoute.js"
 import messageRoute from "./routes/messageRoute.js"
 import mentorPlanRoute from './routes/mentorPlanRoute.js'
 import paymentRoute from './routes/paymentRoute.js'
+<<<<<<< HEAD
 import storyRoute from './routes/storyRoute.js'
 
+=======
+import eventRoute from './routes/eventRoute.js'
+>>>>>>> 0076a3421c2a1939f001991af5be35875eb37610
 const app = express();
 
 dotenv.config();
@@ -55,7 +59,11 @@ app.use('/api/v1/chat', chatRoute)
 app.use('/api/v1/message', messageRoute)
 app.use('/api/v1/mentorPlan',mentorPlanRoute);
 app.use('/api/v1/payment' , paymentRoute);
+<<<<<<< HEAD
 app.use('/api/v1/story' , storyRoute);
+=======
+app.use('/api/v1/events',eventRoute)
+>>>>>>> 0076a3421c2a1939f001991af5be35875eb37610
 
 app.get("/", (req, res) => {
   res.send("i am sending your request ");

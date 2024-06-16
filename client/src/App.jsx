@@ -36,6 +36,7 @@ import Createplan from "./Pages/mentor-plan/Createplan.jsx";
 import SuccessPost from "./Pages/SuccessPost/SuccessPost.jsx"
 import SuccessStories from "./Pages/SuccessStories/SuccessStories.jsx"
 import SuccessPostForm from "./Pages/SuccessPostForm/SuccessPostForm.jsx"
+import EventPage from "./Pages/Event/EventPage.jsx";
 // importing mentor plan
 
 function App() {
@@ -177,6 +178,7 @@ function App() {
             <Route path="/user/graph" element={<Graph />} />
             <Route path="/mentor/:id" element={<Plan />} />
             <Route path="/mentor/create-plan" element={<Createplan />} />
+            <Route path="/events" element={<EventPage />} />
             // mentor plan Routes
             <Route path="*" element={<NotFound />} />
           </Routes>
