@@ -21,7 +21,7 @@ const EditProfilePic = () => {
 
   const handleProfilePicChange = async (e) => {
 
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     
 
 

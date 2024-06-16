@@ -9,6 +9,7 @@ import Requested from "../../../Components/Users/Mentor/Requested.jsx";
 import Reviews from "../../../Components/Users/Mentor/Reviews.jsx";
 import EditProfilePic from "../../../Components/Users/EditProfilePic.jsx";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const MentorDashboard = () => {
   const [currentComponent, setCurrentComponent] = useState("Post");
@@ -106,12 +107,17 @@ const MentorDashboard = () => {
             <div className="link-info" name="Requested">
               Requsted
             </div>
+            <Link
+              to='/mentor/create-plan'
+            >
             <div
               className="link-info"
               name="Chat"
             >
-              Chat with AI
+              Create Plan
             </div>
+            
+            </Link>
             <div className="link-info" name="EditProfile">
               Edit Profile
             </div>

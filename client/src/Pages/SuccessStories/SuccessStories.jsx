@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./SuccessStories.css";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import { blog } from "../../assets/Data";
 import { AiOutlineTags, AiOutlineClockCircle } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SuccessStories = () => {
+
+
+
+
   return (
     <>
       <Header />
@@ -18,16 +24,62 @@ const SuccessStories = () => {
           <div className="bio">
             Embrace challenges as opportunities to grow and achieve greatness
           </div>
+          <Link 
+          to="/success-stories/form"
+          >
+            
           <div className="link">Add Yours</div>
+          </Link>
         </div>
 
-        <div className="grid3">
-          {blog.map((item) => (
-            <div className="box boxItems" key={item.id}>
+        {generateSuccessStories()}
+      </section>
+      <Footer />
+    </>
+  );
+};
+
+export default SuccessStories;
+
+
+
+const  generateSuccessStories = ()=>{
+
+  const [stories, setStories] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+
+    axios.get(`${import.meta.env.VITE_URL}/api/v1/story/getStories`, {withCredentials : true})
+    .then(data=>{
+      console.log(data.data);
+      setStories(data.data.result);
+    })
+
+
+  },[])
+  
+  const handleClick = (item)=>{
+    navigate(`/success-stories/${item._id}`, {
+      state: {
+        item
+      }
+    })
+  }
+
+
+  return (
+    <>
+      <div className="grid3">
+          {stories.map((item) => (
+            <div className="box boxItems cursor-pointer" 
+            key={item._id}
+            onClick = {()=>{handleClick(item)}}
+            >
               <div className="img">
                 <img
-                  src="https://images.pexels.com/photos/20704817/pexels-photo-20704817/free-photo-of-allee.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
-                  alt=""
+                  src={item?.picture?.url || "https://images.pexels.com/photos/20704817/pexels-photo-20704817/free-photo-of-allee.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load`"}
+                  alt="image"
                 />
               </div>
               <div className="details">
@@ -36,19 +88,15 @@ const SuccessStories = () => {
                   <a href="/">#{item.category}</a>
                 </div>
                 <h3>{item.title}</h3>
-                <p>{item.desc.slice(0, 200)}...</p>
+                <p>{item.description.slice(0, 200)}...</p>
                 <div className="date">
                   <AiOutlineClockCircle className="icon" />{" "}
-                  <label htmlFor="">{item.date}</label>
+                  <label htmlFor="">{item.createdDate.slice(0,10)}</label>
                 </div>
               </div>
             </div>
           ))}
         </div>
-      </section>
-      <Footer />
     </>
   );
-};
-
-export default SuccessStories;
+}

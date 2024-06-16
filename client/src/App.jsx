@@ -33,6 +33,9 @@ import Dashboard from "./Pages/Users/Dashboard.jsx";
 import NotificationPage from "./Components/Users/Notification.jsx";
 import Plan from "./Pages/mentor-plan/Plan.jsx";
 import Createplan from "./Pages/mentor-plan/Createplan.jsx";
+import SuccessPost from "./Pages/SuccessPost/SuccessPost.jsx"
+import SuccessStories from "./Pages/SuccessStories/SuccessStories.jsx"
+import SuccessPostForm from "./Pages/SuccessPostForm/SuccessPostForm.jsx"
 // importing mentor plan
 
 function App() {
@@ -166,7 +169,9 @@ function App() {
             /> */}
             <Route path="/explore" element={<Explore />} />
             <Route path="/adminresources" element={<AdminResources />} />
-            <Route path="/successstorypage" element={<SuccessStoryPage />} />
+            <Route path="/successstorypage" element={<SuccessStories />} />
+            <Route path="/success-stories/form" element={<SuccessPostForm />} />
+            <Route path="/success-stories/:id" element={<SuccessPost />} />
             <Route path="/mentor/review" element={<Review />} />
             <Route path="/chat/:id" element={<UserChat />} />
             <Route path="/user/graph" element={<Graph />} />
