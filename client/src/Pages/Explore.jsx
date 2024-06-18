@@ -68,7 +68,7 @@ const Explore = () => {
   const handleCategoryClick = (categoryId) => {
     // console.log(`Category clicked: ${categoryId}`);
     if (categoryId === 3) {
-      navigate('/adminresources');
+      navigate('/all-admin-resource');
     }
     else if (categoryId === 4) {
       navigate('/successstorypage');

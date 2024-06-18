@@ -9,21 +9,21 @@ export const postresource= catchAsyncErrors(async(req,res,next)=>{
 const{ pdfUrl,videoUrl,pdfFileName,pdfFileType,videoFileType,videoFileName,
   pdfDescription,videoDescription,pdfTitle,videoTitle}=req.body;
 
-  //  if(!pdfUrl&&!videoUrl)
-  //   {
+   if(!pdfUrl&&!videoUrl)
+    {
 
-  //       return next(new ErrorHandler("Please Provide Resource",400));
-  //   }
+        return next(new ErrorHandler("Please Provide Resource",400));
+    }
 
-  //   if(pdfUrl&&!pdfDescription||pdfUrl&&!pdfTitle)
-  //     {
-  //       return next(new ErrorHandler("Please Provide PDF Descrption",401));
-  //     }
+    if(pdfUrl&&!pdfDescription||pdfUrl&&!pdfTitle)
+      {
+        return next(new ErrorHandler("Please Provide PDF Descrption",401));
+      }
 
-  //     if(videoUrl&&!videoDescription||videoUrl&&!videoTitle)
-  //       {
-  //         return next(new ErrorHandler("Please Provide Video Decription",402));
-  //       }
+      if(videoUrl&&!videoDescription||videoUrl&&!videoTitle)
+        {
+          return next(new ErrorHandler("Please Provide Video Decription",402));
+        }
     const resources= await Resources.create({
       pdfUrl,videoUrl,pdfFileName,pdfFileType,videoFileType,videoFileName,videoDescription,
       pdfDescription,pdfTitle,videoTitle

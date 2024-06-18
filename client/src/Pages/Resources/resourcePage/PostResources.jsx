@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Button, Container, Typography, Grid, TextField, TextareaAutosize, Box} from '@mui/material';
+import { Button, Container, Typography, Grid, TextField, TextareaAutosize, Box, LinearProgress } from '@mui/material';
 import axios from "axios";
 import toast from "react-hot-toast";
-
 
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import Header from '../Header/Header';
+import Header from '../../../Components/Header/Header';
+import Footer from '../../../Components/Footer/Footer';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -142,90 +142,101 @@ const PostResources = () => {
 
   return ( 
     <>
-    
-    <Header/>
-    <Typography variant="h5" gutterBottom style={{ textAlign: 'center', fontWeight: 'bold', color: 'blue', marginBottom: '20px' }}>
-          UPLOAD RESOURCES
+      <Header/>
+      <Container maxWidth="lg">
+        <Typography variant="h4" gutterBottom align="center" style={{ fontWeight: 'bold', color: '#3f51b5', marginBottom: '30px' }}>
+          Upload Resources
         </Typography>
-    <Grid container spacing={3}>
-    {/* Left Column: Form */}
-    <Grid item xs={12} md={8}>
-      <Box
-        sx={{
-          border: '1px solid #ccc',
-          borderRadius: '8px',
-          padding: '20px',
-          backgroundColor: '#f2f2f2',
-          marginBottom: '20px',
-          width: '100%', // Adjust width as per your design
-          maxWidth: '500px', // Limit maximum width
-          margin: '0 auto', // Center align horizontally
-        }}
-      >
-      
-        <form onSubmit={handleSubmit}>
-          <Box sx={{ marginBottom: '20px' }}>
-            <TextField
-              fullWidth
-              id="pdfTitle"
-              label="PDF Title"
-              value={pdfTitle}
-              onChange={(e) => setPdfTitle(e.target.value)}
-            />
-          </Box>
-          <Box sx={{ marginBottom: '20px' }}>
-            <TextareaAutosize
-              rowsMin={3}
-              placeholder="PDF Description"
-              style={{ width: '100%' }}
-              value={pdfDescription}
-              onChange={(e) => setPdfDescription(e.target.value)}
-            />
-          </Box>
-          <Box sx={{ marginBottom: '20px' }}>
-            <input type="file" id="pdfUpload" onChange={handlePdfUpload} accept=".pdf" />
-            {pdfUploadprogress > 0 && pdfUploadprogress !== 100 && (
-              <p style={{ color: 'yellow' }}>PDF Upload Progress: {pdfUploadprogress}%</p>
-            )}
-          </Box>
-          <Box sx={{ marginBottom: '20px' }}>
-            <TextField
-              fullWidth
-              id="videoTitle"
-              label="Video Title"
-              value={videoTitle}
-              onChange={(e) => setVideoTitle(e.target.value)}
-            />
-          </Box>
-          <Box sx={{ marginBottom: '20px' }}>
-            <TextareaAutosize
-              rowsMin={3}
-              placeholder="Video Description"
-              style={{ width: '100%' }}
-              value={videoDescription}
-              onChange={(e) => setVideoDescription(e.target.value)}
-            />
-          </Box>
-          <Box sx={{ marginBottom: '20px' }}>
-            <input type="file" id="videoUpload" onChange={handleVideoUpload} accept="video/*" />
-            {videoUploadprogress > 0 && videoUploadprogress !== 100 && (
-              <p style={{ color: 'blue' }}>Video Upload Progress: {videoUploadprogress}%</p>
-            )}
-          </Box>
-          <Button type="submit" variant="contained" color="primary">Submit</Button>
-        </form>
-      </Box>
-    </Grid>
-
-    {/* Right Column: Image */}
-    <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center' }}>
-      {/* Replace 'imageSrc' with your image URL */}
-      <img src="/top-view-businesspeople-working-with-icons-painted-table.jpg" alt="Image" style={{ maxWidth: '100%', height: 'auto' ,textAlign:'center'}} />
-    </Grid>
-  </Grid>
-  
-            <Footer/>
-  </>
+        <Grid container spacing={4}>
+          {/* Left Column: Form */}
+          <Grid item xs={12} md={8}>
+            <Box
+              sx={{
+                border: '1px solid #ccc',
+                borderRadius: '8px',
+                padding: '20px',
+                backgroundColor: '#fff',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                marginBottom: '20px',
+              }}
+            >
+              <form onSubmit={handleSubmit}>
+                <Box sx={{ marginBottom: '20px' }}>
+                  <TextField
+                    fullWidth
+                    id="pdfTitle"
+                    label="PDF Title"
+                    value={pdfTitle}
+                    onChange={(e) => setPdfTitle(e.target.value)}
+                  />
+                </Box>
+                <Box sx={{ marginBottom: '20px' }}>
+                  <TextareaAutosize
+                    rowsMin={3}
+                    placeholder="PDF Description"
+                    style={{ width: '100%', padding: '10px', borderRadius: '4px', borderColor: '#ccc' }}
+                    value={pdfDescription}
+                    onChange={(e) => setPdfDescription(e.target.value)}
+                  />
+                </Box>
+                <Box sx={{ marginBottom: '20px' }}>
+                  <input type="file" id="pdfUpload" onChange={handlePdfUpload} accept=".pdf" style={{ display: 'none' }} />
+                  <label htmlFor="pdfUpload">
+                    <Button variant="outlined" component="span" fullWidth>
+                      Upload PDF
+                    </Button>
+                  </label>
+                  {pdfUploadprogress > 0 && (
+                    <Box sx={{ width: '100%', mt: 2 }}>
+                      <LinearProgress variant="determinate" value={pdfUploadprogress} />
+                      <Typography variant="body2" color="textSecondary">{`PDF Upload Progress: ${pdfUploadprogress}%`}</Typography>
+                    </Box>
+                  )}
+                </Box>
+                <Box sx={{ marginBottom: '20px' }}>
+                  <TextField
+                    fullWidth
+                    id="videoTitle"
+                    label="Video Title"
+                    value={videoTitle}
+                    onChange={(e) => setVideoTitle(e.target.value)}
+                  />
+                </Box>
+                <Box sx={{ marginBottom: '20px' }}>
+                  <TextareaAutosize
+                    rowsMin={3}
+                    placeholder="Video Description"
+                    style={{ width: '100%', padding: '10px', borderRadius: '4px', borderColor: '#ccc' }}
+                    value={videoDescription}
+                    onChange={(e) => setVideoDescription(e.target.value)}
+                  />
+                </Box>
+                <Box sx={{ marginBottom: '20px' }}>
+                  <input type="file" id="videoUpload" onChange={handleVideoUpload} accept="video/*" style={{ display: 'none' }} />
+                  <label htmlFor="videoUpload">
+                    <Button variant="outlined" component="span" fullWidth>
+                      Upload Video
+                    </Button>
+                  </label>
+                  {videoUploadprogress > 0 && (
+                    <Box sx={{ width: '100%', mt: 2 }}>
+                      <LinearProgress variant="determinate" value={videoUploadprogress} />
+                      <Typography variant="body2" color="textSecondary">{`Video Upload Progress: ${videoUploadprogress}%`}</Typography>
+                    </Box>
+                  )}
+                </Box>
+                <Button type="submit" variant="contained" color="primary" fullWidth>Submit</Button>
+              </form>
+            </Box>
+          </Grid>
+          {/* Right Column: Image */}
+          <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <img src="/top-view-businesspeople-working-with-icons-painted-table.jpg" alt="Upload" style={{ maxWidth: '100%', height: 'auto', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }} />
+          </Grid>
+        </Grid>
+      </Container>
+      <Footer/>
+    </>
   );
 };
 
