@@ -21,8 +21,10 @@ import messageRoute from "./routes/messageRoute.js"
 import mentorPlanRoute from './routes/mentorPlanRoute.js'
 import paymentRoute from './routes/paymentRoute.js'
 import storyRoute from './routes/storyRoute.js'
+import resourceRoute from './routes/resourceRoute.js'
 
 import eventRoute from './routes/eventRoute.js'
+import { errorMiddleware } from "./middleware/error.js";
 const app = express();
 
 dotenv.config();
@@ -32,32 +34,35 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-  origin : true,
-  credentials : true,
-  methods : ["GET" , 'POST' , "PUT" , "DELETE"],       
+  origin: true,
+  credentials: true,
+  methods: ["GET", 'POST', "PUT", "DELETE"],
 }));
 app.use(morgan("dev"));
 app.use(cookie());
 cloudinary.v2.config({
-  cloud_name:process.env.CLOUDINARY_NAME,
-  api_key:process.env.CLOUDINARY_API_KEY,
-  api_secret:process.env.CLOUDINARY_SECRET
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET
 })
+app.use(errorMiddleware);
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/blog", blogRoute);
-app.use("/api/v1/comment",commentRoute);
+app.use("/api/v1/comment", commentRoute);
 app.use("/api/v1/entrepreneur", entrepreneurRoute);
 app.use("/api/v1/mentor", mentorRoute);
 app.use("/api/v1/investor", investorRoute);
 app.use("/api/v1/other", othersRoute);
-app.use("/api/v1/ai/",aiChatRoute)
+app.use("/api/v1/ai/", aiChatRoute)
 app.use('/api/v1/chat', chatRoute)
 app.use('/api/v1/message', messageRoute)
-app.use('/api/v1/mentorPlan',mentorPlanRoute);
-app.use('/api/v1/payment' , paymentRoute);
-app.use('/api/v1/story' , storyRoute);
-app.use('/api/v1/events',eventRoute)
+app.use('/api/v1/mentorPlan', mentorPlanRoute);
+app.use('/api/v1/payment', paymentRoute);
+app.use('/api/v1/story', storyRoute);
+app.use('/api/v1/events', eventRoute);
+app.use("/api/v1/resource", resourceRoute);
+
 
 app.get("/", (req, res) => {
   res.send("i am sending your request ");

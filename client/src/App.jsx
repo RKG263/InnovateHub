@@ -37,6 +37,8 @@ import SuccessPost from "./Pages/SuccessPost/SuccessPost.jsx"
 import SuccessStories from "./Pages/SuccessStories/SuccessStories.jsx"
 import SuccessPostForm from "./Pages/SuccessPostForm/SuccessPostForm.jsx"
 import EventPage from "./Pages/Event/EventPage.jsx";
+import Resources from "./Components/Resource/Resources.jsx"
+import PostResources from "./Components/Resource/PostResources.jsx"
 // importing mentor plan
 
 function App() {
@@ -169,7 +171,7 @@ function App() {
               }
             /> */}
             <Route path="/explore" element={<Explore />} />
-            <Route path="/adminresources" element={<AdminResources />} />
+            <Route path="/adminresources" element={<Resources />} />
             <Route path="/successstorypage" element={<SuccessStories />} />
             <Route path="/success-stories/form" element={<SuccessPostForm />} />
             <Route path="/success-stories/:id" element={<SuccessPost />} />
