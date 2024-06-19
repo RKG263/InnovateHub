@@ -1,13 +1,36 @@
 
 import Event from '../models/eventModel.js' ;
 import User  from '../models/userModel.js';
+import { getDataUri } from '../utils/features.js';
+import cloudinary from "cloudinary";
+
 // import path from 'path' ;
 // import fs from 'fs' ;
 
 export const createEvent = async (req, res) => {
-    const { topic, description, startDate, startTime, endDate, endTime, wallpaper, webinarLink, takerEmail } = req.body;
+  
+  
+  try {
+      let { topic, description, startDate, startTime, endDate, endTime, wallpaper, webinarLink, takerEmail } = req.body;
+    
+      console.log(req.file);
+      console.log(req.body);
+      
+      if(req.file)
+        {
+          const file = getDataUri(req.file);
+          const cloudinaryResult = await cloudinary.v2.uploader.upload(file.content);
+          wallpaper = cloudinaryResult.secure_url;
+          // req.user.profile_pic.public_id = cloudinaryResult.public_id;
+          
+          console.log(cloudinaryResult);
+        }
+        else throw new Error("File must be image");
+        
+        console.log(req.body);
 
-    try {
+
+
         const taker = await User.findOne({ email: takerEmail });
         if (!taker) {
             return res.status(400).json({ message: 'Taker not found' });

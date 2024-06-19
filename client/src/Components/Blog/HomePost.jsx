@@ -24,8 +24,8 @@ const HomePosts = ({ post }) => {
         </div>
 
         {/* Post Content */}
-        <p className="text-lg leading-relaxed text-gray-700 mb-4">
-          {post.description}
+        <p className="text-lg leading-relaxed text-gray-700 mb-4 h-24">
+          {post.description.slice(0,100) + "..."}
         </p>
 
         {/* Read more */}

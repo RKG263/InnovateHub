@@ -12,7 +12,7 @@ import success from '/Success-stories.webp'
 const categories = [
   // {
   //   id: 1,
-  //   title: 'Funding Opportunities',
+  //   title: 'Funding Opportuni  ties',
   //   description: 'Find the best funding opportunities for your startup.',
   //   icon: <BusinessCenter />,
   //   image: 'path/to/funding-image.jpg', // Replace with actual image path

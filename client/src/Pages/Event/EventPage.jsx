@@ -67,7 +67,7 @@ const EventPage = () => {
       }
     });
     if (wallpaper) {
-      formData.append('wallpaper', wallpaper);
+      formData.append('file', wallpaper);
     }
 
     axios.post(`${server}/events`, formData, {
@@ -141,11 +141,13 @@ const EventPage = () => {
     } else {
       statusColor = 'orange';
     }
-
+    console.log(event);
     return (
-
+      
       <Grid item xs={12} key={event._id}>
+        
         <Card>
+          
           <Box display="flex">
             <CardMedia
               component="img"
