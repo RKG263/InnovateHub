@@ -10,7 +10,8 @@ export const createPostController = async (req, res, next) => {
     const { title, description, username, userID } = req.body;
 
     if (!title || !description || !username || !userID) {
-      throw new Error("All fields are required");
+   
+      return next({status:400,message:"all feild required"})
     }
 
     // picture uplodation

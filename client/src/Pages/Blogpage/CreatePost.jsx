@@ -84,8 +84,8 @@ const CreatePost = () => {
       navigate("/posts");
       // console.log(res.data);
     } catch (err) {
-      console.log(err);
-      toast.error("error in posting")
+      console.log(err.response);
+      toast.error(err.response.data.error)
     }
   };
   

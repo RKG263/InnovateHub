@@ -10,7 +10,7 @@ export const createPlanController=async(req,res,next)=>{
     const {title,description,duration,mentorId,price,planID,paymentURL}=req.body;
 
     if(!title || !description || !duration ||!mentorId ||!price){
-      throw new Error("all fied required");
+      return next({status:400,message:"all feild required"})
     }
     const result=await mentorPlanModel.create({
       title,

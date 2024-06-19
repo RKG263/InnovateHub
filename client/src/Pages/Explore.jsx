@@ -6,7 +6,9 @@ import Footer from '../Components/Footer/Footer';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-
+import eventurl from '/events.jpg'
+import resource from '/resources.png'
+import success from '/Success-stories.webp'
 const categories = [
   // {
   //   id: 1,
@@ -20,21 +22,21 @@ const categories = [
     title: 'Networking Events',
     description: 'Connect with other entrepreneurs and investors.',
     icon: <Event />,
-    image: 'path/to/networking-image.jpg', // Replace with actual image path
+    image: eventurl, // Replace with actual image path
   },
   {
     id: 3,
     title: 'Resources',
     description: 'Access valuable resources to help grow your business.',
     icon: <LibraryBooks />,
-    image: 'path/to/resources-image.jpg', // Replace with actual image path
+    image: resource, // Replace with actual image path
   },
   {
     id: 4,
     title: 'Success Stories',
     description: 'Get inspired by the success stories of other entrepreneurs.',
     icon: <Star />,
-    image: 'path/to/success-stories-image.jpg', // Replace with actual image path
+    image: success, // Replace with actual image path
   },
 ];
 

@@ -1,34 +1,38 @@
 /* eslint-disable react/prop-types */
-import {IF} from '../../url.js'
+import { IF } from '../../url.js';
 
-
-const HomePosts = ({post}) => {
-  
+const HomePosts = ({ post }) => {
   return (
-    <div className="w-full flex mt-8 space-x-4">
-      {/* Left */}
-      <div className="w-[35%] h-[200px] flex justify-center items-center shadow-lg rounded-lg overflow-hidden">
-        <img src={post.picture.url} alt="" className="h-full w-full object-cover rounded-lg" />
+    <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden mt-8">
+      {/* Featured Image */}
+      <div className="relative h-80 overflow-hidden">
+        <img src={post.picture.url} alt={post.title} className="absolute inset-0 w-full h-full object-cover object-center" />
       </div>
-      {/* Right */}
-      <div className="flex flex-col w-[65%] bg-white shadow-lg rounded-lg p-4">
-        <h1 className="text-xl font-bold md:mb-2 mb-1 md:text-2xl">
+
+      {/* Post Details */}
+      <div className="p-6">
+        {/* Title */}
+        <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
           {post.title}
         </h1>
-        <div className="flex mb-2 text-sm font-semibold text-gray-500 items-center justify-between md:mb-4">
-          <p>@{post.username}</p>
-          <div className="flex space-x-2 text-sm">
-            <p>{new Date(post.updatedAt).toLocaleDateString()}</p>
-            <p>{new Date(post.updatedAt).toLocaleTimeString()}</p>
-          </div>
+
+        {/* Author and Date */}
+        <div className="flex items-center mb-4 text-gray-600 text-sm">
+          <span className="mr-2">@{post.username}</span>
+          <span>&bull;</span>
+          <span className="ml-2">{new Date(post.updatedAt).toLocaleDateString()}</span>
         </div>
-        <p className="text-sm md:text-lg leading-snug">{post.description.slice(0, 200)} ...<span className="text-blue-500">Read more</span></p>
+
+        {/* Post Content */}
+        <p className="text-lg leading-relaxed text-gray-700 mb-4">
+          {post.description}
+        </p>
+
+        {/* Read more */}
+        <a href="#" className="text-blue-500 hover:underline">Read more</a>
       </div>
     </div>
   );
-  
-  
-  
 }
 
-export default HomePosts
+export default HomePosts;
