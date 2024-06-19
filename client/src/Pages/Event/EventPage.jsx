@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   Container, Grid, Card, CardContent, CardMedia, Typography, Button, Avatar, Box, Dialog, DialogTitle, DialogContent, DialogActions, TextField, CircularProgress, Snackbar, IconButton,
-  Link
 } from '@mui/material';
 import { DatePicker, TimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
@@ -15,8 +14,7 @@ import { de } from 'date-fns/locale/de';
 import logo from '../../assets/logo.png';
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
-
-
+import { Link } from 'react-router-dom';
 
 const EventPage = () => {
   const { user } = useSelector((state) => state.user);
@@ -89,7 +87,7 @@ const EventPage = () => {
       .catch(error => {
         setLoading(false);
         console.error('Error creating event:', error);
-        handleSnackbarOpen('Failed to create event', 'error');
+        handleSnackbarOpen('Failed to create event due incorrect entry or internal server error', 'error');
       });
   };
 
@@ -118,6 +116,10 @@ const EventPage = () => {
     setSnackbarOpen(true);
   };
 
+  const handleCancelWallpaper = () => {
+    setWallpaper(null);
+  };
+
   const renderEventCard = (event) => {
     const now = new Date();
 
@@ -143,11 +145,8 @@ const EventPage = () => {
     }
     console.log(event);
     return (
-      
       <Grid item xs={12} key={event._id}>
-        
         <Card>
-          
           <Box display="flex">
             <CardMedia
               component="img"
@@ -165,7 +164,10 @@ const EventPage = () => {
                     {event.description}
                   </Typography>
                   <Box mt={2} display="flex" alignItems="center">
-                    <Avatar src={event.taker.profile_pic} alt={event.taker.name} />
+                     <Link to={`/profile/${event.taker._id}`}>
+                     <Avatar src={event.taker.profile_pic} alt={event.taker.name} />
+                     </Link>
+                   
                     <Box ml={2}>
                       <Typography variant="body2">
                         {event.taker.name}
@@ -187,17 +189,15 @@ const EventPage = () => {
                   </Box>
                 </Box>
                 <Box mt={2} display="flex" flexDirection="column" alignItems="flex-end">
-                  <Link  href={event.webinarLink} target="_blank" rel="noopener">
-                  { console.log(event.webinarLink)}
-                  <Button
-                    variant="contained"
-                    color="primary"            
-                    // onClick={() => window.open(event.webinarLink, '_blank', 'noopener,noreferrer')}
-                  >
-                    Join Webinar
-                  </Button>
+                  <Link href={event.webinarLink} target="_blank" rel="noopener">
+                    {console.log(event.webinarLink)}
+                    <Button
+                      variant="contained"
+                      color="primary"
+                    >
+                      Join Webinar
+                    </Button>
                   </Link>
-                 
                   {user?.isAdmin && (
                     <>
                       <Button variant="outlined" color="secondary" onClick={() => deleteEvent(event._id)} style={{ marginTop: '10px' }}>
@@ -217,7 +217,6 @@ const EventPage = () => {
   return (
     <>
       <Header />
-
       <Container style={{ backgroundColor: '#e0f7fa', padding: '20px', borderRadius: '8px' }}
         className='min-h-screen'
       >
@@ -307,11 +306,21 @@ const EventPage = () => {
                     />
                     <Box mt={2} textAlign="center">
                       {wallpaper && (
-                        <img
-                          src={URL.createObjectURL(wallpaper)}
-                          alt="Wallpaper Preview"
-                          style={{ width: '100%', maxHeight: '100px', objectFit: 'cover', marginBottom: '10px' }}
-                        />
+                        <>
+                          <img
+                            src={URL.createObjectURL(wallpaper)}
+                            alt="Wallpaper Preview"
+                            style={{ width: '100%', maxHeight: '100px', objectFit: 'cover', marginBottom: '10px' }}
+                          />
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={handleCancelWallpaper}
+                            style={{ marginBottom: '10px' }}
+                          >
+                            Cancel Wallpaper
+                          </Button>
+                        </>
                       )}
                       <Button
                         variant="contained"
@@ -363,7 +372,6 @@ const EventPage = () => {
           }}
         />
       </Container>
-
       <Footer />
     </>
   );

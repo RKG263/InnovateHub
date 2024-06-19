@@ -46,7 +46,7 @@ export const registerController = async (req, res, next) => {
 
     res.status(201).send({
       success: true,
-      message: "User created successfully",
+      message: "You are registered successfully",
       user,
     });
   } catch (error) {

@@ -1,90 +1,87 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Grid, Paper, Card, CardContent, CardMedia, Button, Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
-import { BusinessCenter, Event, LibraryBooks, Star, Person, AccountBalance } from '@mui/icons-material';
+import { Container, Typography, Grid, Paper, Card, CardContent, CardMedia, Button, CircularProgress, Box } from '@mui/material';
+import { Event, LibraryBooks, Star } from '@mui/icons-material';
 import Header from '../Components/Header/Header';
 import Footer from '../Components/Footer/Footer';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import eventurl from '/events.jpg'
-import resource from '/resources.png'
-import success from '/Success-stories.webp'
+import eventurl from '/events.jpg';
+import resource from '/resources.png';
+import success from '/Success-stories.webp';
+import logo from '../assets/logo.png';
+import { format } from 'date-fns';
+import { server } from '../redux/store';
+
+
 const categories = [
-  // {
-  //   id: 1,
-  //   title: 'Funding Opportuni  ties',
-  //   description: 'Find the best funding opportunities for your startup.',
-  //   icon: <BusinessCenter />,
-  //   image: 'path/to/funding-image.jpg', // Replace with actual image path
-  // },
   {
     id: 2,
     title: 'Networking Events',
     description: 'Connect with other entrepreneurs and investors.',
     icon: <Event />,
-    image: eventurl, // Replace with actual image path
+    image: eventurl,
   },
   {
     id: 3,
     title: 'Resources',
     description: 'Access valuable resources to help grow your business.',
     icon: <LibraryBooks />,
-    image: resource, // Replace with actual image path
+    image: resource,
   },
   {
     id: 4,
     title: 'Success Stories',
     description: 'Get inspired by the success stories of other entrepreneurs.',
     icon: <Star />,
-    image: success, // Replace with actual image path
+    image: success,
   },
 ];
 
-const ongoingEvents = [
-  { id: 1, name: 'Tech Startup Conference', date: '2023-06-25', location: 'San Francisco' },
-  { id: 2, name: 'Investor Meetup', date: '2023-07-10', location: 'New York' },
-];
-
-// const mentors = [
-//   { id: 1, name: 'John Doe', role: 'Tech Mentor', avatar: <Person /> },
-//   { id: 2, name: 'Jane Smith', role: 'Business Mentor', avatar: <Person /> },
-// ];
-
-const investors = [
-  { id: 1, name: 'Robert Johnson', role: 'Venture Capitalist', avatar: <AccountBalance /> },
-  { id: 2, name: 'Emily Davis', role: 'Angel Investor', avatar: <AccountBalance /> },
-];
-
-const entrepreneurs = [
-  { id: 1, name: 'Alice Brown', role: 'Startup Founder', avatar: <Person /> },
-  { id: 2, name: 'Michael White', role: 'Serial Entrepreneur', avatar: <Person /> },
-];
-
 const Explore = () => {
-
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [ongoingEvents, setOngoingEvents] = useState([]);
 
+  useEffect(() => {
+    axios.get(`${server}/events`, { withCredentials: true })
+      .then(response => {
+        setLoading(false);
+        if (Array.isArray(response.data)) {
+          const now = new Date();
+          const ongoing = response.data.filter(event => {
+            const startDateTime = new Date(event.startDate);
+            startDateTime.setHours(new Date(event.startTime).getHours());
+            startDateTime.setMinutes(new Date(event.startTime).getMinutes());
 
+            const endDateTime = new Date(event.endDate);
+            endDateTime.setHours(new Date(event.endTime).getHours());
+            endDateTime.setMinutes(new Date(event.endTime).getMinutes());
 
+            return now >= startDateTime && now <= endDateTime;
+          });
+          setOngoingEvents(ongoing);
+        }
+      })
+      .catch(error => {
+        setLoading(false);
+        console.error('Error fetching events:', error);
+        toast.error('Failed to fetch ongoing events');
+      });
+  }, []);
 
   const handleCategoryClick = (categoryId) => {
-    // console.log(`Category clicked: ${categoryId}`);
     if (categoryId === 2) {
       navigate('/events');
-    }
-    else if (categoryId === 3) {
+    } else if (categoryId === 3) {
       navigate('/all-admin-resource');
-    }
-    else if (categoryId === 4) {
+    } else if (categoryId === 4) {
       navigate('/successstorypage');
     }
-    // Implement navigation to category details page or relevant action here
   };
 
   const handleConnectClick = (type, id) => {
-    // console.log(`Connect clicked: ${type} ID ${id}`);
-    // Implement connect logic here
-    navigate(`/mentor/${id}`)
+    navigate(`/mentor/${id}`);
   };
 
   return (
@@ -131,80 +128,55 @@ const Explore = () => {
         <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: '40px' }}>
           Ongoing Events
         </Typography>
-        <Grid container spacing={4}>
-          {ongoingEvents.map((event) => (
-            <Grid item key={event.id} xs={12} sm={6} md={4}>
-              <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography variant="h6">{event.name}</Typography>
-                  <Typography variant="body2" color="textSecondary">{event.date}</Typography>
-                  <Typography variant="body2" color="textSecondary">{event.location}</Typography>
-                </CardContent>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => handleConnectClick('event', event.id)}
-                  sx={{ margin: '10px' }}
-                >
-                  Join Event
-                </Button>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+        {loading ? (
+          <Box display="flex" justifyContent="center" alignItems="center" minHeight="20vh">
+            <CircularProgress />
+          </Box>
+        ) : ongoingEvents.length === 0 ? (
+          <Typography variant="body1" align="center" color="textSecondary">
+            No ongoing events available.
+          </Typography>
+        ) : (
+          <Grid container spacing={4}>
+            {ongoingEvents.map((event) => {
+              const startDateTime = new Date(event.startDate);
+              startDateTime.setHours(new Date(event.startTime).getHours());
+              startDateTime.setMinutes(new Date(event.startTime).getMinutes());
 
-        {/* <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: '40px' }}>
-          Connect with Mentors
-        </Typography>
-        <List>
-          {generateMentor()}
-        </List> */}
+              const endDateTime = new Date(event.endDate);
+              endDateTime.setHours(new Date(event.endTime).getHours());
+              endDateTime.setMinutes(new Date(event.endTime).getMinutes());
 
-        {/* <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: '40px' }}>
-          Connect with Investors
-        </Typography>
-        <List>
-          {investors.map((investor) => (
-            <ListItem key={investor.id}>
-              <ListItemAvatar>
-                <Avatar>
-                  {investor.avatar}
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={investor.name} secondary={investor.role} />
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handleConnectClick('investor', investor.id)}
-              >
-                Connect
-              </Button>
-            </ListItem>
-          ))}
-        </List>
-
-        <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: '40px' }}>
-          Connect with Entrepreneurs
-        </Typography>
-        <List>
-          {entrepreneurs.map((entrepreneur) => (
-            <ListItem key={entrepreneur.id}>
-              <ListItemAvatar>
-                <Avatar>
-                  {entrepreneur.avatar}
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={entrepreneur.name} secondary={entrepreneur.role} />
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handleConnectClick('entrepreneur', entrepreneur.id)}
-              >
-                Connect
-              </Button>
-            </ListItem>
-          ))}
-        </List> */}
+              return (
+                <Grid item key={event._id} xs={12} sm={6} md={4}>
+                  <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                    <Box display="flex">
+                      <CardMedia
+                        component="img"
+                        sx={{ width: 150, height: 150, objectFit: 'cover' }}
+                        image={event.wallpaper || logo}
+                        alt={event.topic}
+                      />
+                      <CardContent sx={{ flex: 1 }}>
+                        <Typography variant="h6">{event.topic}</Typography>
+                        <Typography variant="body2" color="textSecondary">{event.description}</Typography>
+                        <Typography variant="body2" color="textSecondary">{`Ends ${format(endDateTime, 'dd-MM-yyyy HH:mm')}`}</Typography>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={() => window.open(event.webinarLink, '_blank', 'noopener,noreferrer')}
+                          sx={{ marginTop: '10px' }}
+                        >
+                          Join Webinar
+                        </Button>
+                      </CardContent>
+                    </Box>
+                  </Card>
+                </Grid>
+              );
+            })}
+          </Grid>
+        )}
       </Container>
       <Footer />
     </>
@@ -212,57 +184,3 @@ const Explore = () => {
 };
 
 export default Explore;
-
-
-const generateMentor = () => {
-  const [mentors, setMentors] = useState([]);
-  const navigate = useNavigate();
-
-
-  useEffect(() => {
-
-    axios.get(`${import.meta.env.VITE_API_ENDPOINT}/api/v1/mentor`, { withCredentials: true })
-      .then(data => {
-        setMentors(data.data);
-      })
-
-  }, []);
-
-  console.log(mentors);
-
-  const handleConnectClick = async (userId) => {
-
-    try {
-      navigate(`/mentor/${userId}`)
-
-
-    } catch (err) {
-      toast.error("Something wrong");
-      console.error();
-    }
-  }
-
-  return (
-    <>
-
-
-      {mentors.map((mentor) => (
-        <ListItem key={mentor.userId}>
-          <ListItemAvatar>
-            <Avatar>
-              {mentor.avatar}
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary={mentor.name} secondary={mentor.role} />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => handleConnectClick(mentor.userId)}
-          >
-            Ask  for Mentorship
-          </Button>
-        </ListItem>
-      ))}
-    </>
-  )
-}

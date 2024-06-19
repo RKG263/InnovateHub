@@ -59,7 +59,7 @@ export const createEvent = async (req, res) => {
 // Get Events
 export const getEvents = async (req, res) => {
     try {
-        const events = await Event.find().populate('taker', 'name aboutMe profile_pic');
+        const events = await Event.find().populate('taker', 'name aboutMe profile_pic _id');
         // console.log(events) ;
         res.status(200).json(events);
     } catch (error) {

@@ -48,7 +48,7 @@ We reserve the right to correct any errors or mistakes in pricing, even if we ha
 
 All purchases are non-refundable. You can cancel your subscription at any time by logging into your account. Your cancellation will take effect at the end of the current paid term.
 
-If you are unsatisfied with our services, please email us at official.6packprogrammer@gmail.com.
+If you are unsatisfied with our services, please email us at official.innovatorshub@gmail.com.
 
 
 7. PROHIBITED ACTIVITIES
