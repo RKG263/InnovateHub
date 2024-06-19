@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { Box, Button, styled } from "@mui/material";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import { useNavigate } from "react-router-dom";
 
 const VisuallyHiddenInput = styled('input')({
   opacity: 0,
@@ -24,6 +25,7 @@ const VisuallyHiddenInput = styled('input')({
 const SuccessPostForm = () => {
 
   const [image, setImage] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,6 +38,8 @@ const SuccessPostForm = () => {
 
       const res = await axios.post(`${import.meta.env.VITE_URL}/api/v1/story/createStory`, data, { withCredentials: true })
       console.log(res.data);
+      toast.success("Story Created");
+      navigate('/successstorypage')
 
     } catch (err) {
       toast.error("Something wrong");

@@ -136,10 +136,123 @@ export const fetchNotification = async (req, res, next) => {
   }
 }
 
+// export const CheckChatStatus = async (req, res, next) => {
+//   const { Id1, Id2 } = req.body;
+
+//   try {
+//     const notification = await notificationModel.findOne({
+//       $or: [
+//         { sender: Id1, receiver: Id2 },
+//         { sender: Id2, receiver: Id1 }
+//       ]
+//     });
+
+//     if (!notification) {
+//       return res.json({ chatEnabled: false, message: 'Approach' });
+//     }
+
+//     if (notification.status === 'accepted') {
+//       return res.json({ chatEnabled: true, message: 'Chat' });
+//     } else if (notification.status === 'pending') {
+//       if (notification.sender.toString() === Id1) {
+//         return res.json({ chatEnabled: false, message: 'Your request is pending' });
+//       } else {
+//         return res.json({ chatEnabled: false, message: 'You have a connection request' });
+//       }
+//     } else if (notification.status === 'rejected') {
+//       return res.json({ chatEnabled: false, message: 'Approach' });
+//     } else {
+//       return res.json({ chatEnabled: false, message: 'No interaction found' });
+//     }
+//   } catch (error) {
+//     console.error('Error checking chat status:', error);
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+// };
+
+
 export const CheckChatStatus = async (req, res, next) => {
   const { Id1, Id2 } = req.body;
 
   try {
+    // Fetch the roles of the users
+    const [user1, user2] = await Promise.all([
+      userModel.findById(Id1),
+      userModel.findById(Id2)
+    ]);
+
+    if (!user1 || !user2) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // If visiting user's own profile, no approach option should be available
+    if (Id1 === Id2) {
+      return res.json({ chatEnabled: false, message: 'Your profile', approachEnabled: false });
+    }
+
+    // Entrepreneur-Mentor interaction logic
+    if (user1.role === 'Entrepreneur' && user2.role === 'Mentor') {
+      const notification = await notificationModel.findOne({
+        $or: [
+          { sender: Id1, receiver: Id2 },
+          { sender: Id2, receiver: Id1 }
+        ]
+      });
+
+      const mentor = await mentorModel.findOne({ userId: Id2 });
+      const isMentorshipGiven = mentor.mentorshipGiven.includes(Id1);
+
+
+      if (notification) {
+        if (notification.status === 'accepted' && isMentorshipGiven) {
+          return res.json({ chatEnabled: true, message: 'Chat', approachEnabled: false });
+        } else if (notification.status === 'accepted' && !isMentorshipGiven) {
+          return res.json({ chatEnabled: false, message: 'Take My Plan', approachEnabled: false });
+        } else if (notification.status === 'pending') {
+          return res.json({ chatEnabled: false, message: notification.sender.toString() === Id1 ? 'Your request is pending' : 'You have a connection request', approachEnabled: false });
+        } else if (notification.status === 'rejected') {
+          return res.json({ chatEnabled: false, message: 'Approach', approachEnabled: true });
+        } else {
+          return res.json({ chatEnabled: false, message: 'No interaction found', approachEnabled: true });
+        }
+      } else {
+        return res.json({ chatEnabled: false, message: 'Approach', approachEnabled: true });
+      }
+    }
+
+    // Entrepreneur-Investor interaction logic
+    if (user1.role === 'Entrepreneur' && user2.role === 'Investor') {
+      const notification = await notificationModel.findOne({
+        $or: [
+          { sender: Id1, receiver: Id2 },
+          { sender: Id2, receiver: Id1 }
+        ]
+      });
+
+      if (!notification) {
+        return res.json({ chatEnabled: false, message: 'Approach', approachEnabled: true });
+      }
+
+      if (notification.status === 'accepted') {
+        return res.json({ chatEnabled: true, message: 'Chat', approachEnabled: false });
+      } else if (notification.status === 'pending') {
+        return res.json({ chatEnabled: false, message: notification.sender.toString() === Id1 ? 'Your request is pending' : 'You have a connection request', approachEnabled: false });
+      } else if (notification.status === 'rejected') {
+        return res.json({ chatEnabled: false, message: 'Approach', approachEnabled: true });
+      } else {
+        return res.json({ chatEnabled: false, message: 'No interaction found', approachEnabled: true });
+      }
+    }
+
+    // Mentor can't approach Entrepreneur
+    if (user1.role === 'Mentor' && user2.role === 'Entrepreneur') {
+      const mentor = await mentorModel.find({userId : Id1});
+      
+      const hasGivenMentorship = mentor[0].mentorshipGiven.includes(Id2);
+      return res.json({ chatEnabled: hasGivenMentorship, message: 'Mentors cannot approach entrepreneurs', approachEnabled: false });
+    }
+
+    // Default interactions
     const notification = await notificationModel.findOne({
       $or: [
         { sender: Id1, receiver: Id2 },
@@ -148,21 +261,17 @@ export const CheckChatStatus = async (req, res, next) => {
     });
 
     if (!notification) {
-      return res.json({ chatEnabled: false, message: 'Approach' });
+      return res.json({ chatEnabled: false, message: 'Approach', approachEnabled: true });
     }
 
     if (notification.status === 'accepted') {
-      return res.json({ chatEnabled: true, message: 'Chat' });
+      return res.json({ chatEnabled: true, message: 'Chat', approachEnabled: false });
     } else if (notification.status === 'pending') {
-      if (notification.sender.toString() === Id1) {
-        return res.json({ chatEnabled: false, message: 'Your request is pending' });
-      } else {
-        return res.json({ chatEnabled: false, message: 'You have a connection request' });
-      }
+      return res.json({ chatEnabled: false, message: notification.sender.toString() === Id1 ? 'Your request is pending' : 'You have a connection request', approachEnabled: false });
     } else if (notification.status === 'rejected') {
-      return res.json({ chatEnabled: false, message: 'Approach' });
+      return res.json({ chatEnabled: false, message: 'Approach', approachEnabled: true });
     } else {
-      return res.json({ chatEnabled: false, message: 'No interaction found' });
+      return res.json({ chatEnabled: false, message: 'No interaction found', approachEnabled: true });
     }
   } catch (error) {
     console.error('Error checking chat status:', error);
@@ -188,7 +297,7 @@ export const handleNotification = async (req, res, next) => {
         roleModel = mentorModel;
       }
       const Rsender = await roleModel.findOne({ email: sender.email });
-      Rsender.MyConnections.push(receiverId);
+      Rsender.myConnections.push(receiverId);
       Rsender.save();
 
       if (receiver.role == 'Entrepreneur') {
@@ -199,7 +308,7 @@ export const handleNotification = async (req, res, next) => {
         roleModel = mentorModel;
       }
       const Rreceiver = await roleModel.findOne({ email: receiver.email });
-      Rreceiver.MyConnections.push(senderId);
+      Rreceiver.myConnections.push(senderId);
       Rreceiver.save();
 
       const message = " Connection Request is Accepted";

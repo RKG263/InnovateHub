@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 const Resources = () => {
     const { isAuthenticated, user, message, error, loading } = useSelector(
         (state) => state.user
-      );
+    );
     const [resources, setResources] = useState([]);
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const Resources = () => {
                 const response = await axios.get("http://localhost:8000/api/v1/resource/Resources", {
                     withCredentials: true,
                 });
-                setResources(response?.data?.resources );
+                setResources(response?.data?.resources);
                 console.log(response);
             } catch (error) {
                 console.error('Error fetching resources:', error);
@@ -62,38 +62,48 @@ const Resources = () => {
 
     const pdfResources = resources.filter(element => element.pdfUrl);
     const videoResources = resources.filter(element => element.videoUrl);
- 
-   
+
+
     let displayPdfResources = pdfResources.length > 0 && (videoResources.length === 0 || (pdfResources.length > 0 && videoResources.length > 0));
     let displayVideoResources = videoResources.length > 0 && (pdfResources.length === 0 || (pdfResources.length > 0 && videoResources.length > 0));
 
     return (
         <>
             <Header />
-            <Container>
-               {
-                user?.isAdmin &&  <Box display="flex" justifyContent="space-between" alignItems="center" mt={3} mb={2}>
-                    <Typography variant="h4" style={{ fontWeight: 'bold', color: '#3f51b5' }}>
-                        Available Resources
-                    </Typography>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        href="/admin-resource-post"
-                        style={{
-                            backgroundColor: '#3f51b5',
-                            color: '#ffffff',
-                            fontWeight: 'bold',
-                            borderRadius: '8px',
-                            padding: '10px 20px',
-                            textTransform: 'none',
-                            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                        }}
+            <Container
+                className='min-h-screen'
+            >
+                {
+                    user?.isAdmin && <Box
+                        display="flex"
+                        justifyContent="space-between"
+                        alignItems="center"
+                        mt={3}
+                        mb={2}
+                        
+
                     >
-                        Post Resources
-                    </Button>
-                </Box>
-               }
+                        <Typography variant="h4" style={{ fontWeight: 'bold', color: '#3f51b5' }}>
+                            Available Resources
+                        </Typography>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            href="/admin-resource-post"
+                            style={{
+                                backgroundColor: '#3f51b5',
+                                color: '#ffffff',
+                                fontWeight: 'bold',
+                                borderRadius: '8px',
+                                padding: '10px 20px',
+                                textTransform: 'none',
+                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                            }}
+                        >
+                            Post Resources
+                        </Button>
+                    </Box>
+                }
                 <Box p={3} bgcolor="#f0f0f0" borderRadius={8}>
                     {pdfResources.length === 0 && videoResources.length === 0 && (
                         <Grid item xs={12}>
@@ -104,7 +114,9 @@ const Resources = () => {
                     <Grid container spacing={4}>
                         {/* PDF Resources */}
                         {pdfResources.length > 0 && (
-                            <Grid item xs={12} md={6}>
+                            <Grid item xs={12} md={6}
+                                // className
+                            >
                                 <Box bgcolor="#ffffff" p={3} borderRadius={8} boxShadow={2}>
                                     <Typography variant="h5" style={{ textAlign: 'center', color: '#3f51b5', marginBottom: '15px' }}>PDF Resources</Typography>
                                     {pdfResources.map((element, index) => (

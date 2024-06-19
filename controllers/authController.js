@@ -289,7 +289,7 @@ export const getMyProfile = async (req, res, next) => {
     }
     
     let connections = await Promise.all(
-      roleUser.MyConnections.map(async connectionId => {
+      roleUser.myConnections.map(async connectionId => {
         const userData = await userModel.findById(connectionId);
         return {
           _id: userData._id,

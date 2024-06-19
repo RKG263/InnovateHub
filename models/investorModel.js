@@ -61,7 +61,7 @@ const investorSchema = new Schema({
         type: String,
         default : ''
     },
-    MyConnections: {
+    myConnections: {
         type: [Schema.Types.ObjectId] ,
         default : [] 
     },

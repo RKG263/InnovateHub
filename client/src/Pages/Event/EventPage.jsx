@@ -143,6 +143,7 @@ const EventPage = () => {
     }
 
     return (
+
       <Grid item xs={12} key={event._id}>
         <Card>
           <Box display="flex">
@@ -214,7 +215,10 @@ const EventPage = () => {
   return (
     <>
       <Header />
-      <Container style={{ backgroundColor: '#e0f7fa', padding: '20px', borderRadius: '8px' }}>
+
+      <Container style={{ backgroundColor: '#e0f7fa', padding: '20px', borderRadius: '8px' }}
+        className='min-h-screen'
+      >
         <Typography variant="h4" gutterBottom align="center">
           Events
         </Typography>
@@ -357,6 +361,7 @@ const EventPage = () => {
           }}
         />
       </Container>
+
       <Footer />
     </>
   );

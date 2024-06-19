@@ -8,13 +8,13 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const categories = [
-  {
-    id: 1,
-    title: 'Funding Opportunities',
-    description: 'Find the best funding opportunities for your startup.',
-    icon: <BusinessCenter />,
-    image: 'path/to/funding-image.jpg', // Replace with actual image path
-  },
+  // {
+  //   id: 1,
+  //   title: 'Funding Opportunities',
+  //   description: 'Find the best funding opportunities for your startup.',
+  //   icon: <BusinessCenter />,
+  //   image: 'path/to/funding-image.jpg', // Replace with actual image path
+  // },
   {
     id: 2,
     title: 'Networking Events',
@@ -67,7 +67,10 @@ const Explore = () => {
 
   const handleCategoryClick = (categoryId) => {
     // console.log(`Category clicked: ${categoryId}`);
-    if (categoryId === 3) {
+    if (categoryId === 2) {
+      navigate('/events');
+    }
+    else if (categoryId === 3) {
       navigate('/all-admin-resource');
     }
     else if (categoryId === 4) {
@@ -148,14 +151,14 @@ const Explore = () => {
           ))}
         </Grid>
 
-        <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: '40px' }}>
+        {/* <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: '40px' }}>
           Connect with Mentors
         </Typography>
         <List>
           {generateMentor()}
-        </List>
+        </List> */}
 
-        <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: '40px' }}>
+        {/* <Typography variant="h5" align="left" gutterBottom sx={{ marginTop: '40px' }}>
           Connect with Investors
         </Typography>
         <List>
@@ -199,7 +202,7 @@ const Explore = () => {
               </Button>
             </ListItem>
           ))}
-        </List>
+        </List> */}
       </Container>
       <Footer />
     </>
@@ -216,23 +219,22 @@ const generateMentor = () => {
 
   useEffect(() => {
 
-    axios.get(`${import.meta.env.VITE_API_ENDPOINT}/api/v1/mentor`,{withCredentials : true})
-    .then(data=>{
-      setMentors(data.data);
-    })
+    axios.get(`${import.meta.env.VITE_API_ENDPOINT}/api/v1/mentor`, { withCredentials: true })
+      .then(data => {
+        setMentors(data.data);
+      })
 
   }, []);
 
   console.log(mentors);
 
-  const handleConnectClick = async(userId)=>{
+  const handleConnectClick = async (userId) => {
 
-    try{
+    try {
       navigate(`/mentor/${userId}`)
 
 
-    }catch(err)
-    {
+    } catch (err) {
       toast.error("Something wrong");
       console.error();
     }
@@ -253,7 +255,7 @@ const generateMentor = () => {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => handleConnectClick( mentor.userId)}
+            onClick={() => handleConnectClick(mentor.userId)}
           >
             Ask  for Mentorship
           </Button>

@@ -39,7 +39,7 @@ import SuccessPostForm from "./Pages/SuccessPostForm/SuccessPostForm.jsx"
 import EventPage from "./Pages/Event/EventPage.jsx";
 import Resources from "./Pages/Resources/resourcePage/Resources.jsx"
 import PostResources from "./Pages/Resources/resourcePage/PostResources.jsx"
-// importing mentor plan
+
 
 function App() {
   const { isAuthenticated, user, message, error, loading } = useSelector(
@@ -184,6 +184,9 @@ function App() {
             <Route path="/mentor/:id" element={<Plan />} />
             <Route path="/mentor/create-plan" element={<Createplan />} />
             <Route path="/events" element={<EventPage />} />
+            <Route path="/plan/:id" element={<Plan />} />
+            {/* <Route path="/ev" element={<Plan />} /> */}
+
             // mentor plan Routes
             <Route path="*" element={<NotFound />} />
           </Routes>
