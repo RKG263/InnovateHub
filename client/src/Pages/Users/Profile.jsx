@@ -6,7 +6,7 @@ import {
 import { styled } from '@mui/system';
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Approach } from '../../redux/actions/other';
@@ -32,6 +32,7 @@ const VisuallyHiddenInput = styled('input')({
   // whiteSpace: 'nowrap',
   // width: 1,
 });
+
 
 const Root = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(4),
@@ -106,7 +107,7 @@ const ProfilePage = () => {
         setConnections(userData.Connections || []);
         setInterests(userData.User?.interests || []);
         checkChatStatus(_id, userId);
-        setLoading(false); // Set loading to false after successful data fetch
+     
       })
       .catch(error => {
         console.error('Error fetching profile data:', error);
@@ -123,8 +124,10 @@ const ProfilePage = () => {
         setChatEnabled(chatEnabled);
         setApproachedMessage(message);
         setApproachEnabled(approachEnabled);
+        setLoading(false); // Set loading to false after successful data fetch
       })
       .catch(error => {
+         setLoading(false); // Set loading to false after successful data fetch
         console.error('Error checking chat status:', error);
         toast.error('Failed to check chat status. Please try again.');
       });
@@ -354,21 +357,23 @@ const ProfilePage = () => {
                     <Typography variant="body1" color="textSecondary">This profile user has no connections</Typography>
                   ) : (
                     connections.map((connection, index) => (
-                      <ListItem key={index} onClick={() => { navigate(`/profile/${connection._id}`) }}>
+                      <ListItem key={index} >
+                        <Link to = {`/profile/${connection._id}`}>        
                         <Avatar
                           alt={connection?.name || "John Doe"}
                           src={connection?.image || "/path/to/default.jpg"}
                           sx={{ width: '50px', height: '50px', marginRight: '10px' }}
-                        />
-                        <Box>
-                          <ListItemText primary={connection?.name || "John Doe"} secondary={connection?.role || "Investor / Mentor / Entrepreneur"} />
-                        </Box>
-                      </ListItem>
-                    ))
-                  )}
-                </List>
-              </ScrollableSection>
-            </Section>
+                          />
+                             </Link>
+                          <Box>
+                            <ListItemText primary={connection?.name || "John Doe"} secondary={connection?.role || "Investor / Mentor / Entrepreneur"} />
+                          </Box>
+                        </ListItem>
+                      ))
+                    )}
+                  </List>
+                </ScrollableSection>
+              </Section>
 
             <Section>
               <Typography variant="h5" gutterBottom>My Interests</Typography>

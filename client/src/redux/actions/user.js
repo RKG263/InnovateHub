@@ -20,7 +20,7 @@ export const login = (email, password , role) => async dispatch => {
     dispatch({ type: 'loginSuccess', payload: data });
   } catch (error) {
     console.log(error)
-    dispatch({ type: 'loginFail', payload: error.response.data.message });
+    dispatch({ type: 'loginFail', payload: error.response.data.error });
   }
 };
 export const register = (name , email , password , role)  => async dispatch => {
@@ -36,7 +36,7 @@ export const register = (name , email , password , role)  => async dispatch => {
   
       dispatch({ type: 'registerSuccess', payload: data });
     } catch (error) {
-      dispatch({ type: 'registerFail', payload: error.response.data.message });
+      dispatch({ type: 'registerFail', payload: error.response.data.error });
     }
   };
   export const logout = () => async dispatch => {

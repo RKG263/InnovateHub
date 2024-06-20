@@ -15,9 +15,10 @@ import logo from '../../assets/logo.png';
 import Header from '../../Components/Header/Header';
 import Footer from '../../Components/Footer/Footer';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const EventPage = () => {
-  const { user } = useSelector((state) => state.user);
+  const { user , isAuthenticated } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
   const [events, setEvents] = useState([]);
   const [open, setOpen] = useState(false);
@@ -189,15 +190,20 @@ const EventPage = () => {
                   </Box>
                 </Box>
                 <Box mt={2} display="flex" flexDirection="column" alignItems="flex-end">
-                  <Link href={event.webinarLink} target="_blank" rel="noopener">
-                    {console.log(event.webinarLink)}
-                    <Button
-                      variant="contained"
-                      color="primary"
-                    >
-                      Join Webinar
-                    </Button>
-                  </Link>
+                  {/* <Link href={event.webinarLink} target="_blank" rel="noopener">
+                    {console.log(event.webinarLink)} */}
+                   <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={() =>{
+                             if(isAuthenticated) window.open(event.webinarLink, '_blank', 'noopener,noreferrer')
+                             else toast.error("Please Login First") ;
+                          }}
+                          sx={{ marginTop: '10px' }}
+                        >
+                          Join Webinar
+                        </Button>
+                  {/* </Link> */}
                   {user?.isAdmin && (
                     <>
                       <Button variant="outlined" color="secondary" onClick={() => deleteEvent(event._id)} style={{ marginTop: '10px' }}>

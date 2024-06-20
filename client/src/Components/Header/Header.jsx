@@ -194,9 +194,9 @@ const Header = () => {
             <Button
               sx={{
                 color: "white",
-                textDecoration: isActiveLink("/contact") ? "underline" : "none", // Underline when active
+                textDecoration: isActiveLink("/posts") ? "underline" : "none", // Underline when active
                 "&:hover": {
-                  backgroundColor: isActiveLink("/contact")
+                  backgroundColor: isActiveLink("/posts")
                     ? "#303f9f"
                     : "transparent", // Dark blue background when active
                 },
