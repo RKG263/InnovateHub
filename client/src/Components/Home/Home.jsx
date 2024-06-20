@@ -119,6 +119,7 @@ const Home = () => {
   >
     Ask Ai
   </Fab>
+  { isAuthenticated && 
   <Fab
     color="primary"
     aria-label="notifications"
@@ -130,10 +131,13 @@ const Home = () => {
       },
     }}
   >
+  
     <Notifications /> 
   </Fab>
-</Box>
+}
+</Box>       
       <NotificationDialog open={isNotificationOpen} onClose={handleNotificationClose} />
+       
     </>
   );
 };

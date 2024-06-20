@@ -6,13 +6,15 @@ import axios from 'axios';
 import { server } from '../../redux/store';
 
 const NotificationDialog = ({ open, onClose }) => {
-  const [Notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const { user, loading } = useSelector((state) => state.user);
+  const { user, loading: userLoading } = useSelector((state) => state.user);
 
   useEffect(() => {
     const getNotifications = async () => {
       try {
+        setLoading(true);
         const userId = user?._id;
         const { data } = await axios.post(`${server}/other/fetchnotifications`, { userId }, {
           withCredentials: true,
@@ -25,14 +27,19 @@ const NotificationDialog = ({ open, onClose }) => {
         }
       } catch (error) {
         console.error('Error fetching notifications:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    getNotifications();
+    if (user) {
+      getNotifications();
+    }
   }, [user]);
 
   const handleResponse = async (notificationId, action, sendId) => {
     try {
+      setLoading(true);
       const { data } = await axios.post(
         `${server}/other/handlenotification`,
         { notificationId, action, senderId: user._id, receiverId: sendId },
@@ -52,6 +59,8 @@ const NotificationDialog = ({ open, onClose }) => {
       }
     } catch (error) {
       console.error('Error updating notification status:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -64,14 +73,14 @@ const NotificationDialog = ({ open, onClose }) => {
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>Notifications</DialogTitle>
       <DialogContent dividers style={{ backgroundColor: '#e0f7fa' }}>
-        {loading ? (
+        {userLoading || loading ? (
           <Box display="flex" justifyContent="center" alignItems="center" height="100%">
             <CircularProgress />
           </Box>
-        ) : Notifications.length === 0 ? (
+        ) : notifications.length === 0 ? (
           <Typography variant="body1">No notifications</Typography>
         ) : (
-          Notifications.map((notification) => (
+          notifications.map((notification) => (
             <Paper key={notification._id} style={{ padding: '16px', marginBottom: '8px', backgroundColor: '#ffffff' }}>
               <Box display="flex" alignItems="center" justifyContent="space-between">
                 <Box>

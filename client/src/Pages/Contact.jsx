@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { contactUs } from '../redux/actions/other';
 import {  useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import SpinningLoader from '../Shared/SpinningLoader';
 
 const ContactUs = () => {
     
@@ -43,18 +44,19 @@ const ContactUs = () => {
     if (mess) {
       toast.success(mess);
       dispatch({ type: 'clearMessage' });
+      navigate('/') ;
     }
   }, [dispatch, error, mess , loading ]);
 
 const handleSubmit = (e) => {
   e.preventDefault();
   dispatch(contactUs(name ,email , message)) ;
-   navigate('/') ;
 };
 
 
   return (
     <>
+     {loading ? <SpinningLoader/> : <>
       <Header/>
       <Box style={formStyle} component="form" onSubmit={handleSubmit}>
         <Typography variant="h4" gutterBottom align="center">
@@ -109,6 +111,8 @@ const handleSubmit = (e) => {
         </Grid>
       </Box>
       <Footer/>
+      </>
+      }
     </>
   );
 };
