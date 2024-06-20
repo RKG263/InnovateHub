@@ -87,6 +87,7 @@ const ProfilePage = () => {
   const [fileUploadprogress, setFileUploadprogress] = useState(0);
   const [fileUploading, setFileUploading] = useState(false);
   const [isUpload, setIsUpload] = useState(false);
+  const [url, setUrl] = useState(null);
 
   const { user } = useSelector((state) => state.user);
   const { userId } = useParams();
@@ -179,31 +180,36 @@ const ProfilePage = () => {
             const viewUrl = downloadURL + '?alt=media';
             console.log('File viewable at', viewUrl);
             
-            axios
-            .post(
-              `http://localhost:8000/api/v1/resource/postResources`,
-                {
-                  pdfUrl: fileUrl,
-                  pdfFileName: file.name,
-                  pdfFileType: file.type,
-                  pdfDescription: "File from approch form",
-                  pdfTitle: file.name
+            // axios
+            // .post(
+            //   `http://localhost:8000/api/v1/resource/postResources`,
+            //     {
+            //       pdfUrl: fileUrl,
+            //       pdfFileName: file.name,
+            //       pdfFileType: file.type,
+            //       pdfDescription: "File from approch form",
+            //       pdfTitle: file.name,
                   
-                },
-                {
-                  withCredentials: true,
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                }
-              ).then(data=>{
-                console.log(data)
+                  
+            //     },
+            //     {
+            //       withCredentials: true,
+            //       headers: {
+            //         "Content-Type": "application/json",
+            //       },
+            //     }
+            //   ).then(data=>{
+            //     console.log(data)
                 
-              });
+            //   });
+
+              setUrl(fileUrl);
+              
               
               toast.success('File uploaded successfully');
               setFileUploading(false);
               setIsUpload(true);
+              
               
             }).catch((error) => {
               toast.error(error.response.data.message);
@@ -224,10 +230,11 @@ const ProfilePage = () => {
     event.preventDefault();
     const formDataToSend = new FormData();
     formDataToSend.append('name', formData.name);
-    formDataToSend.append('email', formData.email);
+    formDataToSend.append('url', url);
+    // formDataToSend.append('email', formData.email);
     formDataToSend.append('businessFile', formData.businessFile);
     formDataToSend.append('description', formData.description);
-    dispatch(Approach(user._id, userId, user.name, user.email, formData.description));
+    dispatch(Approach(user._id, userId, user.name, user.email, formData.description, url));
     setApproachedMessage('Request Pending'); // Set approached message to pending after form submission
     setOpen(false);
   };
@@ -285,21 +292,21 @@ const ProfilePage = () => {
                 <DialogContent>
                   <form>
                     <TextField
-                      label="Name"
+                      label="Title"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
                       fullWidth
                       margin="normal"
                     />
-                    <TextField
+                    {/* <TextField
                       label="Email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
                       fullWidth
                       margin="normal"
-                    />
+                    /> */}
                     <TextField
                       label="Description"
                       name="description"
@@ -315,7 +322,6 @@ const ProfilePage = () => {
                         component="span"
                         // fullWidth
                         margin="normal"
-                        
                         
                         loading={fileUploading}
                         disabled={isUpload}

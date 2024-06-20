@@ -26,7 +26,7 @@ export const contactUs = (name, email, message) => async dispatch => {
     });
   }
 };
-export const Approach = (senderId, receiverId ,name, email ,description) => async dispatch  => {
+export const Approach = (senderId, receiverId ,name, email ,description, url) => async dispatch  => {
   try {
     const config = {
       headers: {
@@ -37,7 +37,7 @@ export const Approach = (senderId, receiverId ,name, email ,description) => asyn
 
     dispatch({ type: 'approachRequest' });
     const {data} = await axios.post(`${server}/other/approach`, {
-      senderId, receiverId,name , email , description 
+      senderId, receiverId,name , email , description , url
     } , config);
 
     dispatch({type : 'approachSuccess' , payload : data.message})

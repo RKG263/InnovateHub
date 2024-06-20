@@ -38,7 +38,7 @@ const InvestorDashboard = () => {
       case 'Appointment':
         return <Appointment />
       case 'Idea':
-        ; return <Idea />
+         return <Idea />
       case 'Invested':
         return <Invested />
       case 'Meeting':

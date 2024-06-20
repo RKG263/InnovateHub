@@ -8,6 +8,7 @@ const eventSchema = new mongoose.Schema({
   endDate : { type: Date, required: true },
   endTime : { type: String, required: true },
   wallpaper : { type: String },
+  wallpaperId : { type: String },
   webinarLink : { type: String, required: true , default : "www.google.com"},
   taker : { type: Schema.Types.ObjectId, ref: 'User', required: true }
 }, {

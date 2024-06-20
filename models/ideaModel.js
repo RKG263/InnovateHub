@@ -16,6 +16,9 @@ const ideaSchema = new Schema({
         required: true
 
     },
+    url:{
+        type : String,
+    },
     investorId: {
         type: Schema.Types.ObjectId,
         required: true

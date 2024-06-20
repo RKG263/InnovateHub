@@ -36,7 +36,7 @@ const EnterpreneurDashboard = () => {
       case 'Investors':
         return <Investors />
       case 'Idea':
-        ; return <Idea />
+         return <Idea />
       case 'Mentors':
         return <Mentors />
       case 'Meeting':

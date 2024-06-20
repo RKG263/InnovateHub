@@ -30,7 +30,24 @@ export const entrepreneurIdeaController = async (req, res, next) => {
 export const entrepreneurController = async (req, res, next) => {
 
     try {
-        const entrepreneur = await entrepreneurModel.find();
+        const entrepreneur = await ideaModel.find({entrepreneurId : req.user._id});
+
+        res.status(200).json(entrepreneur);
+
+    } catch (err) {
+        console.error(err);
+        next(err);
+
+
+    }
+
+
+} 
+
+export const investorIdeaController = async (req, res, next) => {
+
+    try {
+        const entrepreneur = await ideaModel.find({investorId : req.user._id});
 
         res.status(200).json(entrepreneur);
 
