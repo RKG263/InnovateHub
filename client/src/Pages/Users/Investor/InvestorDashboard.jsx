@@ -54,7 +54,7 @@ const InvestorDashboard = () => {
 
   return (
 
-    <div className="container">
+    <div className="container max-sm:flex-col">
       {/* <!-- Profile Section --> */}
       <div className="profile-section">
         <div className="flex justify-center items-center flex-col text-center ">
@@ -103,9 +103,9 @@ const InvestorDashboard = () => {
             <div className="link-info"
               name="Appointment"
             >Appointment</div>
-            <div className="link-info"
+            {/* <div className="link-info"
               name="Chat"
-            >Chat</div>
+            >Chat</div> */}
             <div className="link-info"
               name="EditProfile"
             >Edit Profile</div>

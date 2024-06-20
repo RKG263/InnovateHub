@@ -46,7 +46,7 @@ const MentorDashboard = () => {
   return (
 
 
-    <div className="container">
+    <div className="container max-sm:flex-col">
 
       {/* <!-- Profile Section --> */}
 

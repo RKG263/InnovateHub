@@ -8,19 +8,9 @@ import { getAnalytics } from 'firebase/analytics';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import Header from '../../../Components/Header/Header';
 import Footer from '../../../Components/Footer/Footer';
+import { storage, app, analytics } from '../../../Utils/firebase';
 
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_APP_ID
-};
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const storage = getStorage(app);
 
 const PostResources = () => {
   const [pdfUrl, setPdfUrl] = useState(null);
@@ -101,7 +91,7 @@ const PostResources = () => {
     event.preventDefault();
     await axios
       .post(
-        "http://localhost:8000/api/v1/resource/postResources",
+        `http://localhost:8000/api/v1/resource/postResources`,
         {
           pdfUrl,
           videoUrl,

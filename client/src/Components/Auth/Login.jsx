@@ -62,14 +62,8 @@ const Login = () => {
             onChange={e => setPassword(e.target.value)}
             sx={{ gridColumn: 'span 2' }}
           />
-          <TextField
-            label="Confirm Password"
-            type="password"
-            name="confirmPassword"
-            required
-            fullWidth
-            sx={{ gridColumn: 'span 2' }}
-          />
+         
+         
           <FormControl fullWidth sx={{ gridColumn: 'span 2' }}>
             <InputLabel id="role-label">Select Role</InputLabel>
             <Select

@@ -17,6 +17,21 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PlanIcon from '@mui/icons-material/Assignment';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { LoadingButton } from '@mui/lab';
+
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { storage, app } from '../../Utils/firebase';
+
+
+const VisuallyHiddenInput = styled('input')({
+  opacity: 0,
+  // height: 1,
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  // whiteSpace: 'nowrap',
+  // width: 1,
+});
 
 const Root = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(4),
@@ -67,6 +82,11 @@ const ProfilePage = () => {
     description: '',
   });
   const [loading, setLoading] = useState(true); // Set loading to true initially
+
+  const [fileUploadprogress, setFileUploadprogress] = useState(0);
+  const [fileUploading, setFileUploading] = useState(false);
+  const [isUpload, setIsUpload] = useState(false);
+
   const { user } = useSelector((state) => state.user);
   const { userId } = useParams();
   const _id = user._id;
@@ -126,6 +146,77 @@ const ProfilePage = () => {
     setFormData({ ...formData, businessFile: e.target.files[0] });
   };
 
+
+  const handleFileUpload = async (event) => {
+
+    try {
+      const file = event.target.files[0];  
+      const storageRef = ref(storage, 'pdfs/' + file.name);
+      // setFileName(file.name);
+      // setFileType(file.type);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      let fileUrl = null;
+
+      setFileUploading(true);
+      uploadTask.on('state_changed',
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setFileUploadprogress(progress);
+          console.log(`Upload is ${progress}% done`);
+        },
+        (error) => {
+          console.error('Error uploading file:', error);
+        },
+        () => {
+          console.log('File uploaded successfully');
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log('File available at', downloadURL);
+            fileUrl = downloadURL
+            const viewUrl = downloadURL + '?alt=media';
+            console.log('File viewable at', viewUrl);
+            
+            axios
+            .post(
+              `http://localhost:8000/api/v1/resource/postResources`,
+                {
+                  pdfUrl: fileUrl,
+                  pdfFileName: file.name,
+                  pdfFileType: file.type,
+                  pdfDescription: "File from approch form",
+                  pdfTitle: file.name
+                  
+                },
+                {
+                  withCredentials: true,
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                }
+              ).then(data=>{
+                console.log(data)
+                
+              });
+              
+              toast.success('File uploaded successfully');
+              setFileUploading(false);
+              setIsUpload(true);
+              
+            }).catch((error) => {
+              toast.error(error.response.data.message);
+            });
+        }
+      );
+      
+      
+
+
+    } catch (err) {
+      console.log(err);
+    }
+
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formDataToSend = new FormData();
@@ -145,6 +236,8 @@ const ProfilePage = () => {
   const handlePlanClick = () => {
     navigate(`/plan/${userId}`);
   };
+
+
 
   return (
     <>
@@ -175,7 +268,7 @@ const ProfilePage = () => {
                 </Button>
               ) : approachedMessage === 'Approach' && approachEnabled ? (
                 <Button variant="contained" color="primary" onClick={handleOpen} startIcon={<PersonAddIcon />}>
-                  Approach 
+                  Approach
                 </Button>
               ) : approachedMessage === 'Take My Plan' ? (
                 <Button onClick={handlePlanClick} variant="contained" color="primary" startIcon={<PlanIcon />}>
@@ -212,18 +305,34 @@ const ProfilePage = () => {
                       fullWidth
                       margin="normal"
                     />
-                    <input
-                      accept=".ppt,.pptx,.pdf"
-                      style={{ display: 'none' }}
-                      id="business-file"
-                      type="file"
-                      onChange={handleFileChange}
-                    />
-                    <label htmlFor="business-file">
-                      <Button variant="contained" component="span" fullWidth margin="normal">
+                 
+                 
+                      <LoadingButton
+                        variant="contained"
+                        component="span"
+                        // fullWidth
+                        margin="normal"
+                        
+                        
+                        loading={fileUploading}
+                        disabled={isUpload}
+                        className=' m-10'
+                      >
                         Upload Business PPT or PDF
-                      </Button>
-                    </label>
+                        <VisuallyHiddenInput
+                          type="file"
+                          // multiple
+                          accept=".ppt,.pptx,.pdf"
+                          name="file"
+                          // accept=".jpg, .jpeg, .png"
+                          onChange={(e) => {
+                            // handleFileChange(e);
+                            handleFileUpload(e);
+                          }}
+                        />
+                      </LoadingButton>
+             
+                 
                   </form>
                 </DialogContent>
                 <DialogActions>
@@ -250,39 +359,41 @@ const ProfilePage = () => {
                           alt={connection?.name || "John Doe"}
                           src={connection?.image || "/path/to/default.jpg"}
                           sx={{ width: '50px', height: '50px', marginRight: '10px' }}
-                          />
-                          <Box>
-                            <ListItemText primary={connection?.name || "John Doe"} secondary={connection?.role || "Investor / Mentor / Entrepreneur"} />
-                          </Box>
-                        </ListItem>
-                      ))
-                    )}
-                  </List>
-                </ScrollableSection>
-              </Section>
-  
-              <Section>
-                <Typography variant="h5" gutterBottom>My Interests</Typography>
-                <Grid container spacing={2}>
-                  {interests.length === 0 ? (
-                    <Typography variant="body1" color="textSecondary">This profile user has no interests</Typography>
-                  ) : (
-                    interests.map((interest, index) => (
-                      <Grid item key={index}>
-                        <Button variant="outlined" color="primary" style={{ borderRadius: '20px' }}>{interest}</Button>
-                      </Grid>
+                        />
+                        <Box>
+                          <ListItemText primary={connection?.name || "John Doe"} secondary={connection?.role || "Investor / Mentor / Entrepreneur"} />
+                        </Box>
+                      </ListItem>
                     ))
                   )}
-                </Grid>
-              </Section>
-            </Root>
-          </Container>
-        )}
-        <Footer />
-        <ToastContainer /> {/* Toast container for displaying notifications */}
-      </>
-    );
-  };
-  
-  export default ProfilePage;
-  
+                </List>
+              </ScrollableSection>
+            </Section>
+
+            <Section>
+              <Typography variant="h5" gutterBottom>My Interests</Typography>
+              <Grid container spacing={2}>
+                {interests.length === 0 ? (
+                  <Typography variant="body1" color="textSecondary">This profile user has no interests</Typography>
+                ) : (
+                  interests.map((interest, index) => (
+                    <Grid item key={index}>
+                      <Button variant="outlined" color="primary" style={{ borderRadius: '20px' }}>{interest}</Button>
+                    </Grid>
+                  ))
+                )}
+              </Grid>
+            </Section>
+          </Root>
+        </Container>
+      )}
+      <Footer />
+      <ToastContainer /> {/* Toast container for displaying notifications */}
+    </>
+  );
+};
+
+export default ProfilePage;
+
+
+

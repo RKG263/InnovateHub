@@ -305,12 +305,13 @@ const EventPage = () => {
                       fullWidth
                     />
                     <Box mt={2} textAlign="center">
-                      {wallpaper && (
+                      {wallpaper ? (
                         <>
                           <img
                             src={URL.createObjectURL(wallpaper)}
-                            alt="Wallpaper Preview"
-                            style={{ width: '100%', maxHeight: '100px', objectFit: 'cover', marginBottom: '10px' }}
+                              alt="Wallpaper Preview"
+                              // style={{ width: '100%', maxHeight: '100px', objectFit: 'cover', marginBottom: '10px' }}
+                              className='aspect-square h-10'
                           />
                           <Button
                             variant="contained"
@@ -320,8 +321,9 @@ const EventPage = () => {
                           >
                             Cancel Wallpaper
                           </Button>
-                        </>
-                      )}
+                        </> 
+                      ):
+                      
                       <Button
                         variant="contained"
                         component="label"
@@ -335,6 +337,7 @@ const EventPage = () => {
                           onChange={(e) => setWallpaper(e.target.files[0])}
                         />
                       </Button>
+                      }
                     </Box>
                   </DialogContent>
                   <DialogActions>

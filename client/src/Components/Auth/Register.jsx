@@ -13,6 +13,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [role, setRole] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate() ;
@@ -20,8 +21,24 @@ const Register = () => {
 
   const handleRegistration = async (event) => {
     event.preventDefault();
-    dispatch(register(name, email, password, role));
-    navigate('/login');
+    try{
+
+      if(password !== confirmPassword)
+       {
+         toast.error("Password and confirm password not match");
+         throw new Error("Password and confirm password not match");
+         
+       }
+      else
+      {
+        dispatch(register(name, email, password, role));
+        navigate('/login');
+      }
+      
+    }catch(err)
+    {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -104,6 +121,15 @@ const Register = () => {
             fullWidth
             onChange={e => setPassword(e.target.value)}
             sx={{ gridColumn: 'span 2' }}
+          />
+           <TextField
+            label="Confirm Password"
+            type="password"
+            name="confirmPassword"
+            required
+            fullWidth
+            sx={{ gridColumn: 'span 2' }}
+            onChange={e => setConfirmPassword(e.target.value)}
           />
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', gridColumn: 'span 2' }}>
             <MuiLink component={Link} to="/login" variant="body2" sx={{ textDecoration: 'none', color: '#271776ca' }}>

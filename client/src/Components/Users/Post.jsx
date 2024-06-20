@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
@@ -29,7 +30,7 @@ const Post = () => {
     <div className='flex flex-col justify-evenly shadow-gray-600'>
 
 
-      {myPosts?.map(post => {
+      {myPosts.length!=0 ? myPosts?.map(post => {
         return (
           <>
           <Link to={user ? `/posts/post-detail/${post._id}` : "/login"}>
@@ -61,7 +62,9 @@ const Post = () => {
           </Link>
           </>
         )
-      })}
+      }):
+        <Typography variant='h4'>You have no post</Typography>
+      }
     </div>
   )
 }

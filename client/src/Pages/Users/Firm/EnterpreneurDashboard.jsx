@@ -52,7 +52,7 @@ const EnterpreneurDashboard = () => {
   return (
 
 
-    <div className="container justify-evenly">
+    <div className="container justify-evenly max-sm:flex-col">
       {/* <!-- Profile Section --> */}
 
 
@@ -97,9 +97,9 @@ const EnterpreneurDashboard = () => {
             <div className="link-info"
               name="Investors"
             >Investors</div>
-            <div className="link-info"
+            {/* <div className="link-info"
               name="Chat"
-            >Chat</div>
+            >Chat</div> */}
             <div className="link-info"
               name="EditProfile"
             >Edit Profile</div>

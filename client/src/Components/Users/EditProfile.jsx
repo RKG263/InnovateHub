@@ -257,8 +257,8 @@ const EditProfile = () => {
 
 
 
-              <Grid item xs={12}>
-                <Button variant="contained" color="primary" type="submit" fullWidth>
+              <Grid item xs={12} className='justify-center flex'>
+                <Button variant="contained" color="primary" type="submit" >
                   Save Changes
                 </Button>
               </Grid>
