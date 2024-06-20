@@ -15,7 +15,7 @@ export const userReducer = createReducer({}, (builder) => {
     .addCase('loginFail', (state ,action) => {
             state.loading = false;
             state.isAuthenticated = false;
-            state.error = `Please Enter Correct Feild`;
+            state.error = action.payload;
     })
     .addCase('clearError' ,( state) => {
          state.error = null;

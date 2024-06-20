@@ -22,7 +22,7 @@ export const registerController = async (req, res, next) => {
 
     const isUserExist = await userModel.findOne({ email });
     if (isUserExist) {
-      throw new Error("User already exists");
+     return next({status:400,message:"user Already exist , please login"})
     }
 
     const token = generateRandomToken(16);
@@ -62,22 +62,23 @@ export const loginController = async (req, res, next) => {
   try {
     const { email, password, role } = req.body;
     if (!email || !password || !role) {
-      throw new Error("all field required");
+     
+      return next({status:400,message:"all feild required"})
     }
 
     const user = await userModel.findOne({ email });
     if (!user) {
       // console.log("Invalid Email  ");
-      throw new Error("Invalid Email  ");
+      return next({status:400,message:"invalid email & password"})
     }
     // console.log(user.password)
     const isMatch = await user.comparePassword(password);
 
     if (!isMatch) {
-      throw new Error("invalid  password ");
+      return next({status:400,message:"invalid email & password"})
     }
     if (user.role != role) {
-      throw new Error("invalid  role");
+      return next({status:400,message:"invalid role"})
     }
     if (!user.isVerified) {
       throw new Error("user not verified")
