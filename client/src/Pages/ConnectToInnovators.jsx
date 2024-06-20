@@ -7,6 +7,7 @@ import axios from 'axios';
 import { server } from '../redux/store';
 import SpinningLoader from '../Shared/SpinningLoader';
 import { useSelector } from 'react-redux';
+import { Input } from 'postcss';
 
 const UserListPage = () => {
   const [roleFilter, setRoleFilter] = useState('');
@@ -94,6 +95,7 @@ const UserListPage = () => {
                   <Select
                     value={roleFilter}
                     onChange={(e) => setRoleFilter(e.target.value)}
+                    label="Filter by Role"
                   >
                     <MenuItem value="">All Roles</MenuItem>
                     <MenuItem value="Entrepreneur">Entrepreneur</MenuItem>
@@ -142,7 +144,7 @@ const UserListPage = () => {
                       {user.role || 'No Role'} {/* Use a fallback value */}
                     </Typography>
                     <Typography variant="body2" gutterBottom>
-                      {user.aboutMe || "Growing"}
+                      {user.aboutMe?.slice(0,30) || "Growing"}...
                     </Typography>
                     <Button
                       variant="contained"

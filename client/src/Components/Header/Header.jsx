@@ -50,11 +50,13 @@ const Header = () => {
           </Link>
 
             <Stack className="max-md:hidden">
+            <Link to="/" style={{ textDecoration: "none" }}>
               <Typography variant="h4" sx={{ fontWeight: "bold" }}
                   className=" max-lg:text-[30px]"
               >
                 InnovatorsHub
               </Typography>
+              </Link>
             </Stack>
         </Box>
 

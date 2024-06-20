@@ -43,6 +43,9 @@ const userSchema = new mongoose.Schema(
     aboutMe: {
       type: String,
     },
+    intrest: {
+      type: String,
+    },
     contact : {
       type : Number,
     },

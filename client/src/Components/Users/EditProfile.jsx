@@ -37,6 +37,7 @@ const EditProfile = () => {
     contact: user.contact,
     newPassword: '',
     confirmPassword: '',
+    intrest: ''
   });
 
 
@@ -73,6 +74,7 @@ const EditProfile = () => {
         aboutMe: userData.aboutMe,
         newPassword: userData.newPassword,
         contact: userData.contact,
+        intrest : userData.intrest,
       }
 
 
@@ -176,6 +178,25 @@ const EditProfile = () => {
                     type="number"
                     // disabled={true}
                     value={userData.contact}
+                    onChange={handleChange}
+                    fullWidth
+                  />
+
+
+
+                </div>
+              </Grid>
+
+               <Grid item xs={12}>
+                <div className="flex">
+                  <TextField
+                    id="intrest"
+                    name="intrest"
+                    label="Intrest"
+                    type="text"
+                    multiline
+                    // disabled={true}
+                    value={userData.intrest}
                     onChange={handleChange}
                     fullWidth
                   />

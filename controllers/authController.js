@@ -167,7 +167,7 @@ export const editProfileController = async (req, res, next) => {
     
 
     
-    const { fullName, aboutMe, newPassword, contact } = req.body;
+    const { fullName, aboutMe, newPassword, contact, intrest } = req.body;
     // console.log(req.body);
     
     if (newPassword) {
@@ -183,6 +183,7 @@ export const editProfileController = async (req, res, next) => {
     req.user.name = fullName;
     req.user.aboutMe = aboutMe;
     req.user.contact = contact;
+    req.user.intrest = intrest;
 
 
     const result = await userModel.updateOne({ _id: req.user._id }, req.user);
