@@ -12,6 +12,7 @@ import success from '/Success-stories.webp';
 import logo from '../assets/logo.png';
 import { format } from 'date-fns';
 import { server } from '../redux/store';
+import { useSelector } from 'react-redux';
 
 
 const categories = [
@@ -42,6 +43,7 @@ const Explore = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [ongoingEvents, setOngoingEvents] = useState([]);
+  const {isAuthenticated}  = useSelector((state) => state.user) ;
 
   useEffect(() => {
     axios.get(`${server}/events`, { withCredentials: true })
@@ -164,7 +166,10 @@ const Explore = () => {
                         <Button
                           variant="contained"
                           color="primary"
-                          onClick={() => window.open(event.webinarLink, '_blank', 'noopener,noreferrer')}
+                          onClick={() =>{
+                             if(isAuthenticated) return window.open(event.webinarLink, '_blank', 'noopener,noreferrer')
+                            toast.error("Please Login First") ;
+                          }}
                           sx={{ marginTop: '10px' }}
                         >
                           Join Webinar

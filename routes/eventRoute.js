@@ -8,7 +8,7 @@ const router = express.Router()  ;
 // router.use('/events')
 
 router.route('/')
-  .get(isauth ,  getEvents)
+  .get( getEvents)
   .post(isauth, isAdmin , singleUpload ,  createEvent);
 
 router.route('/:id')
